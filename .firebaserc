@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "plataforma-asociaciones-24407": {
+      "hosting": {
+        "plataforma-asociaciones-clm": [
+          "plataforma-asociaciones-24407"
+        ]
+      }
+    }
+  }
+}

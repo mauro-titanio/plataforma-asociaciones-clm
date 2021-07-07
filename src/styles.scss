@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+$dark: #002850;
+$secondary: #EEF0F2;
+$info: #f7ba00;
+$primary: #EF476F;
+$white: #fff;
+$fbBlue: #2C88FF;
+$googleRed: #EB4435;
+$font-family-base: 'Karla',
+sans-serif;
+$headings-font-family: 'Quicksand',
+sans-serif;
+$btn-padding-x: 1.3rem;
+$btn-padding-y: 0.5rem;
+$input-btn-border-width: 0;
+$input-btn-focus-width: 0;
+$btn-focus-width: 0;
+$all500out: all 500ms ease-out;
+@import './node_modules/bootstrap/scss/bootstrap.scss';
+//
+//
+.log-header {
+    background-image: url('https://i.imgur.com/6dpdXPc.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.bg-white {
+    background-color: $white !important;
+}
+
+.btn-facebook {
+    background-color: $fbBlue;
+    color: $white;
+    transition: $all500out;
+}
+
+.btn-facebook:hover {
+    color: $white;
+    opacity: 0.5;
+}
+
+.btn-google {
+    background-color: $googleRed;
+    color: $white;
+    transition: $all500out;
+}
+
+.btn-google:hover {
+    color: $white;
+    opacity: 0.5;
+}
+
+.align-items-center {
+    align-items: center !important;
+}

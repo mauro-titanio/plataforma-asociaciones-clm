@@ -1,0 +1,58 @@
+<header class="overflow-hidden vh-100 log-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 col-sm-12 header-left pt-5 px-4 mx-lg-5 m-sm-1">
+                <div class="header-text py-4 px-4 shadow-lg bg-white rounded-3">
+                    <h1 class="display-3 text-dark w-100 fw-normal">Plataforma de asociaciones de Castilla-La Mancha</h1>
+                    <p class="w-75 mt-3">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                    <button class="btn px-5 btn-primary text-light my-3 rounded-2 shadow-sm" type="button" name="button" data-bs-toggle="modal" data-bs-target="#loginModal">Acceder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body m-2 border border-muted">
+                <div class="row justify-content-center mt-3">
+                    <div class="col-8 text-center">
+                        <h3>Iniciar sesión</h3>
+                        <hr>
+                    </div>
+
+                </div>
+
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8">
+                        <div class="row justify-content-center btn-google py-4 align-items-center px-2 rounded-3" (click)="loginGoogle()">
+                            <div class="col-2">
+                                <i class="bi bi-google h3"></i>
+                            </div>
+                            <div class="col-10">
+                                Iniciar sesión con Google
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mb-3">
+                    <div class="col-8">
+                        <div class="row justify-content-center btn-facebook py-4 align-items-center px-2 rounded-3" (click)="loginFb()">
+                            <div class="col-2">
+                                <i class="bi bi-facebook h3"></i>
+                            </div>
+                            <div class="col-10">
+                                Iniciar sesión con Facebook
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
