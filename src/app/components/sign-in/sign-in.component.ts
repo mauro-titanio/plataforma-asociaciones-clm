@@ -23,6 +23,7 @@ export class SignInComponent implements OnInit {
   loginGoogle() {
     console.log("login")
     this.authService.googleAuth().then(success => {
+      document.getElementById('modalClose')?.click()
       this.router.navigate(['/home'])
     }).catch(error => {
       console.error("Error en el login")
@@ -31,6 +32,7 @@ export class SignInComponent implements OnInit {
   loginFb() {
     console.log("login")
     this.authService.loginWithFB().then(success => {
+      document.getElementById('modalClose')?.click()
       this.router.navigate(['/home'])
     }).catch(error => {
       console.error("Error en el login")
