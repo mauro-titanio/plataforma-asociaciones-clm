@@ -1,0 +1,90 @@
+.card {
+    box-shadow: 15px 15px 56px #001f3e, -15px -15px 56px #003162;
+    background-size: cover;
+    color: white;
+    padding: 10em 0 0 0;
+    max-width: 35ch;
+    background-blend-mode: multiply;
+    overflow: hidden;
+    transition: transform 500ms ease;
+    transition: background-color 500ms ease 500ms;
+}
+
+.col:nth-child(1) .card {
+    background-image: url('https://i.imgur.com/zvvXCEq.jpg');
+}
+
+.col:nth-child(2) .card {
+    background-image: url('https://i.imgur.com/hmJHEYx.jpg');
+}
+
+.col:nth-child(3) .card {
+    background-image: url('https://i.imgur.com/gubTS7b.jpg');
+}
+
+.card-body {
+    --padding: 2rem;
+    padding: var(--padding);
+    background: #002850;
+}
+
+.card:focus-within .card-body>* {
+    transition-duration: 0ms;
+    transition-delay: 0ms;
+}
+
+.card-title {
+    position: relative;
+    width: max-content;
+}
+
+.card-title::after {
+    content: "";
+    position: absolute;
+    height: 4px;
+    width: calc(100% + var(--padding));
+    background-color: white;
+    left: calc(var(--padding) * -1);
+    bottom: -0.2em;
+    transform-origin: left;
+    transition: transform 500ms ease;
+}
+
+@media (hover) {
+    .card:hover,
+    .card:focus-within {
+        transform: scale(1.05);
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    .card-body {
+        transform: translateY(66%);
+        transition: transform 500ms ease;
+        transition-delay: 500ms;
+    }
+    .card-body>*:not(.card-title) {
+        opacity: 0;
+        transition: opacity 500ms linear;
+    }
+    .card-title::after {
+        transform: scaleX(0);
+    }
+    .card:hover .card-body,
+    .card:focus-within .card-body {
+        transform: translateY(0);
+    }
+    .card:focus-within .card-body {
+        transition-duration: 0ms;
+    }
+    .card:hover .card-body>*,
+    .card:focus-within .card-body>* {
+        transition-delay: 500ms;
+        opacity: 1;
+    }
+    .card:hover .card-title::after,
+    .card:focus-within .card-title::after {
+        transform: scaleX(1);
+    }
+    .card:focus-within .card-title::after {
+        transition-duration: 0ms;
+    }
+}
