@@ -14,6 +14,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthService } from './shared/services/auth/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 
 
@@ -24,6 +25,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     SignInComponent,
     HomeComponent,
     NavbarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

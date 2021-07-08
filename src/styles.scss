@@ -1,25 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Karla:wght@200;300;400;500;600;700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
-$dark: #002850;
-$secondary: #EEF0F2;
-$info: #f7ba00;
-$primary: #EF476F;
-$white: #fff;
-$fbBlue: #2C88FF;
-$googleRed: #EB4435;
-$font-family-base: 'Karla',
-sans-serif;
-$headings-font-family: 'Montserrat',
-sans-serif;
-$btn-padding-x: 1.3rem;
-$btn-padding-y: 0.5rem;
-$input-btn-border-width: 0;
-$input-btn-focus-width: 0;
-$btn-focus-width: 0;
-$all500out: all 500ms ease-out;
+@import './variables.scss';
 @import './node_modules/bootstrap/scss/bootstrap.scss';
 //
 //
+html,
+body {
+    background-color: $white;
+    min-height: 100vh !important;
+}
+
 .log-header {
     background-image: url('https://i.imgur.com/6dpdXPc.png');
     background-position: center;
@@ -54,4 +44,15 @@ $all500out: all 500ms ease-out;
 
 .align-items-center {
     align-items: center !important;
+}
+
+.footer-row {
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0 !important;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 @Component({
@@ -7,7 +8,13 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  user: any
+  user: User = {
+    uid: '',
+    email: '',
+    displayName: '',
+    photoURL: '',
+    emailVerified: true
+  }
   constructor(
     private authService: AuthService
   ) { }

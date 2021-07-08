@@ -1,31 +1,26 @@
+@import '../../../variables.scss';
 .card {
-    box-shadow: 15px 15px 56px #001f3e, -15px -15px 56px #003162;
     background-size: cover;
     color: white;
-    padding: 10em 0 0 0;
-    max-width: 35ch;
+    padding: 0 0 0 0;
     background-blend-mode: multiply;
     overflow: hidden;
+    max-width: 45ch;
+    height: 15rem;
     transition: transform 500ms ease;
     transition: background-color 500ms ease 500ms;
+    border-top-right-radius: 5rem !important;
 }
 
-.col:nth-child(1) .card {
-    background-image: url('https://i.imgur.com/zvvXCEq.jpg');
-}
-
-.col:nth-child(2) .card {
-    background-image: url('https://i.imgur.com/hmJHEYx.jpg');
-}
-
-.col:nth-child(3) .card {
-    background-image: url('https://i.imgur.com/gubTS7b.jpg');
+.col .card {
+    background-image: url('https://i.imgur.com/6dpdXPc.png');
+    background-position: bottom;
 }
 
 .card-body {
     --padding: 2rem;
     padding: var(--padding);
-    background: #002850;
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .card:focus-within .card-body>* {
@@ -43,7 +38,7 @@
     position: absolute;
     height: 4px;
     width: calc(100% + var(--padding));
-    background-color: white;
+    background-color: $dark;
     left: calc(var(--padding) * -1);
     bottom: -0.2em;
     transform-origin: left;
@@ -54,12 +49,13 @@
     .card:hover,
     .card:focus-within {
         transform: scale(1.05);
-        background-color: rgba(0, 0, 0, 0.7);
     }
     .card-body {
         transform: translateY(66%);
         transition: transform 500ms ease;
         transition-delay: 500ms;
+        background-color: $white;
+        color: $dark;
     }
     .card-body>*:not(.card-title) {
         opacity: 0;
