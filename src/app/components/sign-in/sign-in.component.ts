@@ -14,11 +14,11 @@ export class SignInComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    
-      if (this.authService.isLoggedIn()) {
-    //   this.router.navigate(['/home'])
-      }
-    
+
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/home'])
+    }
+
   }
   loginGoogle() {
     console.log("login")
