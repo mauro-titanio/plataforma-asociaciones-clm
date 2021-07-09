@@ -10,6 +10,20 @@ body {
     min-height: 100vh !important;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    cursor: default !important;
+}
+
+a {
+    cursor: pointer;
+}
+
 .log-header {
     background-image: url('https://i.imgur.com/6dpdXPc.png');
     background-position: center;

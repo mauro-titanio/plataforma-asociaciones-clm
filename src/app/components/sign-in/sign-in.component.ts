@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifierService } from 'angular-notifier';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 
 
@@ -10,8 +11,10 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-
-  constructor(private authService: AuthService, private router: Router) { }
+  
+  constructor(private authService: AuthService, private router: Router,private notifier: NotifierService) { 
+    
+  }
 
   ngOnInit(): void {
 
@@ -24,6 +27,7 @@ export class SignInComponent implements OnInit {
     console.log("login")
     this.authService.googleAuth().then(success => {
       document.getElementById('modalClose')?.click()
+      this.notifier.notify('success', 'Acceso realizado')
       this.router.navigate(['/home'])
     }).catch(error => {
       console.error("Error en el login")

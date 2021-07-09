@@ -5,6 +5,7 @@
                 <div class="header-text py-4 px-4 shadow-lg bg-white rounded-3">
                     <h1 class="display-3 text-dark w-100 fw-normal">Plataforma de asociaciones de Castilla-La Mancha</h1>
                     <p class="w-75 mt-3">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
+                    <button class="btn px-5 btn-outline-dark my-3 rounded-2 me-2" type="button" name="button" data-bs-toggle="modal" data-bs-target="#signinModal">Registro</button>
                     <button class="btn px-5 btn-primary text-light my-3 rounded-2 shadow-sm" type="button" name="button" data-bs-toggle="modal" data-bs-target="#loginModal">Acceder</button>
                 </div>
             </div>
@@ -18,36 +19,75 @@
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-body m-2 border border-muted">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" id="modalClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <div class="row justify-content-center mb-3">
-                    <div class="col-8">
-                        <div class="row justify-content-center btn-google py-4 align-items-center px-2 rounded-3" (click)="loginGoogle()">
-                            <div class="col-2">
-                                <i class="bi bi-google h3"></i>
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Acceder</h5>
+                <button type="button" id="modalClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row py-3">
+                    <div class="col-6">
+                        <form action="">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Correo electrónico</label>
                             </div>
-                            <div class="col-10">
-                                Iniciar sesión con Google
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Contraseña</label>
                             </div>
-                        </div>
+                            <div class="text-center">
+                                <button class="btn btn-dark text-light">Acceder</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 border-start border-dark text-center">
+                        <p>O acceder con:</p>
+                        <button class="btn btn-google w-100 mb-2" (click)="loginGoogle()"><i class="bi bi-google me-2"></i> Google</button>
+                        <button class="btn btn-facebook w-100 mb-2"><i class="bi bi-facebook me-2"></i> Facebook</button>
+                    </div>
+                    <div class="text-center py-4 mt-2">
+                        <small>¿No tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signinModal"> Registro</a>
                     </div>
                 </div>
-                <div class="row justify-content-center mb-3">
-                    <div class="col-8">
-                        <div class="row justify-content-center btn-facebook py-4 align-items-center px-2 rounded-3" (click)="loginFb()">
-                            <div class="col-2">
-                                <i class="bi bi-facebook h3"></i>
-                            </div>
-                            <div class="col-10">
-                                Iniciar sesión con Facebook
-                            </div>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+
+<!--Sign in modal-->
+<div class="modal fade" id="signinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+                <button type="button" id="modalClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row py-3">
+                    <div class="col-6">
+                        <form action="">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">Correo electrónico</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">Contraseña</label>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-dark text-light">Registro</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-6 border-start border-dark text-center">
+                        <p>O registrarse con:</p>
+                        <button class="btn btn-google w-100 mb-2"><i class="bi bi-google me-2"></i> Google</button>
+                        <button class="btn btn-facebook w-100 mb-2"><i class="bi bi-facebook me-2"></i> Facebook</button>
+                    </div>
+                    <div class="text-center py-4 mt-2">
+                        <small>¿Ya tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal"> Acceder</a>
+                    </div>
                 </div>
             </div>
         </div>
