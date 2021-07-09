@@ -36,14 +36,14 @@
                                 <label for="floatingPassword">Contraseña</label>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-dark text-light">Acceder</button>
+                                <button class="btn btn-dark btn-sm">Acceder</button>
                             </div>
                         </form>
                     </div>
                     <div class="col-6 border-start border-dark text-center">
                         <p>O acceder con:</p>
-                        <button class="btn btn-google w-100 mb-2" (click)="loginGoogle()"><i class="bi bi-google me-2"></i> Google</button>
-                        <button class="btn btn-facebook w-100 mb-2"><i class="bi bi-facebook me-2"></i> Facebook</button>
+                        <button class="btn btn-google w-100 mb-2" (click)="loginGoogle()"><i class="bi bi-google me-2"></i>Google</button>
+                        <button class="btn btn-facebook w-100 mb-2"><i class="bi bi-facebook me-2"></i>Facebook</button>
                     </div>
                     <div class="text-center py-4 mt-2">
                         <small>¿No tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signinModal"> Registro</a>
@@ -53,7 +53,6 @@
         </div>
     </div>
 </div>
-
 
 <!--Sign in modal-->
 <div class="modal fade" id="signinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -66,17 +65,17 @@
             <div class="modal-body">
                 <div class="row py-3">
                     <div class="col-6">
-                        <form action="">
+                        <form onsubmit="register()">
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
                                 <label for="floatingInput">Correo electrónico</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" formControlName="password">
                                 <label for="floatingPassword">Contraseña</label>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-dark text-light">Registro</button>
+                                <button type="submit" class="btn btn-dark text-light">Registro</button>
                             </div>
                         </form>
                     </div>

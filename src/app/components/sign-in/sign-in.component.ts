@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
@@ -12,17 +13,37 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
 })
 export class SignInComponent implements OnInit {
   
-  constructor(private authService: AuthService, private router: Router,private notifier: NotifierService) { 
-    
+
+
+registerForm: FormGroup
+
+
+
+
+  constructor(private authService: AuthService, private router: Router,private notifier: NotifierService,  private fb: FormBuilder,) { 
+  
+    this.registerForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+    })
+  }
+  get f() {
+    return this.registerForm.controls
   }
 
   ngOnInit(): void {
-
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home'])
     }
-
   }
+  
+
+
+register(){
+  console.log("signin")
+  this.authService.signUp(this.f.email.value,this.f.password.value)
+}
+
   loginGoogle() {
     console.log("login")
     this.authService.googleAuth().then(success => {
