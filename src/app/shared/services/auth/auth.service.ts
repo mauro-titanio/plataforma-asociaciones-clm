@@ -20,6 +20,8 @@ export class AuthService {
     public ngZone: NgZone, // NgZone service to remove outside scope warning
     private notifier: NotifierService
   ) { }
+
+  
   setUserData(user: any) {
     const userData: User = {
       uid: user.uid,
@@ -33,22 +35,6 @@ export class AuthService {
     })
   }
 
-  actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for this
-    // URL must be in the authorized domains list in the Firebase Console.
-    url: 'https://plataforma-asociaciones-24407.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
-    // This must be true.
-    handleCodeInApp: true,
-    iOS: {
-      bundleId: 'com.example.ios'
-    },
-    android: {
-      packageName: 'com.example.android',
-      installApp: true,
-      minimumVersion: '12'
-    },
-    dynamicLinkDomain: 'https://plataforma-asociaciones-24407.firebaseapp.com/__/auth/action?mode=action&oobCode=code'
-  };
 
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');
@@ -100,11 +86,11 @@ export class AuthService {
     return this.fireAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['home']);
+          this.notifier.notify('success', 'Acceso realizado')
         });
         this.setUserData(result.user);
       }).catch((error) => {
-        window.alert(error.message)
+        this.notifier.notify('error', 'Ha occurrido un error')
       })
   }
 
@@ -112,10 +98,14 @@ export class AuthService {
   signUp(email: string, password: string) {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        window.alert("You have been successfully registered!");
+        this.notifier.notify('success', 'Registro completado')
+        document.getElementById('modalCloseRegister')?.click()
+        setTimeout(() => {
+          document.getElementById('loginButton')?.click()
+        }, 1000);
         console.log(result.user)
       }).catch((error) => {
-        window.alert(error.message)
+        this.notifier.notify('error', 'El usuario ya existe')
       })
   }
 

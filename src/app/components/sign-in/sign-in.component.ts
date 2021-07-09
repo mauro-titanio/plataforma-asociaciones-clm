@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
+import { MustMatch } from 'src/app/shared/services/validation/validation';
 
 
 
@@ -12,17 +13,26 @@ import { AuthService } from 'src/app/shared/services/auth/auth.service';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  
-
-
-registerForm: FormGroup
 
 
 
+  registerForm: FormGroup
+  loginForm: FormGroup
 
-  constructor(private authService: AuthService, private router: Router,private notifier: NotifierService,  private fb: FormBuilder,) { 
-  
+
+
+
+  constructor(private authService: AuthService, private router: Router, private notifier: NotifierService, private fb: FormBuilder,) {
+
     this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+  }, {
+      validator: MustMatch('password', 'confirmPassword')
+  })
+
+    this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     })
@@ -30,37 +40,56 @@ registerForm: FormGroup
   get f() {
     return this.registerForm.controls
   }
-
+  get g() {
+    return this.loginForm.controls
+  }
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home'])
     }
   }
+
+
+
+  register() {
+    console.log("signin")
+    if (this.registerForm.invalid) {
+      this.notifier.notify('error', 'Email y/o contraseña invalidos')
+      return
+    }
+    this.authService.signUp(this.f.email.value, this.f.password.value)
+  }
+
+  loginEmailPsw(){
+    console.log("Log E & P")
+    if (this.loginForm.invalid) {
+      this.notifier.notify('error', 'Email y/o contraseña invalidos')
+      return
+    }
+    this.authService.signIn(this.g.email.value, this.g.password.value)
+    this.router.navigate(['/home'])
+  }
   
-
-
-register(){
-  console.log("signin")
-  this.authService.signUp(this.f.email.value,this.f.password.value)
-}
 
   loginGoogle() {
     console.log("login")
     this.authService.googleAuth().then(success => {
-      document.getElementById('modalClose')?.click()
+      document.getElementById('modalCloseLogin')?.click()
+      document.getElementById('modalCloseRegister')?.click()
       this.notifier.notify('success', 'Acceso realizado')
       this.router.navigate(['/home'])
     }).catch(error => {
-      console.error("Error en el login")
+      this.notifier.notify('error', 'Error en el acceso')
     })
   }
   loginFb() {
     console.log("login")
     this.authService.loginWithFB().then(success => {
-      document.getElementById('modalClose')?.click()
+      document.getElementById('modalCloseLogin')?.click()
+      document.getElementById('modalCloseRegister')?.click()
       this.router.navigate(['/home'])
     }).catch(error => {
-      console.error("Error en el login")
+      this.notifier.notify('error', 'Error en el acceso')
     })
   }
 
