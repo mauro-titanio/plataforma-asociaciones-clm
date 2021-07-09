@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
+import { NotifierService } from 'angular-notifier';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
     private fireStore: AngularFirestore,
     private fireAuth: AngularFireAuth,
     private router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private notifier: NotifierService
   ) { }
   setUserData(user: any) {
     const userData: User = {
@@ -34,7 +36,7 @@ export class AuthService {
   actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'plataforma-asociaciones-clm.vercel.app',
+    url: 'https://plataforma-asociaciones-clm.vercel.app',
     // This must be true.
     handleCodeInApp: true,
     iOS: {
@@ -115,7 +117,7 @@ export class AuthService {
       this.sendVerificationMail(email);
       this.setUserData(result.user);
     } catch (error) {
-      window.alert(error.message);
+      this.notifier.notify('error', error.message)
     }
   }
 
