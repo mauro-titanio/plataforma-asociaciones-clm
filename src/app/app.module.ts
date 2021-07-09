@@ -15,6 +15,8 @@ import { AuthService } from './shared/services/auth/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { VerificationComponent } from './components/verification/verification.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -26,10 +28,12 @@ import { FooterComponent } from './components/footer/footer.component';
     HomeComponent,
     NavbarComponent,
     FooterComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    RouterModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,

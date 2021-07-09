@@ -48,65 +48,72 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')!)
   }
 
-  signOut() {
-    return this.fireAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['/']);
-    })
+  async signOut() {
+    await this.fireAuth.signOut();
+    localStorage.removeItem('user');
+    this.router.navigate(['/']);
   }
 
  // Sign in with Facebook
 
  
   // Auth logic to run auth providers
-  loginWithFB(): Promise<any>{
-    return this.fireAuth.signInWithPopup( new fireapp.auth.FacebookAuthProvider())
-      .then((result) => {
-        console.log(result);
-      })
-      .catch(err => {
-        console.log(err.message);
-      })
+  async loginWithFB(): Promise<any>{
+    try {
+      const result = await this.fireAuth.signInWithPopup(new fireapp.auth.FacebookAuthProvider());
+      console.log(result);
+    } catch (err) {
+      console.log(err.message);
+    }
   }
 
   //GOOGLE
-  googleAuth(): Promise<any> {
-    return this.fireAuth.signInWithPopup(new fireapp.auth.GoogleAuthProvider())
-      .then((result) => {
-        localStorage.setItem('user', JSON.stringify(result.user));
-        this.setUserData(result.user);
-      }).catch((error) => {
-        throwError(error)
-      })
+  async googleAuth(): Promise<any> {
+    try {
+      const result = await this.fireAuth.signInWithPopup(new fireapp.auth.GoogleAuthProvider());
+      localStorage.setItem('user', JSON.stringify(result.user));
+      this.setUserData(result.user);
+    } catch (error) {
+      throwError(error);
+    }
 
   }
 
   // Sign in with email/password
-  signIn(email: string, password: string) {
-    return this.fireAuth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.notifier.notify('success', 'Acceso realizado')
-        });
-        this.setUserData(result.user);
-      }).catch((error) => {
-        this.notifier.notify('error', 'Ha occurrido un error')
-      })
+  async signIn(email: string, password: string):Promise<void> {
+    try {
+      const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
+      this.ngZone.run(() => {
+        this.notifier.notify('success', 'Acceso realizado');
+
+          this.router.navigate(['/home']);
+       
+        
+      });
+      this.setUserData(result.user);
+    } catch (error) {
+      this.notifier.notify('error', 'Ha occurrido un error');
+    }
   }
 
   // Sign up with email/password
-  signUp(email: string, password: string) {
-    return this.fireAuth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.notifier.notify('success', 'Registro completado')
-        document.getElementById('modalCloseRegister')?.click()
-        setTimeout(() => {
-          document.getElementById('loginButton')?.click()
-        }, 1000);
-        console.log(result.user)
-      }).catch((error) => {
-        this.notifier.notify('error', 'El usuario ya existe')
-      })
+  async signUp(email: string, password: string) {
+    try {
+      const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
+      this.sendVerification();
+      this.notifier.notify('success', 'Te hemos enviado un correo de verificación');
+      document.getElementById('modalCloseRegister')?.click();
+      this.router.navigate(['/verification-email']);
+      console.log(result.user);
+    } catch (error) {
+      this.notifier.notify('error', 'El usuario ya existe');
+    }
   }
 
+async sendVerification(): Promise<void>{
+  return await (await this.fireAuth.currentUser)?.sendEmailVerification()
+}
+
+
+ 
 }

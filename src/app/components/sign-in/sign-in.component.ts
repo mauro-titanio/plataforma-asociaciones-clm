@@ -58,6 +58,7 @@ export class SignInComponent implements OnInit {
       return
     }
     this.authService.signUp(this.f.email.value, this.f.password.value)
+    this.router.navigate(['/verification-email']);
   }
 
   loginEmailPsw(){
@@ -67,7 +68,7 @@ export class SignInComponent implements OnInit {
       return
     }
     this.authService.signIn(this.g.email.value, this.g.password.value)
-    this.router.navigate(['/home'])
+    this.router.navigate(['/home']);
   }
   
 
