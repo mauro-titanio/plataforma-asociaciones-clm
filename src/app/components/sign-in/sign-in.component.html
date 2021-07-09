@@ -65,7 +65,7 @@
             <div class="modal-body">
                 <div class="row py-3">
                     <div class="col-6">
-                        <form onsubmit="register()">
+                        <form onsubmit="register()" [formGroup]="registerForm">
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" formControlName="email">
                                 <label for="floatingInput">Correo electrónico</label>
