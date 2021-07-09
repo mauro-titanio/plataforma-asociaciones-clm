@@ -36,7 +36,7 @@ export class AuthService {
   actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: 'https://plataforma-asociaciones-clm.vercel.app',
+    url: 'https://plataforma-asociaciones-24407.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
     // This must be true.
     handleCodeInApp: true,
     iOS: {
@@ -47,7 +47,7 @@ export class AuthService {
       installApp: true,
       minimumVersion: '12'
     },
-    dynamicLinkDomain: 'example.page.link'
+    dynamicLinkDomain: 'https://plataforma-asociaciones-24407.firebaseapp.com/__/auth/action?mode=action&oobCode=code'
   };
 
   isLoggedIn(): boolean {
@@ -100,7 +100,7 @@ export class AuthService {
     return this.fireAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['home']);
         });
         this.setUserData(result.user);
       }).catch((error) => {
@@ -109,34 +109,14 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  async signUp(email: string, password: string) {
-    try {
-      const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
-      /* Call the SendVerificaitonMail() function when new user sign
-      up and returns promise */
-      this.sendVerificationMail(email);
-      this.setUserData(result.user);
-    } catch (error) {
-      this.notifier.notify('error', error.message)
-    }
-  }
-
-  // Send email verfificaiton when new user sign up
-  sendVerificationMail(email:string) {
-    return this.fireAuth.sendSignInLinkToEmail(email, this.actionCodeSettings)
-    .then(() => {
-      this.router.navigate(['verify-email-address']);
-    })
-  }
-
-  // Reset Forggot password
-  forgotPassword(passwordResetEmail: string) {
-    return this.fireAuth.sendPasswordResetEmail(passwordResetEmail)
-    .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
-    }).catch((error) => {
-      window.alert(error)
-    })
+  signUp(email: string, password: string) {
+    return this.fireAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        window.alert("You have been successfully registered!");
+        console.log(result.user)
+      }).catch((error) => {
+        window.alert(error.message)
+      })
   }
 
 }
