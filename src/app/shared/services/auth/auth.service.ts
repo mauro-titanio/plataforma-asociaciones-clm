@@ -84,17 +84,12 @@ export class AuthService {
     try {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
       this.ngZone.run(() => {
-        this.notifier.notify('success', 'Acceso realizado');
-
-          
-       
-        
+        this.notifier.notify('success', 'Acceso realizado'); 
       });
       this.setUserData(result.user);
       setTimeout(() => {
         this.router.navigate(['/home'])
-      }, 3000);
-      
+      }, 3000); 
     } catch (error) {
       this.notifier.notify('error', 'Ha occurrido un error');
     }
