@@ -86,11 +86,15 @@ export class AuthService {
       this.ngZone.run(() => {
         this.notifier.notify('success', 'Acceso realizado');
 
-          this.router.navigate(['/home']);
+          
        
         
       });
       this.setUserData(result.user);
+      setTimeout(() => {
+        this.router.navigate(['/home'])
+      }, 3000);
+      
     } catch (error) {
       this.notifier.notify('error', 'Ha occurrido un error');
     }

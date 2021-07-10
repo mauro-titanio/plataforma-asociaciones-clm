@@ -8,6 +8,8 @@ html,
 body {
     background-color: $white;
     min-height: 100vh !important;
+    overflow-x: hidden;
+    max-width: 100vw;
 }
 
 h1,
@@ -26,6 +28,10 @@ a {
 
 .text-50 {
     font-size: 0.8rem;
+}
+
+.text-justify {
+    text-align: justify !important;
 }
 
 .log-header {

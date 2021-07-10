@@ -17,6 +17,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { RouterModule } from '@angular/router';
+import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
 
 
 
@@ -29,6 +30,7 @@ import { RouterModule } from '@angular/router';
     NavbarComponent,
     FooterComponent,
     VerificationComponent,
+    AssociationProfileComponent,
   ],
   imports: [
     BrowserModule,
