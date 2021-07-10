@@ -20,20 +20,21 @@
     background-repeat: no-repeat;
     border: 5px solid;
     border-radius: 50%;
-    position: absolute;
-    top: 230px;
-    left: 320px;
+    transform: translateY(-50%);
 }
 
-.bg-image-theme {
-    background-image: url("https://i.imgur.com/6dpdXPc.png");
-    background-size: contain;
+@media screen and (max-width:600px) {
+    .cover-image {
+        height: 150px;
+        border-radius: 0;
+        border: none !important;
+        margin: 0;
+    }
+    .text-sm-center {
+        text-align: center;
+    }
 }
 
-.bg-glass {
-    background: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(9px);
-    -webkit-backdrop-filter: blur(9px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+.logo-bar {
+    max-height: 6rem;
 }

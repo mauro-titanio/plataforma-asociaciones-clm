@@ -69,3 +69,16 @@ a {
 .align-items-center {
     align-items: center !important;
 }
+
+.bg-image-theme {
+    background-image: url("https://i.imgur.com/6dpdXPc.png");
+    background-size: contain;
+}
+
+.bg-glass {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(9px);
+    -webkit-backdrop-filter: blur(9px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}

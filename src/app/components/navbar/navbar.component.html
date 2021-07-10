@@ -1,6 +1,6 @@
-<nav class="navbar navbar-light bg-dark text-secondary">
+<nav class="navbar navbar-light bg-dark text-light">
     <div class="container-fluid mt-1">
-        <p class="py-lg-2 mx-lg-5 mx-sm-2" [ngClass]="{'h6' : vw >= 500, 'fw-bold' : vw < 500}">Plataforma de asociaciones <br> de Castilla - La Mancha</p>
+        <p class="py-lg-2 mx-lg-5 mx-sm-2 text-light" [ngClass]="{'h6' : vw >= 500, 'fw-bold' : vw < 500}">Plataforma de asociaciones <br> de Castilla - La Mancha</p>
         <div class="dropdown " *ngIf="vw>= 500">
             <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-4" data-bs-toggle="dropdown" aria-expanded="false" [src]="user.photoURL" alt="User profile image" />
             <div class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
@@ -18,7 +18,7 @@
             </div>
         </div>
         <div class="dropdown" *ngIf="vw < 500">
-            <i class="bi bi-three-dots-vertical h1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+            <i class="bi bi-three-dots-vertical h1 text-light" data-bs-toggle="dropdown" aria-expanded="false"></i>
             <div class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">

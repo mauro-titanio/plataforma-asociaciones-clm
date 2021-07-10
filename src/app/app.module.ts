@@ -18,6 +18,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { RouterModule } from '@angular/router';
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
+import { AssociationFormComponent } from './components/association-form/association-form.component';
 
 
 
@@ -31,6 +32,7 @@ import { AssociationProfileComponent } from './components/association-profile/as
     FooterComponent,
     VerificationComponent,
     AssociationProfileComponent,
+    AssociationFormComponent,
   ],
   imports: [
     BrowserModule,

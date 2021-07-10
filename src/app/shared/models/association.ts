@@ -1,5 +1,6 @@
 export interface Association {
     id:string,
+    author: string,
     name: string,
     type: string,
     address: string,
