@@ -34,23 +34,25 @@ export class HomeComponent implements OnInit {
     instagram: '',
     twitter: '',
     linkedin: '',
-    description:'',
+    description: '',
     objectives: '',
     activities: '',
-    profileImage:'',
-    profileCover:''
+    profileImage: '',
+    profileCover: ''
   }
+  associationExist = false
+  pageLoaded: boolean = false
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
     private router: Router
-  ) { 
+  ) {
     this.user = this.authService.userData()
     this.readAssociations()
   }
 
   ngOnInit(): void {
-    
+
   }
 
 
@@ -68,12 +70,12 @@ export class HomeComponent implements OnInit {
       instagram: '',
       twitter: '',
       linkedin: '',
-      description:'',
+      description: '',
       objectives: '',
       activities: '',
-      profileCover:'',
-      profileImage:''
-  }
+      profileCover: '',
+      profileImage: ''
+    }
     this.crudAssociation.newAssociation(association, this.user.uid).then(success => {
       console.log("Post creado", success)
       console.log("associación: creada", association)
@@ -82,9 +84,9 @@ export class HomeComponent implements OnInit {
     })
     this.readAssociations()
     setTimeout(() => {
-      this.router.navigate(['/create', (this.userAssociation[0].id )]);
+      this.router.navigate(['/create', (this.userAssociation[0].id)]);
     }, 1000);
-   
+
   }
 
   readAssociations() {
@@ -99,11 +101,24 @@ export class HomeComponent implements OnInit {
           console.log("read associations: ", this.userAssociation)
         })
       })
-    }, 200);
+    }, 50);
+    setTimeout(() => {
+      this.thereIsAssociation()
+    }, 1500);
+    setTimeout(() => {
+      this.pageLoaded = true
+    }, 1550);
   }
 
 
-
+  thereIsAssociation() {
+    if (this.userAssociation.length > 0) {
+      this.associationExist = true
+    } else {
+      this.associationExist = false
+    }
+    console.log("existe associación?", this.associationExist)
+  }
 
   logout() {
     this.authService.signOut()

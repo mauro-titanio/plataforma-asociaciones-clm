@@ -25,15 +25,25 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12 col-sm-12 pe-5">
                             <div class="mb-5">
-                                <label for="formFile" class="form-label">Imagen de perfil</label>
-                                <input class="form-control border" type="file" id="formFile">
+                                <label for="formFile" class="form-label">Imagen de perfil <br> <small class="text-muted">Se recomienda un formato cuadrado</small></label>
+                                <input class="form-control border" type="file" id="formFile" (change)="uploadProfileImage($event)">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 pe-5">
-                            <div class="perfil-image">
-
-                                <!--Poner vista previa-->
-
+                            <div class="cover-image mb-5">
+                                <div *ngIf="percent != null">
+                                    <small>{{percent}}%</small>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percent + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="container mx-0 text-center">
+                                            <img class="image-preview mx-0" [src]="association.profileImage" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -41,14 +51,24 @@
                         <div class="col-lg-6 col-md-12 col-sm-12 pe-5">
                             <div class="mb-5">
                                 <label for="formFile" class="form-label">Imagen de portada <br> <small class="text-muted">tamaño mínimo 900x300</small></label>
-                                <input class="form-control border" type="file" id="formFile">
+                                <input class="form-control border" type="file" id="formFile" (change)="uploadProfileCover($event)">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12 col-sm-12 pe-5">
-                            <div class="cover-image">
-
-                                <!--Poner vista previa-->
-
+                            <div class="cover-image mb-5">
+                                <div *ngIf="percentCover != null">
+                                    <small>{{percentCover}}%</small>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percentCover + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="container mx-0 text-center">
+                                            <img class="image-preview mx-0" [src]="association.profileCover" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
