@@ -19,6 +19,8 @@ import { VerificationComponent } from './components/verification/verification.co
 import { RouterModule } from '@angular/router';
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
 import { AssociationFormComponent } from './components/association-form/association-form.component';
+import { AssociationsListComponent } from './components/associations-list/associations-list.component';
+
 
 
 
@@ -33,6 +35,7 @@ import { AssociationFormComponent } from './components/association-form/associat
     VerificationComponent,
     AssociationProfileComponent,
     AssociationFormComponent,
+    AssociationsListComponent
   ],
   imports: [
     BrowserModule,
