@@ -28,6 +28,12 @@ a {
     cursor: pointer;
 }
 
+a:hover {
+    color: inherit;
+    transition: 200ms ease;
+    opacity: 0.5;
+}
+
 .pointer {
     cursor: pointer !important;
 }
@@ -38,6 +44,14 @@ a {
 
 .w-90 {
     width: 90%;
+}
+
+.vh-fit {
+    height: calc(100vh - 82px - 48px);
+}
+
+.vh-70 {
+    height: 70vh;
 }
 
 .text-justify {

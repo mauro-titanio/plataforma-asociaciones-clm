@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
     }, 1500);
     setTimeout(() => {
       this.pageLoaded = true
-    }, 1550);
+    }, 3000);
   }
 
 

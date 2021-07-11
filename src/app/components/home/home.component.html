@@ -1,6 +1,11 @@
 <app-navbar></app-navbar>
+<div class="row justify-content-center align-content-center vh-70 text-center" *ngIf="!pageLoaded">
+    <h2 class="text-center pb-4 display-4">Descubre un mundo de oportunidades</h2>
+    <div class="spinner-border text-primary mb-2" role="status"></div>
+    <p class="text-center text-dark">Cargando...</p>
+</div>
 <div *ngIf="pageLoaded">
-    <div class="container min-vh-100">
+    <div class="container" [ngClass]="{'vh-fit' : vw >= 500, 'min-vh-100' : vw < 500}">
         <div class="container">
             <div class="row justify-items-center justify-content-center pt-5">
                 <div class="col-lg-6 col-md-12 col-sm-12 text-center text-dark">
