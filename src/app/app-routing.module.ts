@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: '', component: SignInComponent, pathMatch: 'full'},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'verification', component: VerificationComponent, canActivate: [AuthGuard] },
-  { path: 'profile/:userID/:assID', component: AssociationProfileComponent },
+  { path: 'profile/:userID/:assID', component: AssociationProfileComponent, pathMatch: 'full', canLoad:[AuthGuard] },
   { path: 'create/:assID', component: AssociationFormComponent }
 
 ];
