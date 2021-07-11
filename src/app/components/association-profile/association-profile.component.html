@@ -15,8 +15,8 @@
                                 </div>
                                 <div class="col-10">
                                     <div class="container ms-lg-2 ms-md-0 ms-sm-0 text-lg-start text-md-center text-sm-center">
-                                        <h3 class="text-dark pt-2">Asociación Participa Joven CR</h3>
-                                        <p class="text-muted">Asociación juvenil</p>
+                                        <h3 class="text-dark pt-2">{{association.name}}</h3>
+                                        <p class="text-muted">Asociación {{association.type}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -32,14 +32,14 @@
                                         <h5>Información</h5>
                                     </div>
                                     <div>
-                                        <p><i class="bi bi-geo h5 me-3 text-dark"></i>Calle no se que</p>
-                                        <p><i class="bi bi-globe h5 me-3 text-dark"></i>www.ejemplo.com</p>
-                                        <p><i class="bi bi-telephone-fill h5 me-3 text-dark"></i></p>
-                                        <p><i class="bi bi-envelope h5 me-3 text-dark"></i></p>
-                                        <p><i class="bi bi-facebook h5 me-3 text-dark"></i></p>
-                                        <p><i class="bi bi-instagram h5 me-3 text-dark"></i></p>
-                                        <p><i class="bi bi-twitter h5 me-3 text-dark"></i></p>
-                                        <p><i class="bi bi-linkedin h5 me-3 text-dark"></i></p>
+                                        <p *ngIf="association.address  != ''"><i class="bi bi-geo h5 me-3 text-dark"></i>{{association.address}}</p>
+                                        <p><a *ngIf="association.website != ''" [href]="association.website" target="_blank"><i class="bi bi-globe h5 me-3 text-dark"></i>{{association.website}}</a></p>
+                                        <p *ngIf="association.telephone != 0"><i class="bi bi-telephone-fill h5 me-3 text-dark"></i>{{association.telephone}}</p>
+                                        <p *ngIf="association.email  != ''"><i class="bi bi-envelope h5 me-3 text-dark"></i>{{association.email}}</p>
+                                        <p><a *ngIf="association.facebook  != ''" [href]="association.facebook" target="_blank"><i class="bi bi-facebook h5 me-3 text-dark"></i>{{association.facebook}}</a></p>
+                                        <p><a *ngIf="association.instagram  != ''" [href]="association.facebook" target="_blank"><i class="bi bi-instagram h5 me-3 text-dark"></i>{{association.instagram}}</a></p>
+                                        <p><a *ngIf="association.twitter  != ''" [href]="association.facebook" target="_blank"><i class="bi bi-twitter h5 me-3 text-dark"></i>{{association.twitter}}</a></p>
+                                        <p><a *ngIf="association.linkedin  != ''" [href]="association.facebook" target="_blank"><i class="bi bi-linkedin h5 me-3 text-dark"></i>{{association.linkedin}}</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                         <h5>Descripción</h5>
                                     </div>
                                     <div>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit vitae magnam sapiente quam. Minus vitae dolores odit veniam atque, culpa esse ea ullam numquam nihil, temporibus provident ipsam. Vero, pariatur?</p>
+                                        <p class="text-justify">{{association.description}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -61,25 +61,28 @@
                                         <h5>Objetivos</h5>
                                     </div>
                                     <div>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit vitae magnam sapiente quam. Minus vitae dolores odit veniam atque, culpa esse ea ullam numquam nihil, temporibus provident ipsam. Vero, pariatur?</p>
+                                        <p class="text-justify">{{association.objectives}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center" *ngIf="association.activities != ''">
                                 <div class="col-lg-11 col-md-12 col-sm-12 shadow-sm rounded-3 mt-2 bg-white px-4 mb-3">
                                     <div class="pt-4 pb-3 text-dark">
                                         <h5>Actividades</h5>
                                     </div>
                                     <div>
-                                        <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit vitae magnam sapiente quam. Minus vitae dolores odit veniam atque, culpa esse ea ullam numquam nihil, temporibus provident ipsam. Vero, pariatur?</p>
+                                        <p class="text-justify">{{association.activities}}</p>
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="col-lg-11 col-md-12 col-sm-12 rounded-3 mt-2 mb-3 text-end">
+                                    <button class="btn btn-outline-dark btn-sm" routerLink="/create/{{association.id}}">Modificar perfil</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
