@@ -1,11 +1,11 @@
 <app-navbar></app-navbar>
-<div class="row justify-content-center align-content-center vh-70 text-center" *ngIf="!pageLoaded">
-    <h2 class="text-center pb-4 display-4">Descubre un mundo de oportunidades</h2>
-    <div class="spinner-border text-primary mb-2" role="status"></div>
-    <p class="text-center text-dark">Cargando...</p>
+<div class="row justify-content-center align-content-center vh-70 text-center" *ngIf="!pageLoaded" data-aos="fade-in">
+    <h2 class="text-center pb-4 display-4" data-aos="fade-up">Descubre un mundo de oportunidades</h2>
+    <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
+    <p class="text-center text-dark" data-aos="fade-in" data-aos-delay="350">Cargando...</p>
 </div>
 <div *ngIf="pageLoaded">
-    <div class="container" [ngClass]="{'vh-fit' : vw >= 500, 'min-vh-100' : vw < 500}">
+    <div class="container" [ngClass]="{'vh-fit' : vw >= 500, 'min-vh-100' : vw < 500}" data-aos="fade-in">
         <div class="container">
             <div class="row justify-items-center justify-content-center pt-5">
                 <div class="col-lg-6 col-md-12 col-sm-12 text-center text-dark">
@@ -17,7 +17,7 @@
         <div class="container">
             <div class="row justify-content-center px-lg-5 px-md-2 px-sm-1">
                 <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3">
+                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="50">
                         <div class="card-body">
                             <h5 class="card-title">Asociaciones</h5>
                             <p class="card-text mt-3">En esta sección puedes conocer las asociaciones inscritas en la plataforma.</p>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3">
+                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="100">
                         <div class="card-body">
 
                             <h5 class="card-title" *ngIf="!associationExist">Crear perfil de asociación</h5>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3">
+                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="150">
                         <div class="card-body">
                             <h5 class="card-title">Ofertas de Voluntariado</h5>
                             <p class="card-text mt-3">Descubre las ofertas de voluntario publicadas por las asociaciones.<br>¡Juntos somos más fuertes!</p>

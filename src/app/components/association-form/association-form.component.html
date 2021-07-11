@@ -16,10 +16,9 @@
                         <div class="col-lg-6 col-md-12 col-sm-12">
                             <div class="mb-5">
                                 <label for="assType" class="form-label">Tipología</label>
-                                <input class="form-control border" list="associationTypes" id="assTypes" placeholder="{{association.type}}" formControlName="type">
-                                <datalist id="associationTypes">
-                              <option value="{{type}}" *ngFor="let type of associationTypes">
-                            </datalist>
+                                <select class="form-select" aria-label="Default select example" formControlName="type">
+                                    <option value="{{type}}" *ngFor="let type of associationTypes">{{type}}</option>
+                                  </select>
                             </div>
                         </div>
                     </div>

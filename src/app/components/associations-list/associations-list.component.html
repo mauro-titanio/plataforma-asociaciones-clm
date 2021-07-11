@@ -1,1 +1,61 @@
-<p>associations-list works!</p>
+<app-navbar></app-navbar>
+
+<div class="container m-0 min-vw-100 bg-white rounded-3 vh-100">
+    <div class="row justify-content-between">
+        <div class="col-lg-3 col-md-2 col-sm-12 px-4 pt-5 bg-light">
+            <h5>Búscador</h5>
+            <div class="py-4">
+                <div class="input-group mb-5">
+                    <input type="text" class="form-control border" placeholder="Buscar asociación..." aria-label="Buscar asociación" aria-describedby="button-addon2">
+                    <button class="btn btn-info" type="button" id="button-addon2"><i class="bi bi-search text-light"></i></button>
+                </div>
+                <div>
+                    <h6>Filtros de búsqueda</h6>
+                </div>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                      Default checkbox
+                    </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                        <label class="form-check-label" for="flexCheckChecked">
+                      Checked checkbox
+                    </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-12 col-sm-12 px-4 pt-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <h2 class="text-lg-start  text-sm-center">Asociaciones</h2>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            <div class="row h-100 justify-content-center align-items-center" *ngIf="!pageLoaded">
+                <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
+            </div>
+            <div class="row" *ngIf="pageLoaded">
+                <div class="col-lg-4 col-md-6 col-sm-12 p-3" *ngFor="let ass of associations" data-aos="fade-up" data-aos-delay="300">
+                    <div class="row bg-dark py-2 rounded-3 align-items-center shadow">
+                        <div class="col-2 me-3">
+                            <img class="mini-img rounded-circle border border-2 border-white m-auto" [src]="ass.profileImage" alt="">
+                        </div>
+                        <div class="col-9 py-2 ">
+                            <div class="text-truncate">
+                                <h6 class="text-light">{{ass.name}}</h6>
+                                <small class="text-light">{{ass.type}}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
