@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
-import {AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthService } from './shared/services/auth/auth.service';
@@ -20,6 +20,9 @@ import { RouterModule } from '@angular/router';
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
 import { AssociationFormComponent } from './components/association-form/association-form.component';
 import { AssociationsListComponent } from './components/associations-list/associations-list.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 
 
@@ -35,7 +38,7 @@ import { AssociationsListComponent } from './components/associations-list/associ
     VerificationComponent,
     AssociationProfileComponent,
     AssociationFormComponent,
-    AssociationsListComponent
+    AssociationsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,13 +51,14 @@ import { AssociationsListComponent } from './components/associations-list/associ
     ReactiveFormsModule,
     AngularFireStorageModule,
     NotifierModule.withConfig({
-      position:{
-        horizontal:{
+      position: {
+        horizontal: {
           position: 'right'
         }
       }
     }),
-
+    NgSelectModule,
+    Ng2SearchPipeModule
   ],
   providers: [AuthService,
     { provide: BUCKET, useValue: environment.firebase.storageBucket }],

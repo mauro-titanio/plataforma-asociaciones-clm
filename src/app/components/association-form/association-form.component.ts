@@ -94,7 +94,6 @@ export class AssociationFormComponent implements OnInit {
     setTimeout(() => {
       this.crudAssociation.readAllAssociation(this.user.uid).subscribe(data => {
         this.userAssociation = []
-        console.log("hola")
         data.forEach((doc: any) => {
           let association: Association = doc.data()
           association.id = doc.id

@@ -31,4 +31,10 @@ deleteAssociation(userID:string, associationID:string){
   return this.fireStore.collection('users').doc(userID).collection('association').doc(associationID).delete()
 }
 
+
+
+
+
+
+
 }
