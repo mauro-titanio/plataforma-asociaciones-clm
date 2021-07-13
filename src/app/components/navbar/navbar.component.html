@@ -4,14 +4,20 @@
         <div class="dropdown " *ngIf="vw>= 500">
             <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
             <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="user == null"></i>
-            <div class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <div class="dropdown-menu mt-2 dropdown-menu-end shadow-sm" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">
                         <div class="col-12 text-center py-3">
-                            <img width="90px" height="90px" class="rounded-circle border border-2 border-secondary profile-img mx-5 mb-2" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
-                            <p class="h5 mb-0">{{user.displayName}}</p>
-                            <small class="text-muted">{{user.email}}</small>
-                            <hr>
+                            <div class="row" *ngIf="user != null">
+                                <div class="col-3">
+                                    <img width="100%" class="rounded-circle border border-2 border-secondary profile-img mx-5 mx-0" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
+                                </div>
+                                <div class="col-9 pt-3">
+                                    <p class="h5 mb-0">{{user.displayName}}</p>
+                                    <small class="text-muted">{{user.email}}</small>
+                                </div>
+                            </div>
+                            <hr *ngIf="user != null">
                             <ul class="list-group list-group-flush text-start">
                                 <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
                                 <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
@@ -26,14 +32,20 @@
         </div>
         <div class="dropdown" *ngIf="vw < 500">
             <i class="bi bi-three-dots-vertical h1 text-light" data-bs-toggle="dropdown" aria-expanded="false"></i>
-            <div class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <div class="dropdown-menu mt-2 dropdown-menu-end shadow-sm" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">
                         <div class="col-12 text-center py-3">
-                            <img width="90px" height="90px" class="rounded-circle border border-2 border-secondary profile-img mx-5 mb-2" [src]="user.photoURL" alt="User profile image" />
-                            <p class="h5 mb-0">{{user.displayName}}</p>
-                            <small class="text-muted">{{user.email}}</small>
-                            <hr>
+                            <div class="row" *ngIf="user != null">
+                                <div class="col-3">
+                                    <img width="100%" class="rounded-circle border border-2 border-secondary profile-img mx-5 mx-0" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
+                                </div>
+                                <div class="col-9 pt-3">
+                                    <p class="h5 mb-0">{{user.displayName}}</p>
+                                    <small class="text-muted">{{user.email}}</small>
+                                </div>
+                            </div>
+                            <hr *ngIf="user != null">
                             <ul class="list-group list-group-flush text-start">
                                 <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
                                 <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
