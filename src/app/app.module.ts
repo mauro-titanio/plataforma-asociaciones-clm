@@ -9,12 +9,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NotifierModule } from 'angular-notifier';
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
-
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { AuthService } from './shared/services/auth/auth.service';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { RouterModule } from '@angular/router';
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
@@ -34,7 +32,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SignInComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent,
     VerificationComponent,
     AssociationProfileComponent,
     AssociationFormComponent,

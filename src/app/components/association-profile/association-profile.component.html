@@ -33,9 +33,7 @@
                                     </div>
                                     <div>
                                         <p *ngIf="association.address  != ''"><i class="bi bi-geo h5 me-3 text-dark"></i>{{association.address}}</p>
-                                        <div class="d-block text-truncate w-90">
-                                            <p><a *ngIf="association.website != 'https://'" [href]="association.website" target="_blank"><i class="bi bi-globe h5 me-3 text-dark"></i>{{association.website}}</a></p>
-                                        </div>
+                                        <p><a *ngIf="association.website != 'https://'" [href]="association.website" target="_blank"><i class="bi bi-globe h5 me-3 text-dark"></i>{{association.website}}</a></p>
                                         <p *ngIf="association.telephone != 0"><i class="bi bi-telephone-fill h5 me-3 text-dark"></i>{{association.telephone}}</p>
                                         <p *ngIf="association.email  != ''"><i class="bi bi-envelope h5 me-3 text-dark"></i>{{association.email}}</p>
                                         <h6 class="py-3" *ngIf="association.facebook != 'https://www.facebook.com/' || association.instagram != 'https://www.instagram.com/' ||  association.twitter != 'https://twitter.com/' || association.linkedin != 'https://www.linkedin.com/in/'">Redes sociales</h6>

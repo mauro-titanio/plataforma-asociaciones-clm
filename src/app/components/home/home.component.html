@@ -1,50 +1,52 @@
 <app-navbar></app-navbar>
-<div class="row justify-content-center align-content-center vh-70 text-center" *ngIf="!pageLoaded" data-aos="fade-in">
-    <h2 class="text-center pb-4 display-4" data-aos="fade-up">Descubre un mundo de oportunidades</h2>
-    <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
-    <p class="text-center text-dark" data-aos="fade-in" data-aos-delay="350">Cargando...</p>
-</div>
-<div *ngIf="pageLoaded">
-    <div class="container" [ngClass]="{'vh-fit' : vw >= 500, 'min-vh-100' : vw < 500}" data-aos="fade-in">
-        <div class="container">
-            <div class="row justify-items-center justify-content-center pt-5">
-                <div class="col-lg-6 col-md-12 col-sm-12 text-center text-dark">
-                    <h2 class="section-title">Menú principal</h2>
-                    <hr>
+<div class="bg-light min-vh-100">
+    <div class="row justify-content-center align-content-center vh-70 text-center" *ngIf="!pageLoaded" data-aos="fade-in">
+        <h2 class="text-center pb-4 display-4" data-aos="fade-up">Descubre un mundo de oportunidades</h2>
+        <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
+        <p class="text-center text-dark" data-aos="fade-in" data-aos-delay="350">Cargando...</p>
+    </div>
+    <div *ngIf="pageLoaded">
+        <div class="container" [ngClass]="{'vh-fit' : vw >= 500, 'min-vh-100' : vw < 500}" data-aos="fade-in">
+            <div class="container">
+                <div class="row justify-items-center justify-content-center pt-5">
+                    <div class="col-lg-6 col-md-12 col-sm-12 text-center text-dark">
+                        <h2 class="section-title">Menú principal</h2>
+                        <hr>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <div class="row justify-content-center px-lg-5 px-md-2 px-sm-1">
-                <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="50">
-                        <div class="card-body">
-                            <h5 class="card-title">Asociaciones</h5>
-                            <p class="card-text mt-3">En esta sección puedes conocer las asociaciones inscritas en la plataforma.</p>
-                            <a [routerLink]="[ '/associations']" class="btn btn-primary text-light">Asociaciones</a>
+            <div class="container">
+                <div class="row justify-content-center px-lg-5 px-md-2 px-sm-1">
+                    <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
+                        <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="50">
+                            <div class="card-body">
+                                <h5 class="card-title">Asociaciones</h5>
+                                <p class="card-text mt-3">En esta sección puedes conocer las asociaciones inscritas en la plataforma.</p>
+                                <a [routerLink]="[ '/associations']" class="btn btn-primary text-light">Asociaciones</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="100">
-                        <div class="card-body">
+                    <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
+                        <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card-body">
 
-                            <h5 class="card-title" *ngIf="!associationExist">Crear perfil de asociación</h5>
-                            <h5 class="card-title" *ngIf="associationExist">Perfil de asociación</h5>
-                            <p class="card-text mt-3" *ngIf="!associationExist">Empieza a crear el perfil de tu asociación para que las personas puedan conocer vuestras actividades.</p>
-                            <p class="card-text mt-3" *ngIf="associationExist">Accede al perfil de tu asociación. Podrás ver una vista previa y modificarlo.</p>
-                            <a (click)="createAssociation()" class="btn btn-primary text-light" *ngIf="!associationExist">Crea el perfil</a>
-                            <a [routerLink]="['/profile', user.uid, userAssociation[0].id ]" class="btn btn-primary text-light" *ngIf="associationExist">Acceder al perfil</a>
+                                <h5 class="card-title" *ngIf="!associationExist">Crear perfil de asociación</h5>
+                                <h5 class="card-title" *ngIf="associationExist">Perfil de asociación</h5>
+                                <p class="card-text mt-3" *ngIf="!associationExist">Empieza a crear el perfil de tu asociación para que las personas puedan conocer vuestras actividades.</p>
+                                <p class="card-text mt-3" *ngIf="associationExist">Accede al perfil de tu asociación. Podrás ver una vista previa y modificarlo.</p>
+                                <a (click)="createAssociation()" class="btn btn-primary text-light" *ngIf="!associationExist">Crea el perfil</a>
+                                <a [routerLink]="['/profile', user.uid, userAssociation[0].id ]" class="btn btn-primary text-light" *ngIf="associationExist">Acceder al perfil</a>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
-                    <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="150">
-                        <div class="card-body">
-                            <h5 class="card-title">Ofertas de Voluntariado</h5>
-                            <p class="card-text mt-3">Descubre las ofertas de voluntario publicadas por las asociaciones.<br>¡Juntos somos más fuertes!</p>
-                            <a href="#" class="btn btn-primary text-light">Ofertas de voluntariado</a>
+                    <div class="col col-lg-4 col-md-10 col-sm-12 py-lg-5 py-sm-2 px-4" [ngClass]="{'col-lg-8' : vh >= 1360}">
+                        <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="150">
+                            <div class="card-body">
+                                <h5 class="card-title">Ofertas de Voluntariado</h5>
+                                <p class="card-text mt-3">Descubre las ofertas de voluntario publicadas por las asociaciones.<br>¡Juntos somos más fuertes!</p>
+                                <a href="#" class="btn btn-primary text-light">Ofertas de voluntariado</a>
+                            </div>
                         </div>
                     </div>
                 </div>
