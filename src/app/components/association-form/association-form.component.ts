@@ -277,15 +277,6 @@ export class AssociationFormComponent implements OnInit {
     }
     return url;
   }
-  deleteAss() {
-    this.crudAssociation.deleteAssociation(this.user.uid, this.association.id).then(success => {
-      this.notifier.notify('success', 'Perfil eliminado');
-      document.getElementById('closeDelete')?.click()
-      this.router.navigate(['/home'])
-    }).catch(error => {
-      console.log("Error", error)
-      this.notifier.notify('error', 'Ha habido un error en el servidor');
-    })
-  }
+
 
 }

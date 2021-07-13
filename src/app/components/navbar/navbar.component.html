@@ -2,20 +2,23 @@
     <div class="container-fluid mt-1">
         <p class="py-lg-2 mx-lg-5 mx-sm-2 text-light" [ngClass]="{'h6' : vw >= 500, 'fw-bold' : vw < 500}"><a href="">Plataforma de asociaciones <br> de Castilla - La Mancha</a></p>
         <div class="dropdown " *ngIf="vw>= 500">
-            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-4" data-bs-toggle="dropdown" aria-expanded="false" [src]="user.photoURL" alt="User profile image" />
+            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
+            <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="user == null"></i>
             <div class="dropdown-menu mt-2 dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">
                         <div class="col-12 text-center py-3">
-                            <img width="90px" height="90px" class="rounded-circle border border-2 border-secondary profile-img mx-5 mb-2" [src]="user.photoURL" alt="User profile image" />
+                            <img width="90px" height="90px" class="rounded-circle border border-2 border-secondary profile-img mx-5 mb-2" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
                             <p class="h5 mb-0">{{user.displayName}}</p>
                             <small class="text-muted">{{user.email}}</small>
                             <hr>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item h6"> <a href="">Home</a></li>
-                                <li class="list-group-item h6"> <a [routerLink]="'/associations'">Asociaciones</a></li>
+                            <ul class="list-group list-group-flush text-start">
+                                <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
+                                <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
+                                <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a [routerLink]="['/profile', user.uid, userAss[0].id ]"><i class="bi bi-person-square h4 me-3"></i>{{ass.name}}</a></li>
+                                <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
+                                <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3"></i>Cerrar sesión</a></li>
                             </ul>
-                            <button class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</button>
                         </div>
                     </div>
                 </div>
@@ -31,11 +34,13 @@
                             <p class="h5 mb-0">{{user.displayName}}</p>
                             <small class="text-muted">{{user.email}}</small>
                             <hr>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item h6"> <a href="">Home</a> </li>
-                                <li class="list-group-item h6"> <a [routerLink]="'/associations'">Asociaciones</a></li>
+                            <ul class="list-group list-group-flush text-start">
+                                <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
+                                <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
+                                <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a [routerLink]="['/profile', user.uid, userAss[0].id ]"><i class="bi bi-person-square h4 me-3"></i>{{ass.name}}</a></li>
+                                <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
+                                <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3"></i>Cerrar sesión</a></li>
                             </ul>
-                            <button class="btn btn-outline-danger" (click)="logout()">Cerrar sesión</button>
                         </div>
                     </div>
                 </div>
@@ -43,3 +48,24 @@
         </div>
     </div>
 </nav>
+
+
+
+<div class="modal fade" id="eliminateModal" tabindex="-1" aria-labelledby="eliminateModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">¿Eliminar {{ass.name}}?</h5>
+                <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>¿Realmente quires borrar el perfil de <strong>{{ass.name}}</strong>?</p>
+                <p>Todos los datos serán eliminados.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                <button type="button" class="btn btn-danger" (click)="deleteAss()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
