@@ -25,7 +25,7 @@
                 </div>
                 <div class="px-lg-5 px-md-3 px-sm-1 mx-lg-5 mb-5 rounded-bottom pb-4" [ngClass]="{'bg-light': vw >= 600, 'shadow-sm': vw >= 600}">
                     <div class="row pt-4">
-                        <div class="col-lg-4 col-md-12 col-sm-12 px-4">
+                        <div class="col-lg-5 col-md-12 col-sm-12 px-4">
                             <div class="row justify-content-center">
                                 <div class="col-12 shadow-sm rounded-3 mt-2 bg-white px-4 mb-3 pb-4">
                                     <div class="pt-4 pb-3 text-dark">
@@ -34,20 +34,30 @@
                                     <div>
                                         <p *ngIf="association.address  != ''"><i class="bi bi-geo h5 me-3 text-dark"></i>{{association.address}}</p>
                                         <div class="d-block text-truncate w-90">
-                                            <p><a *ngIf="association.website != ''" [href]="association.website" target="_blank"><i class="bi bi-globe h5 me-3 text-dark"></i>{{association.website}}</a></p>
+                                            <p><a *ngIf="association.website != 'https://'" [href]="association.website" target="_blank"><i class="bi bi-globe h5 me-3 text-dark"></i>{{association.website}}</a></p>
                                         </div>
                                         <p *ngIf="association.telephone != 0"><i class="bi bi-telephone-fill h5 me-3 text-dark"></i>{{association.telephone}}</p>
                                         <p *ngIf="association.email  != ''"><i class="bi bi-envelope h5 me-3 text-dark"></i>{{association.email}}</p>
-                                        <h6 class="py-3" *ngIf="association.facebook != '' || association.instagram != '' ||  association.twitter != '' || association.linkedin != ''">Redes sociales</h6>
-                                        <a *ngIf="association.facebook  != ''" [href]="association.facebook" target="_blank"><i class="bi bi-facebook h4 me-3 text-dark pointer"></i></a>
-                                        <a *ngIf="association.instagram  != ''" [href]="association.instagram" target="_blank"><i class="bi bi-instagram h4 me-3 text-dark pointer"></i></a>
-                                        <a *ngIf="association.twitter  != ''" [href]="association.twitter" target="_blank"><i class="bi bi-twitter h4 me-3 text-dark pointer"></i></a>
-                                        <a *ngIf="association.linkedin  != ''" [href]="association.linkedin" target="_blank"><i class="bi bi-linkedin h4 me-3 text-dark pointer"></i></a>
+                                        <h6 class="py-3" *ngIf="association.facebook != 'https://www.facebook.com/' || association.instagram != 'https://www.instagram.com/' ||  association.twitter != 'https://twitter.com/' || association.linkedin != 'https://www.linkedin.com/in/'">Redes sociales</h6>
+                                        <div class="row justify-content-start">
+                                            <div class="col-2" *ngIf="association.facebook  != 'https://www.facebook.com/'">
+                                                <a [href]="association.facebook" target="_blank"><i class="bi bi-facebook h4 me-3 text-dark pointer"></i></a>
+                                            </div>
+                                            <div class="col-2" *ngIf="association.instagram  != 'https://www.instagram.com/'">
+                                                <a [href]="association.instagram" target="_blank"><i class="bi bi-instagram h4 me-3 text-dark pointer"></i></a>
+                                            </div>
+                                            <div class="col-2" *ngIf="association.twitter  != 'https://twitter.com/'">
+                                                <a [href]="association.twitter" target="_blank"><i class="bi bi-twitter h4 me-3 text-dark pointer"></i></a>
+                                            </div>
+                                            <div class="col-2" *ngIf="association.linkedin  != 'https://www.linkedin.com/in/'">
+                                                <a [href]="association.linkedin" target="_blank"><i class="bi bi-linkedin h4 me-3 text-dark pointer"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-8 col-md-12 col-sm-12 px-4">
+                        <div class="col-lg-7 col-md-12 col-sm-12 px-4">
                             <div class="row justify-content-center">
                                 <div class="col-lg-11 col-md-12 col-sm-12 shadow-sm rounded-3 mt-2 bg-white px-4 mb-3">
                                     <div class="pt-4 pb-3 text-dark">

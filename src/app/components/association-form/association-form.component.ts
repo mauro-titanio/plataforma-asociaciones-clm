@@ -60,13 +60,13 @@ export class AssociationFormComponent implements OnInit {
     private fb: FormBuilder,
     private storage: AngularFireStorage
   ) {
-    this.readAssociations()
+
     const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.assForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
-      objectives: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(1000)]],
-      activities: ['', [Validators.minLength(3), Validators.maxLength(1000)]],
+      description: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]],
+      objectives: ['', [Validators.required, Validators.minLength(20), Validators.maxLength(1000)]],
+      activities: ['', [Validators.minLength(20), Validators.maxLength(1000)]],
       type: ['', Validators.required],
       profileImage: [''],
       profileCover: [''],
@@ -74,9 +74,9 @@ export class AssociationFormComponent implements OnInit {
       instagram: ['', Validators.pattern(reg)],
       twitter: ['', Validators.pattern(reg)],
       linkedin: ['', Validators.pattern(reg)],
-      website: ['', Validators.pattern(reg)],
-      telephone: [''],
-      address: ['', [Validators.minLength(3), Validators.maxLength(100)]],
+      website: [''],
+      telephone: [0],
+      address: [''],
       email: ['', [Validators.required, Validators.email]],
 
     })
@@ -84,6 +84,7 @@ export class AssociationFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.userData()
+    this.readAssociations()
   }
 
   get f() {
@@ -193,6 +194,7 @@ export class AssociationFormComponent implements OnInit {
 
 
   updateProfile() {
+
     let association: Association = {
       id: this.association.id,
       name: this.f.name.value,
@@ -206,16 +208,18 @@ export class AssociationFormComponent implements OnInit {
       address: this.f.address.value,
       telephone: this.f.telephone.value,
       email: this.f.email.value,
-      website: this.f.website.value,
-      facebook: this.f.facebook.value,
-      twitter: this.f.twitter.value,
-      instagram: this.f.instagram.value,
-      linkedin: this.f.linkedin.value,
+      website: this.addhttp(this.f.website.value),
+      facebook: this.addhttpFb(this.f.facebook.value),
+      twitter: this.addhttpTw(this.f.twitter.value),
+      instagram: this.addhttpIg(this.f.instagram.value),
+      linkedin: this.addhttpLkdn(this.f.linkedin.value),
     }
+    console.log("Hay http???? ", association.website)
+    console.log("Hay http???? ", association.facebook)
 
     if (this.assForm.invalid) {
       this.notifier.notify('error', 'No se ha podido actualizar');
-      console.log("error!")
+      console.log("error!",)
       return
     }
     this.crudAssociation.updateAssociation(this.user.uid, association, this.association.id).then(success => {
@@ -232,8 +236,56 @@ export class AssociationFormComponent implements OnInit {
 
 
 
+  addhttp(url: any) {
+
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+      url = "https://" + url;
+    }
+    return url;
+
+  }
+
+  addhttpFb(url: any) {
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+      url = "https://www.facebook.com/" + url;
+    }
+    return url;
+  }
 
 
 
+  addhttpLkdn(url: any) {
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+      url = "https://www.linkedin.com/in/" + url;
+    }
+    return url;
+  }
+
+  
+
+
+  addhttpTw(url: any) {
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+      url = "https://twitter.com/" + url;
+    }
+    return url;
+  }
+
+  addhttpIg(url: any) {
+    if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
+      url = "https://www.instagram.com/" + url;
+    }
+    return url;
+  }
+  deleteAss() {
+    this.crudAssociation.deleteAssociation(this.user.uid, this.association.id).then(success => {
+      this.notifier.notify('success', 'Perfil eliminado');
+      document.getElementById('closeDelete')?.click()
+      this.router.navigate(['/home'])
+    }).catch(error => {
+      console.log("Error", error)
+      this.notifier.notify('error', 'Ha habido un error en el servidor');
+    })
+  }
 
 }
