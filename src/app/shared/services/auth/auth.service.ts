@@ -88,8 +88,9 @@ export class AuthService {
       });
       this.setUserData(result.user);
       setTimeout(() => {
+        document.getElementById('modalCloseLogin')?.click()
         this.router.navigate(['/home'])
-      }, 3000); 
+      }, 200); 
     } catch (error) {
       this.notifier.notify('error', 'Ha occurrido un error');
     }

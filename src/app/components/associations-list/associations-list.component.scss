@@ -1,6 +1,14 @@
 @import '../../../variables.scss';
 .mini-img {
-    width: 55px;
-    height: 55px;
+    width: 100%;
+    height: 100%;
     background-color: $white;
+}
+
+@media (hover) {
+    .minicard-body:hover,
+    .minicard-body:focus-within {
+        opacity: 0.5;
+        transition: opacity 500ms ease;
+    }
 }

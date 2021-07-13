@@ -2,7 +2,7 @@
 
 <div class="container m-0 min-vw-100 bg-white rounded-3 vh-100 mb-5">
     <div class="row justify-content-between">
-        <div class="col-lg-3 col-md-12 col-sm-12 px-4 pt-5 bg-light vh-lg-100">
+        <div class="col-lg-3 col-md-12 col-sm-12 px-4 pt-5 bg-white vh-lg-100 border-end shadow-sm">
             <!--PONER MEDIA QUERY-->
             <h5>Búscador</h5>
             <div class="py-4">
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-9 col-md-12 col-sm-12 px-4 pt-4 min-vh-100">
+        <div class="col-lg-9 col-md-12 col-sm-12 px-4 pt-4 min-vh-100 bg-light">
             <div class="row">
                 <div class="col-12">
                     <div class="row">
@@ -42,17 +42,18 @@
             <div class="row h-100 justify-content-center align-items-center" *ngIf="!pageLoaded">
                 <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
             </div>
-            <div class="row" *ngIf="pageLoaded">
-                <div class="col-lg-4 col-md-6 col-sm-12 p-3" *ngFor="let ass of associations | filter:searchText | filter:searchProvince">
-                    <div class="row bg-dark py-2 rounded-3 align-items-center shadow">
-                        <div class="col-2 me-3">
-                            <img class="mini-img rounded-circle border border-2 border-white m-auto" [src]="ass.profileImage" alt="">
-                        </div>
-                        <div class="col-9 py-2 ">
-                            <div class="text-truncate">
-                                <h6 class="text-light">
-                                    <a [routerLink]="['/profile', ass.author, ass.id ]">{{ass.name}}</a></h6>
-                                <small class="text-light">{{ass.type}}</small>
+            <div class="row minicard" *ngIf="pageLoaded">
+                <div class="minicard-body">
+                    <div class="col-lg-4 col-md-6 col-sm-12 py-4 px-2" *ngFor="let ass of associations | filter:searchText | filter:searchProvince">
+                        <div class="row bg-white align-items-center shadow-sm py-2 rounded-3" [routerLink]="['/profile', ass.author, ass.id ]">
+                            <div class="col mx-0 border-end">
+                                <img class="mini-img rounded-circle border mx-auto" [src]="ass.profileImage" alt="">
+                            </div>
+                            <div class="col-9 py-2">
+                                <div class="">
+                                    <h6 class="text-dark mb-0">{{ass.name}}</h6>
+                                    <small class="text-dark">{{ass.type}}</small>
+                                </div>
                             </div>
                         </div>
                     </div>
