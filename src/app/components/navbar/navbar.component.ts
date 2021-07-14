@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
@@ -60,7 +60,10 @@ export class NavbarComponent implements OnInit {
     private storage: AngularFireStorage
   ) {
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-    this.configForm = this.fb.group({})
+    this.configForm = this.fb.group({
+      displayName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      photoURL: [''],
+    })
     this.user = this.authService.userData()
     console.log("Usuario: ", this.authService.userData())
     this.readAssociations()
@@ -69,7 +72,9 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+  get c() {
+    return this.configForm.controls
+  }
 
   readAssociations() {
     setTimeout(() => {
@@ -105,7 +110,13 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  uploadProfileImage(event: any) {
+  
+  logout() {
+    this.authService.signOut()
+  }
+
+/*
+  uploadUserProfileImage(event: any) {
     const file = event.target.files[0];
     const filePath = Date.now() + file.name;
     const fileRef = this.storage.ref(filePath);
@@ -129,9 +140,27 @@ export class NavbarComponent implements OnInit {
       .subscribe()
     }
 
+    updateUserProfile() {
+      let us: User = {
+        uid: this.user.uid,
+        email: this.user.email,
+        displayName: this.c.displayName.value,
+        photoURL: this.c.photoURL.value,
+        emailVerified: this.user.emailVerified
+      }
+      if (this.configForm.invalid) {
+        this.notifier.notify('error', 'No se ha podido actualizar');
+        return
+      }
+      this.crudUsers.updateUser(this.user.uid, us).then(success => {
+        this.notifier.notify('success', 'Perfil actualizado');
+        console.log("Post creado", success)
+      }).catch(error => {
+        this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
+        console.log("Error", error)
+      })
+    }
+    */
 
 
-  logout() {
-    this.authService.signOut()
-  }
 }

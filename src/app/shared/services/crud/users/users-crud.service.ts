@@ -21,7 +21,10 @@ readUser(){
 }
 
 
-
+updateUser(userID:string, data:any){
+  console.log("Form data: ",data)
+  return this.fireStore.collection('users').doc(userID).set(data)
+}
 
 
 }
