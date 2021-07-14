@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
     }
     this.crudAssociation.newAssociation(association, this.user.uid).then(success => {
       console.log("Post creado", success)
-      console.log("associación: creada", association)
     }).catch(error => {
       console.log("Error", error)
     })
@@ -117,7 +116,6 @@ export class HomeComponent implements OnInit {
     } else {
       this.associationExist = false
     }
-    console.log("existe associación?", this.associationExist)
   }
 
   logout() {

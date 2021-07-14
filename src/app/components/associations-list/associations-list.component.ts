@@ -76,7 +76,6 @@ export class AssociationsListComponent implements OnInit {
 
   readAssociations() {
     this.associations = []
-    console.log("users: ", this.users)
     this.pageLoaded = false
     this.users.forEach((us) => {
       this.crudAssociation.readAllAssociation(us.uid).subscribe(data => {
@@ -84,7 +83,6 @@ export class AssociationsListComponent implements OnInit {
         setTimeout(() => {
           data.forEach((doc: any) => {
             let ass: Association = doc.data()
-            console.log("Data: ", doc.data())
             ass.id = doc.id
             this.associations.push(ass)
           }, 1000);
@@ -108,7 +106,6 @@ export class AssociationsListComponent implements OnInit {
   }
 
   searchByType() {
-    console.log("Esto es el tipo seleccionado: ", this.selection)
     if (this.selection == null) {
       this.associations = []
       this.readAssociations()
@@ -123,7 +120,6 @@ export class AssociationsListComponent implements OnInit {
       filtered = this.associations.filter(data => data.type === selectedType.name)
       if (filtered.length != 0) {
         this.associations = filtered
-        console.log("filtered: ", this.associations)
       }
       else {
         this.notifier.notify('error', 'No hemos encontrado asociaciones de esta tipología')
@@ -132,12 +128,10 @@ export class AssociationsListComponent implements OnInit {
   }
 
   searchByProvince() {
-    console.log(this.selectedProvince)
     if (this.selectedProvince == null) {
       this.searchProvince = ''
     } else {
       this.searchProvince = this.selectedProvince.name
-      console.log(this.searchProvince)
     }
   }
 

@@ -99,7 +99,6 @@ export class AssociationFormComponent implements OnInit {
           let association: Association = doc.data()
           association.id = doc.id
           this.userAssociation.push(association)
-          console.log("read associations: ", this.userAssociation)
         })
       })
     }, 100);
@@ -115,7 +114,6 @@ export class AssociationFormComponent implements OnInit {
     this.crudAssociation.getAssociation(this.user.uid, this.userAssociation[0].id).subscribe((data: any) => {
       this.association = data.data()
       this.association.id = data.id
-      console.log("Esta es la primera associación del array: ", this.association)
       this.assForm.patchValue({
         id: this.association.id,
         author: this.user.uid,
@@ -214,12 +212,8 @@ export class AssociationFormComponent implements OnInit {
       instagram: this.addhttpIg(this.f.instagram.value),
       linkedin: this.addhttpLkdn(this.f.linkedin.value),
     }
-    console.log("Hay http???? ", association.website)
-    console.log("Hay http???? ", association.facebook)
-
     if (this.assForm.invalid) {
       this.notifier.notify('error', 'No se ha podido actualizar');
-      console.log("error!",)
       return
     }
     this.crudAssociation.updateAssociation(this.user.uid, association, this.association.id).then(success => {
@@ -252,17 +246,12 @@ export class AssociationFormComponent implements OnInit {
     return url;
   }
 
-
-
   addhttpLkdn(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
       url = "https://www.linkedin.com/in/" + url;
     }
     return url;
   }
-
-  
-
 
   addhttpTw(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {

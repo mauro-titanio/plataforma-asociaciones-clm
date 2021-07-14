@@ -57,7 +57,6 @@ export class AssociationProfileComponent implements OnInit {
     this.crudAssociation.getAssociation(this.userId, this.assId).subscribe(data => {
       this.association = data.data() as Association
       this.association.id = data.id
-      console.log(this.association)
     })
     this.user = this.authService.userData()
   
@@ -74,8 +73,8 @@ export class AssociationProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.isTheSameUser()
-    console.log("Same user?")
   }
+
   goBack() {
     this._location.back();
   }

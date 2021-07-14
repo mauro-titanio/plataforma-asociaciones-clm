@@ -39,21 +39,22 @@ export class NavbarComponent implements OnInit {
     profileImage: '',
     profileCover: '',
   }
+  vw: number = 0
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
     private router: Router,
     private notifier: NotifierService,
-  ) { }
+  ) {  this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)}
 
   ngOnInit(): void {
     this.user = this.authService.userData()
-    console.log("user", this.user)
     this.readAssociations()
   }
 
 
-  vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  
+
   readAssociations() {
     setTimeout(() => {
       this.crudAssociation.readAllAssociation(this.user.uid).subscribe(data => {
@@ -62,7 +63,6 @@ export class NavbarComponent implements OnInit {
           let association: Association = doc.data()
           association.id = doc.id
           this.userAss.push(association)
-          console.log("read associations: ", this.userAss)
         })
       })
     }, 100);
@@ -75,7 +75,6 @@ export class NavbarComponent implements OnInit {
     this.crudAssociation.getAssociation(this.user.uid, this.userAss[0].id).subscribe((data: any) => {
       this.ass = data.data()
       this.ass.id = data.id
-      console.log("Esta es la primera associación del array: ", this.ass)
     })
   }
   
@@ -86,7 +85,7 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/home'])
     }).catch(error => {
       console.log("Error", error)
-      this.notifier.notify('error', 'Ha habido un error en el servidor');
+      this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
     })
   }
   logout() {
