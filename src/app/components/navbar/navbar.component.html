@@ -22,6 +22,7 @@
                                 <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
                                 <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a [routerLink]="['/profile', user.uid, userAss[0].id ]"><i class="bi bi-person-square h4 me-3"></i>{{ass.name}}</a></li>
+                                <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-gear h4 me-3"></i>Configuración</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
                                 <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3"></i>Cerrar sesión</a></li>
                             </ul>
@@ -53,3 +54,63 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Configuración</h5>
+                <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="mb-5">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control border" id="name" placeholder="Introducir un nombre" formControlName="name">
+                            <div *ngIf="configForm.controls['name'].invalid && (configForm.controls['name'].dirty || configForm.controls['name'].touched)" class="alert">
+                                <div *ngIf="configForm.controls['name'].hasError('required')">
+                                    <div class="text-danger text-50 m-0">Por favor introduzca el nombre de la asociación</div>
+                                </div>
+                                <div *ngIf="configForm.controls['name'].hasError('minlength')">
+                                    <div class="text-danger text-50 m-0">Mínimo 3 caracteres</div>
+                                </div>
+                                <div *ngIf="configForm.controls['name'].hasError('maxlength')">
+                                    <div class="text-danger text-50 m-0">Máximo 30 caracteres</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="mb-5">
+                                <label for="formFile" class="form-label">Imagen de perfil <br> <small class="text-muted">Se recomienda un formato cuadrado</small></label>
+                                <input class="form-control border" type="file" id="formFile" (change)="uploadProfileImage($event)">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="cover-image mb-5">
+                                <div *ngIf="percent != null">
+                                    <small>{{percent}}%</small>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percent + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-6 pt-4">
+                                        <img class="image-preview mx-0" [src]="user.photoURL" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary text-light">Eliminar perfil</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-primary text-light">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>

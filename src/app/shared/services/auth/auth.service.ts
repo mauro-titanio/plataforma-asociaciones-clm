@@ -21,7 +21,13 @@ export class AuthService {
     private notifier: NotifierService
   ) { }
 
-  
+  isLoggedIn(): boolean {
+    const user = localStorage.getItem('user');
+    if (user) {
+      return true
+    }
+    return false
+  }
   setUserData(user: any) {
     const userData: User = {
       uid: user.uid,
@@ -34,18 +40,24 @@ export class AuthService {
       merge: true
     })
   }
-
-
-  isLoggedIn(): boolean {
-    const user = localStorage.getItem('user');
-    if (user) {
-      return true
-    }
-    return false
-  }
-
   userData(): User {
     return JSON.parse(localStorage.getItem('user')!)
+  }
+  // Sign in with email/password
+  async signIn(email: string, password: string):Promise<void> {
+    try {
+      const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
+      this.ngZone.run(() => {
+        this.notifier.notify('success', 'Acceso realizado'); 
+      });
+      this.setUserData(result.user);
+      setTimeout(() => {
+        document.getElementById('modalCloseLogin')?.click()
+        this.router.navigate(['/home'])
+      }, 200); 
+    } catch (error) {
+      this.notifier.notify('error', 'Ha occurrido un error');
+    }
   }
 
   async signOut() {
@@ -53,6 +65,8 @@ export class AuthService {
     localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
+
+
 
  // Sign in with Facebook
 
@@ -79,22 +93,7 @@ export class AuthService {
 
   }
 
-  // Sign in with email/password
-  async signIn(email: string, password: string):Promise<void> {
-    try {
-      const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
-      this.ngZone.run(() => {
-        this.notifier.notify('success', 'Acceso realizado'); 
-      });
-      this.setUserData(result.user);
-      setTimeout(() => {
-        document.getElementById('modalCloseLogin')?.click()
-        this.router.navigate(['/home'])
-      }, 200); 
-    } catch (error) {
-      this.notifier.notify('error', 'Ha occurrido un error');
-    }
-  }
+
 
   // Sign up with email/password
   async signUp(email: string, password: string) {

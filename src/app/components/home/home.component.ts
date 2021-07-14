@@ -48,6 +48,7 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {
     this.user = this.authService.userData()
+    console.log("User from home: ", this.authService.userData())
     this.readAssociations()
   }
 
