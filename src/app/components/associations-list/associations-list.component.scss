@@ -1,4 +1,12 @@
 @import '../../../variables.scss';
+.search-item {
+    overflow-y: hidden;
+}
+
+.closed {
+    height: 13rem;
+}
+
 .mini-img {
     width: 100%;
     height: 100%;

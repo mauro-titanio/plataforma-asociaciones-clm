@@ -17,8 +17,8 @@ export class AssociationsListComponent implements OnInit {
   users: Array<User> = []
   associations: Array<Association> = []
   pageLoaded: boolean = false
-
-
+  vw: number = 0
+  openSearchFilters = false
   selectedType = { id: 0, name: '' }
   selection?: { id: number, name: string }
   searchText = ''
@@ -42,7 +42,7 @@ export class AssociationsListComponent implements OnInit {
     private crudUsers: UsersCrudService,
     private notifier: NotifierService
 
-  ) { }
+  ) { this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) }
 
   ngOnInit(): void {
 
@@ -51,14 +51,18 @@ export class AssociationsListComponent implements OnInit {
     setTimeout(() => {
       this.readAssociations()
     }, 3000);
-
-
   }
 
 
 
 
-
+toggleSearchFilters(){
+  if (!this.openSearchFilters) {
+    this.openSearchFilters = true
+  } else{
+    this.openSearchFilters = false
+  }
+}
 
 
 

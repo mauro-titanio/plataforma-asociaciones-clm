@@ -2,10 +2,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 col-md-12 col-sm-12 header-left pt-5 px-4 mx-lg-5 m-sm-1">
-                <div class="header-text py-4 px-4 shadow-lg bg-white rounded-3">
-                    <h1 class="display-3 text-dark w-100 fw-normal">Plataforma de asociaciones de Castilla-La Mancha</h1>
-                    <p class="mt-3">consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                    <button id="loginButton" class="btn px-5 btn-primary text-light my-3 rounded-2 shadow-sm" type="button" name="button" data-bs-toggle="modal" data-bs-target="#loginModal">Acceder</button>
+                <div class="header-text py-4 px-4 shadow-lg bg-white rounded-3 text-center">
+                    <h1 class="display-3 text-dark w-100 fw-normal py-2">Plataforma de asociaciones de Castilla-La Mancha</h1>
+                    <h3 class="fw-light">Descubre un mundo de oportunidades</h3>
+                    <div class="py-2 text-center">
+                        <button id="loginButton" class="btn px-5 btn-primary text-light my-3 rounded-2 shadow-sm" type="button" name="button" data-bs-toggle="modal" data-bs-target="#loginModal">Acceder</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,7 +30,7 @@
                         <form [formGroup]="loginForm">
                             <div class="form mb-3">
                                 <label for="floatingInput">Correo electrónico</label>
-                                <input formControlName="email" type="email" class="form-control" id="floatingInput" placeholder="nombre@ejemplo.com">
+                                <input formControlName="email" type="email" class="form-control boorder-1 border-dark" id="floatingInput" placeholder="nombre@ejemplo.com">
                                 <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['email'].errors">
                                         <div class="text-danger text-50 m-0">Introducir un correo electrónico valido</div>
@@ -37,7 +39,7 @@
                             </div>
                             <div class="form mb-3">
                                 <label for="floatingPassword">Contraseña</label>
-                                <input formControlName="password" type="password" class="form-control" id="floatingPassword" placeholder="Contraseña">
+                                <input formControlName="password" type="password" class="form-control boorder-1 border-dark" id="floatingPassword" placeholder="Contraseña">
                                 <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['password'].errors">
                                         <div class="text-danger text-50 m-0">Introducir una contraseña valida</div>
