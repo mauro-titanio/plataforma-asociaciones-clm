@@ -25,7 +25,7 @@
                                 <!--Riveder esta parte
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-gear h4 me-3"></i>Configuración</a></li>
                                 -->
-                                <li class="list-group-item h6 pb-3"><a><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
+                                <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#feedbackModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
                                 <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3 ms-1"></i>Cerrar sesión</a></li>
                             </ul>
@@ -57,6 +57,68 @@
         </div>
     </div>
 </div>
+
+
+
+
+
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg mt-5">
+        <form [formGroup]="commentForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Envíanos un comentario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div *ngIf="!feedbackSent">
+                        <h5>Tu opinión es muy importante para que podamos seguir mejorando</h5>
+                        <p> Si has tenido un problema o tienes sugerencias envíanos un mensaje aquí abajo.<br> O si la plataforma te ha gustado mucho, también nos lo puedes comentar.</p>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
+                            <textarea class="form-control border" id="exampleFormControlTextarea1" rows="5" formControlName="message"></textarea>
+                            <div *ngIf="commentForm.controls['message'].invalid && (commentForm.controls['message'].dirty || commentForm.controls['message'].touched)" class="alert">
+                                <div *ngIf="commentForm.controls['message'].hasError('required')">
+                                    <div class="text-danger text-50 m-0">El mensaje está vacío</div>
+                                </div>
+                                <div *ngIf="commentForm.controls['message'].hasError('minlength')">
+                                    <div class="text-danger text-50 m-0">Mínimo 10 caracteres</div>
+                                </div>
+                                <div *ngIf="commentForm.controls['message'].hasError('maxlength')">
+                                    <div class="text-danger text-50 m-0">Máximo 1000 caracteres</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="feedbackSent" class="text-center">
+                        <div class="container py-4">
+                            <h6 class="my-4">Mensaje envíado</h6>
+                            <i class="bi bi-check-circle-fill h1 text-success py-4"></i>
+                            <h4 class="mt-4">¡Gracias por tu comentario!</h4>
+                            <p>¡Lo aprovecharemos para seguir mejorando!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-primary text-light" (click)="sendFeedBack()" *ngIf="!feedbackSent">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- Modal configuración del perfil
 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">

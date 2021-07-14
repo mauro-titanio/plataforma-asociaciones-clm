@@ -6,6 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Association } from 'src/app/shared/models/association';
+import { Feedback } from 'src/app/shared/models/feedback';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { AssociationCrudService } from 'src/app/shared/services/crud/association/association-crud.service';
@@ -46,10 +47,16 @@ export class NavbarComponent implements OnInit {
   }
   users: Array<User> = []
   vw: number = 0
-  configForm : FormGroup
+  commentForm : FormGroup
   percent: any
   uploadPercent: Observable<any> | undefined;
   downloadURL: Observable<any> | undefined;
+  feedback: Feedback = {
+    id: 0,
+    date: '',
+    message: ''
+  }
+  feedbackSent = false
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -60,20 +67,20 @@ export class NavbarComponent implements OnInit {
     private storage: AngularFireStorage
   ) {
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-    this.configForm = this.fb.group({
-      displayName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      photoURL: [''],
+    this.commentForm = this.fb.group({
+      message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
     })
     this.user = this.authService.userData()
     console.log("Usuario: ", this.authService.userData())
     this.readAssociations()
+    console.log(this.feedback)
   }
 
   ngOnInit(): void {
 
   }
   get c() {
-    return this.configForm.controls
+    return this.commentForm.controls
   }
 
   readAssociations() {
@@ -114,6 +121,45 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.signOut()
   }
+
+
+toggleFeedBack(){
+  if (this.feedbackSent == true) {
+    this.feedbackSent = false
+  }
+}
+
+  sendFeedBack() {
+    const comment: Feedback = {
+      id: new Date().getTime(),
+     date: new Date().toDateString(),
+     message: this.c.message.value
+    }
+    this.crudUsers.sendFeedback(this.user.uid, comment).then(success => {
+      this.notifier.notify('success', 'Mensaje envíado');
+      this.feedbackSent = true
+      this.commentForm.patchValue({
+        message: ''
+      })
+      console.log("después de PV: ",this.feedback)
+    }).catch(error => {
+      console.log("Error", error)
+      this.notifier.notify('error', 'Ha ocurrido un error');
+    })
+
+
+  }
+
+
+
+
+
+
+
+
+
+
+
 
 /*
   uploadUserProfileImage(event: any) {
