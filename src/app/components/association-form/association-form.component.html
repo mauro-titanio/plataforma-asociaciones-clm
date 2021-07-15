@@ -2,18 +2,18 @@
 <div class="bg-image-theme min-vw-100 min-vh-100">
     <div class="container m-0 min-vw-100 bg-glass min-vh-100">
         <div class="row justify-content-center ">
-            <div class="col-lg-8 bg-white p-5 my-5 rounded-3 shadow-lg">
+            <div class="col-lg-8 col-md-12 col-sm-12 bg-white p-5  rounded-3 shadow-lg" [ngClass]="{'my-5': vw > 600}">
                 <h3 class="text-center section-title">Actualizar perfil de asociación</h3>
                 <form class="pt-4" [formGroup]="assForm">
-                    <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+                    <ul class="nav nav-pills" id="pills-tab" role="tablist" [ngClass]="{'justify-content-center': vw <= 600, 'nav-fill': vw > 990}">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Inicio</button>
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true" [ngClass]="{'btn-sm': vw <= 600}">Inicio</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Descripción</button>
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" [ngClass]="{'btn-sm': vw <= 600}">Descripción</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contacto</button>
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" [ngClass]="{'btn-sm': vw <= 600}">Contacto</button>
                         </li>
                     </ul>
                     <hr class="mb-5">
@@ -44,7 +44,7 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="assType" class="form-label">Tipología</label>
-                                        <select class="form-select" aria-label="Default select example" formControlName="type">
+                                        <select class="form-select border" aria-label="Default select example" formControlName="type">
                                             <option value="{{type}}" *ngFor="let type of associationTypes">{{type}}</option>
                                         </select>
                                         <div *ngIf="assForm.controls['type'].invalid && (assForm.controls['type'].dirty || assForm.controls['type'].touched)" class="alert">
@@ -101,6 +101,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                                    <button class="btn btn-secondary mx-2 mb-2" (click)="navTab()">Siguente</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade mt-3" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                             <h6 class="pb-4">Descripción de la asociación</h6>
@@ -144,6 +150,12 @@
                                     <div *ngIf="assForm.controls['activities'].hasError('maxlength')">
                                         <div class="text-danger text-50 m-0">Máximo 1000 caracteres</div>
                                     </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row justify-content-center">
+                                <div class="col-lg-6 col-md-6 col-sm-12 text-center">
+                                    <button class="btn btn-secondary mx-2 mb-2" (click)="navTab()">Siguente</button>
                                 </div>
                             </div>
                         </div>
@@ -214,6 +226,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <hr>
                             <div class="row justify-content-center">
                                 <div class="col-lg-6 col-md-6 col-sm-12 text-center">
                                     <button class="btn btn-dark text-light mx-2 mb-2" (click)="updateProfile()">Actualizar perfil</button>

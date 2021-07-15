@@ -52,6 +52,8 @@ export class AssociationFormComponent implements OnInit {
   downloadURL: Observable<any> | undefined;
   percentCover: any
   percent: any
+  vh: number = 0
+  vw: number = 0
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -60,7 +62,8 @@ export class AssociationFormComponent implements OnInit {
     private fb: FormBuilder,
     private storage: AngularFireStorage
   ) {
-
+    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+    this.vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
     const reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
     this.assForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
@@ -78,7 +81,6 @@ export class AssociationFormComponent implements OnInit {
       telephone: [0],
       address: [''],
       email: ['', [Validators.required, Validators.email]],
-
     })
   }
 
@@ -106,9 +108,6 @@ export class AssociationFormComponent implements OnInit {
       this.readThisAssociation()
     }, 1100);
   }
-
-
-
 
   readThisAssociation() {
     this.crudAssociation.getAssociation(this.user.uid, this.userAssociation[0].id).subscribe((data: any) => {
@@ -183,16 +182,18 @@ export class AssociationFormComponent implements OnInit {
     )
       .subscribe()
   }
-
-
-
-
-
-
-
-
+  navTab() {
+    let first = document.getElementById('pills-home-tab')
+    let second = document.getElementById('pills-profile-tab')
+    if (first?.classList.contains('active')) {
+      document.getElementById('pills-profile-tab')?.click()
+      window.scrollTo(0, 0)
+    } else if (second?.classList.contains('active')) {
+      document.getElementById('pills-contact-tab')?.click()
+      window.scrollTo(0, 0)
+    }
+  }
   updateProfile() {
-
     let association: Association = {
       id: this.association.id,
       name: this.f.name.value,
@@ -219,6 +220,7 @@ export class AssociationFormComponent implements OnInit {
     this.crudAssociation.updateAssociation(this.user.uid, association, this.association.id).then(success => {
       this.notifier.notify('success', 'Perfil actualizado');
       console.log("Post creado", success)
+
       setTimeout(() => {
         this.router.navigate(['/profile', (this.user.uid), (this.association.id)]);
       }, 1000);
