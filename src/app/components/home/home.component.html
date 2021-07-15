@@ -30,7 +30,7 @@
                     <div class="card shadow-sm mx-auto mb-3 boder border-3 border-dark rounded rounded-3" data-aos="fade-up" data-aos-delay="100">
                         <div class="card-body">
                             <h5 class="card-title" *ngIf="!associationExist">Crear perfil de asociación</h5>
-                            <h5 class="card-title" *ngIf="associationExist">Perfil de asociación</h5>
+                            <h5 class="card-title" *ngIf="associationExist">{{userAssociation[0].name}}</h5>
                             <p class="card-text mt-3" *ngIf="!associationExist">Empieza a crear el perfil de tu asociación para que las personas puedan conocer vuestras actividades.</p>
                             <p class="card-text mt-3" *ngIf="associationExist">Accede al perfil de tu asociación. Podrás ver una vista previa y modificarlo.</p>
                             <a (click)="createAssociation()" class="btn btn-primary text-light" *ngIf="!associationExist">Crea el perfil</a>
