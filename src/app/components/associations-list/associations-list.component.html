@@ -2,7 +2,7 @@
 
 <div class="container m-0 min-vw-100 bg-white rounded-3 vh-100 mb-5">
     <div class="row justify-content-between">
-        <div class="col-lg-3 col-md-12 col-sm-12 px-4 bg-white shadow-sm" [ngClass]="{'position-sticky vh-100 top-0 pt-5 border-end': vw > 990, 'search-item pt-4' : vw <= 990, 'closed' : !openSearchFilters && vw <= 990 }">
+        <div class="col-lg-3 col-md-12 col-sm-12 px-4 bg-white shadow-sm" [ngClass]="{'position-sticky vh-100 top-0 pt-5 border-end': vw > 990, 'search-item pt-4' : vw <= 990, 'closed' : !openSearchFilters && vw <= 990,'visible': openSearchFilters && vw <= 990 }">
             <!--PONER MEDIA QUERY-->
             <h4>Búscador</h4>
             <div class="py-4">

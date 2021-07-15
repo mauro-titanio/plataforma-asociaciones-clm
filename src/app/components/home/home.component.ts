@@ -48,7 +48,7 @@ export class HomeComponent implements OnInit {
     private router: Router
   ) {
     this.user = this.authService.userData()
-    console.log("User from home: ", this.authService.userData())
+
     this.readAssociations()
   }
 
@@ -104,10 +104,8 @@ export class HomeComponent implements OnInit {
     }, 50);
     setTimeout(() => {
       this.thereIsAssociation()
-    }, 1500);
-    setTimeout(() => {
       this.pageLoaded = true
-    }, 3000);
+    }, 1500);
   }
 
 
