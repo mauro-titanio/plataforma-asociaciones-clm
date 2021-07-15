@@ -4,16 +4,16 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="cover-image" [ngStyle]="{ 'background-image': 'url(' + association.profileCover + ')'}"></div>
+                    <div class="cover bg-secondary" [ngStyle]="{ 'background-image': 'url(' + association.profileCover + ')'}" [ngClass]="{'cover-image': vw > 990}"></div>
                 </div>
                 <div class="bg-light mx-lg-5">
                     <div class="row justify-content-center bg-white rounded-bottom shadow-lg">
                         <div class="col-lg-10 col-md-12 col-sm-12 pt-3">
                             <div class="row justify-content-center ">
                                 <div class="col-lg-2 col-sm-12 logo-bar">
-                                    <div class="profile-image mx-auto shadow-sm border-light" [ngStyle]="{ 'background-image': 'url(' + association.profileImage + ')'}"></div>
+                                    <div class="profile-image bg-secondary mx-auto shadow-sm border-light" [ngStyle]="{ 'background-image': 'url(' + association.profileImage + ')'}"></div>
                                 </div>
-                                <div class="col-lg-10 col-md-12 col-sm-12">
+                                <div class="col-lg-10 col-md-12 col-sm-12 shadow-sm">
                                     <div class="container ms-lg-2 ms-md-0 ms-sm-0" [ngClass]="{'text-center': vw <=990}">
                                         <h3 class="text-dark pt-2">{{association.name}} </h3>
                                         <p class="text-muted">{{association.type}}<a class="btn text-muted" routerLink="/create/{{association.id}}" *ngIf="sameUser && vw >= 990"><i class="bi bi-pencil"></i></a></p>
