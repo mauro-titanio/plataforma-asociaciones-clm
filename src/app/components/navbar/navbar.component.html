@@ -19,7 +19,7 @@
                             </div>
                             <hr *ngIf="user != null">
                             <ul class="list-group list-group-flush text-start text-dark">
-                                <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Home</a></li>
+                                <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Inicio</a></li>
                                 <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a [routerLink]="['/profile', user.uid, userAss[0].id ]"><i class="bi bi-person-square h4 me-3"></i>{{ass.name}}</a></li>
                                 <!--Riveder esta parte

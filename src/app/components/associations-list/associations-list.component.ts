@@ -50,22 +50,16 @@ export class AssociationsListComponent implements OnInit {
     this.readUsers()
     setTimeout(() => {
       this.readAssociations()
-    }, 3000);
+    }, 500);
   }
 
-
-
-
-toggleSearchFilters(){
-  if (!this.openSearchFilters) {
-    this.openSearchFilters = true
-  } else{
-    this.openSearchFilters = false
+  toggleSearchFilters() {
+    if (!this.openSearchFilters) {
+      this.openSearchFilters = true
+    } else {
+      this.openSearchFilters = false
+    }
   }
-}
-
-
-
 
   readUsers() {
     this.crudUsers.readAllUsers().subscribe(data => {
@@ -89,7 +83,7 @@ toggleSearchFilters(){
             let ass: Association = doc.data()
             ass.id = doc.id
             this.associations.push(ass)
-          }, 1000);
+          }, 500);
         })
       })
     });
@@ -103,8 +97,6 @@ toggleSearchFilters(){
         }
         return 0;
       });
-    }, 1000);
-    setTimeout(() => {
       this.pageLoaded = true
     }, 1000);
   }
