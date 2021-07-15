@@ -4,6 +4,7 @@ import { AssociationFormComponent } from './components/association-form/associat
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
 import { AssociationsListComponent } from './components/associations-list/associations-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { VerificationComponent } from './components/verification/verification.component';
 import { AuthGuard } from './shared/services/auth/guard/guard.guard';
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'verification', component: VerificationComponent, /*canActivate: [AuthGuard] */},
   { path: 'profile/:userID/:assID', component: AssociationProfileComponent, pathMatch: 'full'},
   { path: 'create/:assID', component: AssociationFormComponent },
-  {path: 'associations', component: AssociationsListComponent}
+  {path: 'associations', component: AssociationsListComponent},
+  {path: 'privacy', component: PrivacyComponent}
 
 ];
 

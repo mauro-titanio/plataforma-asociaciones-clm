@@ -20,6 +20,7 @@ import { AssociationFormComponent } from './components/association-form/associat
 import { AssociationsListComponent } from './components/associations-list/associations-list.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { PrivacyComponent } from './components/privacy/privacy.component';
 
 
 
@@ -36,6 +37,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     AssociationProfileComponent,
     AssociationFormComponent,
     AssociationsListComponent,
+    PrivacyComponent,
   ],
   imports: [
     BrowserModule,
