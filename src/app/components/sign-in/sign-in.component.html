@@ -30,7 +30,7 @@
                         <form [formGroup]="loginForm">
                             <div class="form mb-3">
                                 <label for="floatingInput">Correo electrónico</label>
-                                <input formControlName="email" type="email" class="form-control boorder-1 border-dark" id="floatingInput" placeholder="nombre@ejemplo.com">
+                                <input formControlName="email" type="email" class="form-control border-1 border-dark" id="floatingInput" placeholder="nombre@ejemplo.com">
                                 <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['email'].errors">
                                         <div class="text-danger text-50 m-0">Introducir un correo electrónico valido</div>
@@ -39,7 +39,7 @@
                             </div>
                             <div class="form mb-3">
                                 <label for="floatingPassword">Contraseña</label>
-                                <input formControlName="password" type="password" class="form-control boorder-1 border-dark" id="floatingPassword" placeholder="Contraseña">
+                                <input formControlName="password" type="password" class="form-control border-1 border-dark" id="floatingPassword" placeholder="Contraseña">
                                 <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['password'].errors">
                                         <div class="text-danger text-50 m-0">Introducir una contraseña valida</div>
