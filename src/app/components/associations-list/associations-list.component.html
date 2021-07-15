@@ -44,17 +44,15 @@
                 <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
             </div>
             <div class="row minicard" *ngIf="pageLoaded">
-                <div class="minicard-body">
-                    <div class="col-lg-4 col-md-6 col-sm-12 py-4 px-2" *ngFor="let ass of associations | filter:searchText | filter:searchProvince">
-                        <div class="row bg-white align-items-center shadow-sm py-2 rounded-3" [routerLink]="['/profile', ass.author, ass.id ]">
-                            <div class="col mx-0 border-end">
-                                <img class="mini-img rounded-circle border mx-auto" [src]="ass.profileImage" alt="">
-                            </div>
-                            <div class="col-9 py-2">
-                                <div class="">
-                                    <h6 class="text-dark mb-0">{{ass.name}}</h6>
-                                    <small class="text-dark">{{ass.type}}</small>
-                                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 py-4 px-3 minicard-body" *ngFor="let ass of associations | filter:searchText | filter:searchProvince; let i=index" data-aos="fade-up" data-aos-delay="(i * 300)">
+                    <div class="row bg-white align-items-center shadow-sm py-2 rounded-3" [routerLink]="['/profile', ass.author, ass.id ]">
+                        <div class="col mx-0 border-end" *ngIf="ass.profileImage != ''">
+                            <img class="mini-img rounded-circle border mx-auto" [src]="ass.profileImage" alt="Imagen de prefil de asociación">
+                        </div>
+                        <div class="col-9 py-2" [ngClass]="{'ms-4': ass.profileImage == ''}">
+                            <div>
+                                <h6 class="text-dark mb-0">{{ass.name}}</h6>
+                                <small class="text-dark">{{ass.type}}</small>
                             </div>
                         </div>
                     </div>

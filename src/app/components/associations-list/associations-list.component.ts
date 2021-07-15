@@ -97,8 +97,10 @@ export class AssociationsListComponent implements OnInit {
         }
         return 0;
       });
-      this.pageLoaded = true
-    }, 1000);
+     setTimeout(() => {
+       this.pageLoaded = true
+     }, 500);
+    }, 1500);
   }
 
   searchByType() {
