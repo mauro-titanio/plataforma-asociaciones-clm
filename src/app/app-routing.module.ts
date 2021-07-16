@@ -4,6 +4,7 @@ import { AssociationFormComponent } from './components/association-form/associat
 import { AssociationProfileComponent } from './components/association-profile/association-profile.component';
 import { AssociationsListComponent } from './components/associations-list/associations-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { OffersListComponent } from './components/offers-list/offers-list.component';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 import { VerificationComponent } from './components/verification/verification.component';
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'profile/:userID/:assID', component: AssociationProfileComponent, pathMatch: 'full'},
   { path: 'create/:assID', component: AssociationFormComponent },
   {path: 'associations', component: AssociationsListComponent},
-  {path: 'privacy', component: PrivacyComponent}
+  {path: 'privacy', component: PrivacyComponent},
+  {path: 'offers', component: OffersListComponent}
 
 ];
 

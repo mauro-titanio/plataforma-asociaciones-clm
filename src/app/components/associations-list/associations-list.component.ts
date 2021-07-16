@@ -42,11 +42,7 @@ export class AssociationsListComponent implements OnInit {
     private crudUsers: UsersCrudService,
     private notifier: NotifierService
 
-  ) { this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) }
-
-  ngOnInit(): void {
-
-
+  ) { this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     this.readUsers()
     this.pageLoaded = false
     setTimeout(() => {
@@ -55,6 +51,9 @@ export class AssociationsListComponent implements OnInit {
     setTimeout(() => {
       this.pageLoaded = true
     }, 3000);
+  }
+
+  ngOnInit(): void {
   }
 
   toggleSearchFilters() {
@@ -112,7 +111,6 @@ export class AssociationsListComponent implements OnInit {
         this.pageLoaded = true
       }, 1000);
       return
-     
     }
     setTimeout(() => {
       let selectedType = {

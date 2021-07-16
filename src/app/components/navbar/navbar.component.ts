@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Association } from 'src/app/shared/models/association';
 import { Feedback } from 'src/app/shared/models/feedback';
+import { Offer } from 'src/app/shared/models/offer';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { AssociationCrudService } from 'src/app/shared/services/crud/association/association-crud.service';
+import { OfferCrudService } from 'src/app/shared/services/crud/offer/offer-crud.service';
 import { UsersCrudService } from 'src/app/shared/services/crud/users/users-crud.service';
 
 @Component({
@@ -47,7 +49,7 @@ export class NavbarComponent implements OnInit {
   }
   users: Array<User> = []
   vw: number = 0
-  commentForm : FormGroup
+  commentForm: FormGroup
   percent: any
   uploadPercent: Observable<any> | undefined;
   downloadURL: Observable<any> | undefined;
@@ -57,10 +59,15 @@ export class NavbarComponent implements OnInit {
     message: ''
   }
   feedbackSent = false
+  offerForm: FormGroup
+
+
+
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
     private crudUsers: UsersCrudService,
+    private crudOffers: OfferCrudService,
     private router: Router,
     private notifier: NotifierService,
     private fb: FormBuilder,
@@ -70,17 +77,23 @@ export class NavbarComponent implements OnInit {
     this.commentForm = this.fb.group({
       message: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
     })
+    this.offerForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+    })
     this.user = this.authService.userData()
     console.log("Usuario: ", this.authService.userData())
     this.readAssociations()
     console.log(this.feedback)
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
   get c() {
     return this.commentForm.controls
+  }
+
+  get o() {
+    return this.offerForm.controls
   }
 
   readAssociations() {
@@ -105,7 +118,7 @@ export class NavbarComponent implements OnInit {
       this.ass.id = data.id
     })
   }
-  
+
   deleteAss() {
     this.crudAssociation.deleteAssociation(this.user.uid, this.ass.id).then(success => {
       this.notifier.notify('success', 'Perfil eliminado');
@@ -117,23 +130,23 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  
+
   logout() {
     this.authService.signOut()
   }
 
 
-toggleFeedBack(){
-  if (this.feedbackSent == true) {
-    this.feedbackSent = false
+  toggleFeedBack() {
+    if (this.feedbackSent == true) {
+      this.feedbackSent = false
+    }
   }
-}
 
   sendFeedBack() {
     const comment: Feedback = {
       id: new Date().getTime(),
-     date: new Date().toDateString(),
-     message: this.c.message.value
+      date: new Date().toDateString(),
+      message: this.c.message.value
     }
     this.crudUsers.sendFeedback(this.user.uid, comment).then(success => {
       this.notifier.notify('success', 'Mensaje envíado');
@@ -141,13 +154,36 @@ toggleFeedBack(){
       this.commentForm.patchValue({
         message: ''
       })
-      console.log("después de PV: ",this.feedback)
     }).catch(error => {
       console.log("Error", error)
       this.notifier.notify('error', 'Ha ocurrido un error');
     })
+  }
 
-
+  createOffer() {
+    const off: Offer = {
+      id: '',
+      date: new Date().getTime(),
+      title: this.o.title.value,
+      description: this.o.description.value,
+      author: this.user.uid,
+      associationId: this.ass.id,
+      associationName: this.ass.name,
+      active: true,
+      image: this.ass.profileImage,
+      zone: this.ass.address
+    }
+    this.crudOffers.newOffer(this.user.uid, off).then(success => {
+      this.notifier.notify('success', 'Oferta creada');
+      this.feedbackSent = true
+      this.offerForm.patchValue({
+        title: '',
+        description: ''
+      })
+    }).catch(error => {
+      console.log("Error", error)
+      this.notifier.notify('error', 'Ha ocurrido un error');
+    })
   }
 
 
@@ -161,52 +197,52 @@ toggleFeedBack(){
 
 
 
-/*
-  uploadUserProfileImage(event: any) {
-    const file = event.target.files[0];
-    const filePath = Date.now() + file.name;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath, file)
-    // observe percentage changes
-    task.percentageChanges().subscribe(number => {
-      this.percent = number!
-    })
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      finalize(() => {
-        this.downloadURL = fileRef.getDownloadURL()
-        this.downloadURL.subscribe(data => {
-          this.configForm.patchValue({
-            profileImage: data
+  /*
+    uploadUserProfileImage(event: any) {
+      const file = event.target.files[0];
+      const filePath = Date.now() + file.name;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, file)
+      // observe percentage changes
+      task.percentageChanges().subscribe(number => {
+        this.percent = number!
+      })
+      // get notified when the download URL is available
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL()
+          this.downloadURL.subscribe(data => {
+            this.configForm.patchValue({
+              profileImage: data
+            })
+            this.user.photoURL = data
           })
-          this.user.photoURL = data
         })
-      })
-    )
-      .subscribe()
-    }
-
-    updateUserProfile() {
-      let us: User = {
-        uid: this.user.uid,
-        email: this.user.email,
-        displayName: this.c.displayName.value,
-        photoURL: this.c.photoURL.value,
-        emailVerified: this.user.emailVerified
+      )
+        .subscribe()
       }
-      if (this.configForm.invalid) {
-        this.notifier.notify('error', 'No se ha podido actualizar');
-        return
+  
+      updateUserProfile() {
+        let us: User = {
+          uid: this.user.uid,
+          email: this.user.email,
+          displayName: this.c.displayName.value,
+          photoURL: this.c.photoURL.value,
+          emailVerified: this.user.emailVerified
+        }
+        if (this.configForm.invalid) {
+          this.notifier.notify('error', 'No se ha podido actualizar');
+          return
+        }
+        this.crudUsers.updateUser(this.user.uid, us).then(success => {
+          this.notifier.notify('success', 'Perfil actualizado');
+          console.log("Post creado", success)
+        }).catch(error => {
+          this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
+          console.log("Error", error)
+        })
       }
-      this.crudUsers.updateUser(this.user.uid, us).then(success => {
-        this.notifier.notify('success', 'Perfil actualizado');
-        console.log("Post creado", success)
-      }).catch(error => {
-        this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
-        console.log("Error", error)
-      })
-    }
-    */
+      */
 
 
 }

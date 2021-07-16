@@ -1,4 +1,7 @@
-<app-navbar></app-navbar>
+<app-navbar>
+
+
+</app-navbar>
 
 <div class="container m-0 min-vw-100 bg-white rounded-3 vh-100 mb-5">
     <div class="row justify-content-between">
@@ -12,15 +15,9 @@
 
                 </div>
                 <div>
-                    <h5 class="" [ngClass]="{'pt-2': vw <= 990}">Filtros de búsqueda <i class="bi bi-plus-circle-fill ms-2  h6 text-info align-middle" *ngIf="vw <= 990" (click)="toggleSearchFilters()"></i> </h5>
+                    <h5 class="" [ngClass]="{'pt-2': vw <= 990}">Filtros de búsqueda <i class="bi bi-plus-circle-fill ms-2  h6 text-info align-middle" *ngIf="vw <= 990" (click)="toggleSearchFilters()"></i></h5>
                 </div>
                 <div class="row py-4">
-                    <div class="col-lg-12 col-md-6 col-sm-6">
-                        <div class="mb-3">
-                            <label for="">Tipología</label>
-                            <ng-select [items]="associationTypes" [multiple]="false" [closeOnSelect]="true" [hideSelected]="true" bindLabel="name" placeholder="Elegir tipología" [(ngModel)]="selection" (change)="searchByType()"></ng-select>
-                        </div>
-                    </div>
                     <div class="col-lg-12 col-md-6 col-sm-6">
                         <div class="mb-3">
                             <label for="">Provincia</label>
@@ -35,7 +32,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <h2 class="text-lg-start pt-3 text-sm-center">Asociaciones</h2>
+                        <h2 class="text-lg-start pt-3 text-sm-center">Ofertas de voluntariado</h2>
                     </div>
                     <hr>
                 </div>
@@ -43,21 +40,39 @@
             <div class="row py-5 justify-content-center align-items-center" *ngIf="!pageLoaded">
                 <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
             </div>
-            <div class="row minicard" *ngIf="pageLoaded">
-                <div class="col-lg-4 col-md-6 col-sm-12 p-3" *ngFor="let ass of associations | filter:searchText | filter:searchProvince; let i=index" data-aos="fade-up" [attr.data-aos-delay]="(i * 300)">
-                    <div class="row bg-white align-items-center shadow-sm py-2 rounded-3 minicard-body" [routerLink]="['/profile', ass.author, ass.id ]">
-                        <div class="col mx-0">
-                            <img class="mini-img rounded-circle border mx-auto" [src]="ass.profileImage" alt="Imagen de prefil de asociación" *ngIf="ass.profileImage != ''">
-                        </div>
-                        <div class="col-9 py-2 border-start" [ngClass]="{'ms-4': ass.profileImage == ''}">
-                            <div>
-                                <h6 class="text-dark mb-0">{{ass.name}}</h6>
-                                <small class="text-dark">{{ass.type}}</small>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-12 py-4" *ngFor="let o of offers | filter:searchText | filter:searchProvince; let i =index ">
+                    <div class="card" data-aos="fade-up" [attr.data-aos-delay]="(i * 300)">
+                        <div class=" card-body ">
+                            <h5 class="card-title ">{{o.title}}</h5>
+                            <hr class="my-4 ">
+                            <small class="card-text text-muted">Publicada por:</small>
+                            <div class="row ">
+                                <div class="col-lg-8 col-md-6 col-sm-6 ">
+                                    <p> <a href=" " class="fw-bold text-dark ">{{o.associationName}}</a></p>
+                                </div>
+                                <div class="col-2" *ngIf="o.image != ''">
+                                    <img class="rounded-circle img-translate " [src]="o.image " alt=" " width="50px ">
+                                </div>
+                            </div>
+                            <button class="btn btn-sm text-muted mb-2" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapsable' + i" aria-expanded="false" aria-controls="collapseExample">
+                                <i class="bi bi-file-earmark-text-fill h5 me-2 text-primary"></i> Descripción de la oferta
+                              </button>
+                            <div class="collapse" [id]="'collapsable' + i">
+                                <div class="">
+                                    <p>{{o.description}}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
+
+
+
         </div>
     </div>
 </div>

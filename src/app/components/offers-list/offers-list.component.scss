@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+.search-item {
+    overflow-y: hidden;
+}
+
+.closed {
+    height: 13rem;
+}
+
+.visible {
+    overflow-y: visible !important;
+}
+
+.img-translate {
+    transform: translateY(-20px);
+}

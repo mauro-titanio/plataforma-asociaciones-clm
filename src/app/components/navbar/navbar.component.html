@@ -25,6 +25,7 @@
                                 <!--Riveder esta parte
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-gear h4 me-3"></i>Configuración</a></li>
                                 -->
+                                <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#newOfferModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Crear oferta de voluntariado</a></li>
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#feedbackModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
                                 <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3 ms-1"></i>Cerrar sesión</a></li>
@@ -113,74 +114,123 @@
 
 
 
-
-
-
-
-
-
-
-
-
-<!-- Modal configuración del perfil
-<div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+<div class="modal fade" id="newOfferModal" tabindex="-1" aria-labelledby="eliminateModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <form [formGroup]="configForm">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Configuración</h5>
-                    <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+            <div class="modal-header">
+                <h5 class="modal-title">Crear oferta de voluntariado</h5>
+                <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="offerForm">
                 <div class="modal-body">
+
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
-                            <div class="mb-5">
-                                <label for="name" class="form-label">Nombre</label>
-                                <input type="text" class="form-control border" id="name" placeholder="Introducir un nombre" formControlName="displayName">
-                                <div *ngIf="configForm.controls['displayName'].invalid && (configForm.controls['displayName'].dirty || configForm.controls['displayName'].touched)" class="alert">
-                                    <div *ngIf="configForm.controls['displayName'].hasError('required')">
-                                        <div class="text-danger text-50 m-0">Por favor introduzca el nombre de la asociación</div>
-                                    </div>
-                                    <div *ngIf="configForm.controls['displayName'].hasError('minlength')">
-                                        <div class="text-danger text-50 m-0">Mínimo 3 caracteres</div>
-                                    </div>
-                                    <div *ngIf="configForm.controls['displayName'].hasError('maxlength')">
-                                        <div class="text-danger text-50 m-0">Máximo 30 caracteres</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div *ngIf="!feedbackSent">
                                 <div class="mb-5">
-                                    <label for="formFile" class="form-label">Imagen de perfil <br> <small class="text-muted">Se recomienda un formato cuadrado</small></label>
-                                    <input class="form-control border" type="file" id="formFile" (change)="uploadUserProfileImage($event)">
+                                    <label for="name" class="form-label">Título</label>
+                                    <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title">
+                                    <div *ngIf="offerForm.controls['title'].invalid && (offerForm.controls['title'].dirty || offerForm.controls['title'].touched)" class="alert">
+                                        <div *ngIf="offerForm.controls['title'].hasError('required')">
+                                            <div class="text-danger text-50 m-0">Añade un título a la oferta</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="name" class="form-label">Descripción</label>
+                                    <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description"></textarea>
+                                    <div *ngIf="offerForm.controls['description'].invalid && (offerForm.controls['description'].dirty || offerForm.controls['description'].touched)" class="alert">
+                                        <div *ngIf="offerForm.controls['description'].hasError('required')">
+                                            <div class="text-danger text-50 m-0">Añade una descripción de la oferta</div>
+                                        </div>
+                                        <div *ngIf="offerForm.controls['description'].hasError('minlength')">
+                                            <div class="text-danger text-50 m-0">Mínimo 10 caracteres</div>
+                                        </div>
+                                        <div *ngIf="offerForm.controls['description'].hasError('maxlength')">
+                                            <div class="text-danger text-50 m-0">Máximo 500 caracteres</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12">
-                                <div class="cover-image mb-5">
-                                    <div *ngIf="percent != null">
-                                        <small>{{percent}}%</small>
-                                        <div class="progress mb-3">
-                                            <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percent + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row justify-content-center align-items-center">
-                                        <div class="col-12 pt-4">
-                                            <img style="max-width: 100px" class="image-preview mx-0" [src]="user.photoURL" alt="">
-                                        </div>
-                                    </div>
+                            <div *ngIf="feedbackSent" class="text-center">
+                                <div class="container py-4">
+                                    <h6 class="my-4">Oferta creada</h6>
+                                    <i class="bi bi-check-circle-fill h1 text-success py-4"></i>
+                                    <h4 class="mt-4">¡Esperamos encuentres pronto nuevos voluntarios!</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary text-light">Eliminar perfil</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
-                        <button type="button" class="btn btn-primary text-light" (click)="updateUserProfile()">Actualizar</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-primary text-light" (click)="createOffer()" *ngIf="!feedbackSent">Publicar</button>
                 </div>
             </form>
         </div>
     </div>
-    -->
+</div>
+
+
+
+<!-- Modal configuración del perfil <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModal" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <form [formGroup]="configForm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Configuración</h5>
+                <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="mb-5">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" class="form-control border" id="name" placeholder="Introducir un nombre" formControlName="displayName">
+                            <div *ngIf="configForm.controls['displayName'].invalid && (configForm.controls['displayName'].dirty || configForm.controls['displayName'].touched)" class="alert">
+                                <div *ngIf="configForm.controls['displayName'].hasError('required')">
+                                    <div class="text-danger text-50 m-0">Por favor introduzca el nombre de la asociación</div>
+                                </div>
+                                <div *ngIf="configForm.controls['displayName'].hasError('minlength')">
+                                    <div class="text-danger text-50 m-0">Mínimo 3 caracteres</div>
+                                </div>
+                                <div *ngIf="configForm.controls['displayName'].hasError('maxlength')">
+                                    <div class="text-danger text-50 m-0">Máximo 30 caracteres</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-8 col-md-12 col-sm-12">
+                            <div class="mb-5">
+                                <label for="formFile" class="form-label">Imagen de perfil <br> <small class="text-muted">Se recomienda un formato cuadrado</small></label>
+                                <input class="form-control border" type="file" id="formFile" (change)="uploadUserProfileImage($event)">
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="cover-image mb-5">
+                                <div *ngIf="percent != null">
+                                    <small>{{percent}}%</small>
+                                    <div class="progress mb-3">
+                                        <div class="progress-bar" role="progressbar" [ngStyle]="{'width': percent + '%' }" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center align-items-center">
+                                    <div class="col-12 pt-4">
+                                        <img style="max-width: 100px" class="image-preview mx-0" [src]="user.photoURL" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary text-light">Eliminar perfil</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-primary text-light" (click)="updateUserProfile()">Actualizar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+-->
