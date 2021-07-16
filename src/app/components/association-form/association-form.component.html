@@ -127,7 +127,7 @@
                             </div>
                             <div class="mb-5">
                                 <label for="obj" class="form-label">Objetivos</label>
-                                <textarea class="form-control border" id="obj" rows="5" placeholder="especifique los objetivos de la asociación" formControlName="objectives"></textarea>
+                                <textarea class="form-control border" id="obj" rows="5" placeholder="Especifiques los objetivos de la asociación" formControlName="objectives"></textarea>
                                 <div *ngIf="assForm.controls['objectives'].invalid && (assForm.controls['objectives'].dirty || assForm.controls['objectives'].touched)" class="alert">
                                     <div *ngIf="assForm.controls['objectives'].hasError('required')">
                                         <div class="text-danger text-50 m-0">Por favor especifique los objetivos de la asociación</div>
@@ -142,7 +142,7 @@
                             </div>
                             <div class="mb-5">
                                 <label for="act" class="form-label">Actividades</label>
-                                <textarea class="form-control border" id="act" rows="5" placeholder="{{association.activities}}" formControlName="activities"></textarea>
+                                <textarea class="form-control border" id="act" rows="5" placeholder="Puedes añadir las actividades de la asociación" formControlName="activities"></textarea>
                                 <div *ngIf="assForm.controls['activities'].invalid && (assForm.controls['activities'].dirty || assForm.controls['activities'].touched)" class="alert">
                                     <div *ngIf="assForm.controls['activities'].hasError('minlength')">
                                         <div class="text-danger text-50 m-0">Mínimo 20 caracteres</div>
@@ -165,7 +165,7 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="inputAddress" class="form-label">Dirección</label>
-                                        <input type="text" class="form-control border" id="inputAddress" placeholder="calle ejemplo, 12345, localidad, provincia" formControlName="address">
+                                        <input type="text" class="form-control border" id="inputAddress" placeholder="Calle ejemplo, 12345, localidad, provincia" formControlName="address">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
@@ -202,13 +202,13 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="inputFb" class="form-label"><i class="bi bi-facebook mx-2 h5"></i>Facebook</label>
-                                        <input type="text" class="form-control border" id="inputFb" placeholder="{{association.facebook}}" formControlName="facebook">
+                                        <input type="text" class="form-control border" id="inputFb" placeholder="https://www.facebook.com/nombre-de-la-página" formControlName="facebook">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="inputIg" class="form-label"><i class="bi bi-instagram mx-2 h5"></i>Instagram</label>
-                                        <input type="text" class="form-control border" id="inputIg" placeholder="{{association.instagram}}" formControlName="instagram">
+                                        <input type="text" class="form-control border" id="inputIg" placeholder="https://www.instagram.com/nombre-de-la-página" formControlName="instagram">
                                     </div>
                                 </div>
                             </div>
@@ -216,13 +216,13 @@
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="inputTw" class="form-label"><i class="bi bi-twitter mx-2 h5"></i>Twitter</label>
-                                        <input type="text" class="form-control border" id="inputTw" placeholder="{{association.twitter}}" formControlName="twitter">
+                                        <input type="text" class="form-control border" id="inputTw" placeholder="https://twitter.com/nombre-de-la-página" formControlName="twitter">
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
                                     <div class="mb-5">
                                         <label for="inputLkdn" class="form-label"><i class="bi bi-linkedin mx-2 h5"></i>Linkedin</label>
-                                        <input type="text" class="form-control border" id="inputLkdn" placeholder="{{association.linkedin}}" formControlName="linkedin">
+                                        <input type="text" class="form-control border" id="inputLkdn" placeholder="https://www.linkedin.com/in/nombre-de-la-página" formControlName="linkedin">
                                     </div>
                                 </div>
                             </div>
