@@ -48,9 +48,13 @@ export class AssociationsListComponent implements OnInit {
 
 
     this.readUsers()
+    this.pageLoaded = false
     setTimeout(() => {
       this.readAssociations()
-    }, 500);
+    }, 1000);
+    setTimeout(() => {
+      this.pageLoaded = true
+    }, 3000);
   }
 
   toggleSearchFilters() {
@@ -74,7 +78,6 @@ export class AssociationsListComponent implements OnInit {
 
   readAssociations() {
     this.associations = []
-    this.pageLoaded = false
     this.users.forEach((us) => {
       this.crudAssociation.readAllAssociation(us.uid).subscribe(data => {
         this.associations = []
@@ -97,17 +100,19 @@ export class AssociationsListComponent implements OnInit {
         }
         return 0;
       });
-     setTimeout(() => {
-       this.pageLoaded = true
-     }, 500);
-    }, 1500);
+    }, 500);
   }
 
   searchByType() {
     if (this.selection == null) {
       this.associations = []
+      this.pageLoaded = false
       this.readAssociations()
+      setTimeout(() => {
+        this.pageLoaded = true
+      }, 1000);
       return
+     
     }
     setTimeout(() => {
       let selectedType = {
