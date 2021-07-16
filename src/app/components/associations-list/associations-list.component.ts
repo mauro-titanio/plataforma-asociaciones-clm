@@ -25,7 +25,7 @@ export class AssociationsListComponent implements OnInit {
   searchProvince!: string
   selectedProvince: any
   provinces = [{ id: 1, name: 'Albacete' }, { id: 2, name: 'Ciudad Real' }, { id: 3, name: 'Cuenca' }, { id: 4, name: 'Guadalajara' }, { id: 5, name: 'Toledo' }]
-  aTypes = [{ id: 1, name: 'Asociación de vecinos' }, { id: 2, name: 'AMPA' }, { id: 3, name: 'Asociación cultural' }, { id: 4, name: 'Asociación juvenil' }, { id: 5, name: 'EPSJ' }, { id: 6, name: 'Asociación recreativa' }, { id: 7, name: 'Asociación deportiva' }, { id: 8, name: 'Asociación ideológica' }, { id: 9, name: 'Asociación de la tercera edad' }, { id: 10, name: 'Asociación de acción sanitaria' }, { id: 11, name: 'Asociación de acción social' }, { id: 12, name: 'Asociación referida a la Mujer' }, { id: 13, name: 'Asociación de profesionales' }, { id: 14, name: 'Asociación económica' }]
+  aTypes = [{ id: 1, name: 'Asociación de vecinos' }, { id: 2, name: 'AMPA' }, { id: 3, name: 'Asociación cultural' }, { id: 4, name: 'Asociación juvenil' }, { id: 5, name: 'EPSJ' }, { id: 6, name: 'Asociación recreativa' }, { id: 7, name: 'Asociación deportiva' }, { id: 8, name: 'Asociación ideológica' }, { id: 9, name: 'Asociación de la tercera edad' }, { id: 10, name: 'Asociación de acción sanitaria' }, { id: 11, name: 'Asociación de acción social' }, { id: 12, name: 'Asociación referida a la Mujer' }, { id: 13, name: 'Asociación de profesionales' }, { id: 14, name: 'Asociación económica' }, {id: 15, name: 'LGTBI'}]
   associationTypes = this.aTypes.sort(function (a, b) {
     if (a.name > b.name) {
       return 1;

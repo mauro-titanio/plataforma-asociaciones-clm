@@ -46,7 +46,7 @@ export class AssociationFormComponent implements OnInit {
     profileCover: '',
   }
   assForm: FormGroup
-  aTypes = ['Asociación de vecinos', 'AMPA', 'Asociación cultural', 'Asociación juvenil', 'EPSJ', 'Asociación recreativa', 'Asociación deportiva', 'Asociación ideológica', 'Asociación de la tercera edad', 'Asociación de acción sanitaria', 'Asociación de acción social', 'Asociación referida a la Mujer', 'Asociación de profesionales', 'Asociación económica']
+  aTypes = ['Asociación de vecinos', 'AMPA', 'Asociación cultural', 'Asociación juvenil', 'EPSJ', 'Asociación recreativa', 'Asociación deportiva', 'Asociación ideológica', 'Asociación de la tercera edad', 'Asociación de acción sanitaria', 'Asociación de acción social', 'Asociación referida a la Mujer', 'Asociación de profesionales', 'Asociación económica', 'LGTBI']
   associationTypes = this.aTypes.sort()
   uploadPercent: Observable<any> | undefined;
   downloadURL: Observable<any> | undefined;
