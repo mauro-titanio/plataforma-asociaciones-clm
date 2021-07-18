@@ -72,7 +72,10 @@ export class SignInComponent implements OnInit {
       document.getElementById('modalCloseLogin')?.click()
       document.getElementById('modalCloseRegister')?.click()
       this.notifier.notify('success', 'Acceso realizado')
-      this.router.navigate(['/home'])
+      setTimeout(() => {
+        this.router.navigate(['/home'])
+      }, 1000);
+      
     }).catch(error => {
       this.notifier.notify('error', 'Error en el acceso')
     })

@@ -50,8 +50,10 @@ export class OffersListComponent implements OnInit {
     this.readUsers()
     setTimeout(() => {
       this.readOffers()
+    }, 1000);
+    setTimeout(() => {
       this.pageLoaded = true
-    }, 2000);
+    }, 2500);
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) 
   }
 
@@ -90,7 +92,7 @@ export class OffersListComponent implements OnInit {
       this.offers.sort(function (a, b) {
         return a.date - b.date
       })
-    }, 1500);
+    }, 1000);
     
   }
 

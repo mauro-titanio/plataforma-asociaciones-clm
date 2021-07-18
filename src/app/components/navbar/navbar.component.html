@@ -2,8 +2,8 @@
     <div class="container-fluid mt-1">
         <p class="py-lg-2 mx-lg-5 mx-sm-2 text-light" [ngClass]="{'h6' : vw >= 500, 'fw-bold' : vw < 500}"><a href="">Plataforma de asociaciones <br> de Castilla - La Mancha</a></p>
         <div class="dropdown ">
-            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="user != null && vw > 600" [src]="user.photoURL" alt="User profile image" />
-            <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" aria-expanded="false" *ngIf="vw <= 600 || user == null"></i>
+            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="user != null && vw > 600" [src]="user.photoURL" alt="User profile image" />
+            <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="vw <= 600 || user == null"></i>
             <div class="dropdown-menu mt-2 dropdown-menu-end shadow-sm" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">
@@ -25,7 +25,16 @@
                                 <!--Riveder esta parte
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#profileModal"><i class="bi bi-gear h4 me-3"></i>Configuración</a></li>
                                 -->
-                                <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#newOfferModal" (click)="toggleFeedBack()"><i class="bi bi-megaphone h4 me-3"></i>Crear oferta de voluntariado</a></li>
+
+
+                                <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="bi bi-people h4 me-3"></i>Ofertas de voluntariado<i class="bi bi-caret-down-fill ms-4"></i></a></li>
+                                <div class="collapse ms-4" id="collapseExample">
+                                    <ul class="list-group list-group-flush text-start text-dark">
+                                        <li class="list-group-item h6 pb-3"><a [routerLink]="['/offers']"><i class="bi bi-search h4 me-3"></i>Encontrar oferta</a></li>
+                                        <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#newOfferModal" (click)="toggleFeedBack()"><i class="bi bi-megaphone h4 me-3"></i>Crear oferta</a></li>
+                                        <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-sliders h4 me-3"></i>Panel de gestíon</a></li>
+                                    </ul>
+                                </div>
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#feedbackModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
                                 <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3 ms-1"></i>Cerrar sesión</a></li>
@@ -164,6 +173,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-info" data-bs-dismiss="modal" [routerLink]="['/offers']" *ngIf="feedbackSent">Visualizar las ofertas</button>
                     <button type="button" class="btn btn-primary text-light" (click)="createOffer()" *ngIf="!feedbackSent">Publicar</button>
                 </div>
             </form>

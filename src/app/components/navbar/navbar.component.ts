@@ -123,7 +123,7 @@ export class NavbarComponent implements OnInit {
     this.crudAssociation.deleteAssociation(this.user.uid, this.ass.id).then(success => {
       this.notifier.notify('success', 'Perfil eliminado');
       document.getElementById('closeDelete')?.click()
-      this.router.navigate(['/home'])
+      this.router.navigate([''])
     }).catch(error => {
       console.log("Error", error)
       this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
