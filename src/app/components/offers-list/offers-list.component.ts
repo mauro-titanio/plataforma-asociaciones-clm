@@ -93,7 +93,6 @@ export class OffersListComponent implements OnInit {
         return a.date - b.date
       })
     }, 1000);
-    
   }
 
 

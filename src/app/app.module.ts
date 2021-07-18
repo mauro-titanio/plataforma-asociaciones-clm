@@ -22,6 +22,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { PrivacyComponent } from './components/privacy/privacy.component';
 import { OffersListComponent } from './components/offers-list/offers-list.component';
+import { OffersDashboardComponent } from './components/offers-dashboard/offers-dashboard.component';
 
 
 
@@ -40,6 +41,7 @@ import { OffersListComponent } from './components/offers-list/offers-list.compon
     AssociationsListComponent,
     PrivacyComponent,
     OffersListComponent,
+    OffersDashboardComponent,
   ],
   imports: [
     BrowserModule,

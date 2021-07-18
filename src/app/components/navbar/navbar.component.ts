@@ -148,6 +148,10 @@ export class NavbarComponent implements OnInit {
       date: new Date().toDateString(),
       message: this.c.message.value
     }
+    if (this.commentForm.invalid) {
+      this.notifier.notify('error', 'Ha ocurrido un error');
+      return
+    }
     this.crudUsers.sendFeedback(this.user.uid, comment).then(success => {
       this.notifier.notify('success', 'Mensaje envíado');
       this.feedbackSent = true
@@ -173,6 +177,10 @@ export class NavbarComponent implements OnInit {
       image: this.ass.profileImage,
       zone: this.ass.address
     }
+    if (this.offerForm.invalid) {
+      this.notifier.notify('error', 'Ha ocurrido un error');
+      return
+    }
     this.crudOffers.newOffer(this.user.uid, off).then(success => {
       this.notifier.notify('success', 'Oferta creada');
       this.feedbackSent = true
@@ -189,7 +197,9 @@ export class NavbarComponent implements OnInit {
 
 
 
-
+  refresh(): void {
+    window.location.reload();
+}
 
 
 

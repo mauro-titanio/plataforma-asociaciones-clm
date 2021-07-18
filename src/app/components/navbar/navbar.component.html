@@ -32,7 +32,7 @@
                                     <ul class="list-group list-group-flush text-start text-dark">
                                         <li class="list-group-item h6 pb-3"><a [routerLink]="['/offers']"><i class="bi bi-search h4 me-3"></i>Encontrar oferta</a></li>
                                         <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#newOfferModal" (click)="toggleFeedBack()"><i class="bi bi-megaphone h4 me-3"></i>Crear oferta</a></li>
-                                        <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-sliders h4 me-3"></i>Panel de gestíon</a></li>
+                                        <li class="list-group-item h6 pb-3"><a [routerLink]="['/offers', user.uid ]"><i class="bi bi-sliders h4 me-3"></i>Ofertas publicadas</a></li>
                                     </ul>
                                 </div>
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#feedbackModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
@@ -172,7 +172,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="refresh()">Volver</button>
                     <button type="button" class="btn btn-info" data-bs-dismiss="modal" [routerLink]="['/offers']" *ngIf="feedbackSent">Visualizar las ofertas</button>
                     <button type="button" class="btn btn-primary text-light" (click)="createOffer()" *ngIf="!feedbackSent">Publicar</button>
                 </div>

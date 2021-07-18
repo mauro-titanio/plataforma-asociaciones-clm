@@ -1,0 +1,117 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="container">
+                <div class="row justify-items-center justify-content-center pt-5">
+                    <div class="col-lg-6 col-md-12 col-sm-12 text-center text-dark">
+                        <h2 class="section-title">Ofertas publicadas</h2>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center py-5 px-3">
+                <div class="col-lg-6 col-md-10 col-sm-12" *ngFor="let o of offers; let i = index">
+                    <div class="card mb-4 shadow-sm" data-aos="fade-up" [attr.data-aos-delay]="(i * 100)">
+                        <div class="card-body p-4">
+                            <div class="row">
+                                <div class="col-10">
+                                    <h5>{{o.title}}</h5>
+                                    <hr>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="container">
+                                    <i class="bi bi-pencil position-absolute top-0 end-0 mt-3 me-5 text-light pointer btn-sm btn-info rounded-circle" (click)="getOffer(o.id)" data-bs-toggle="modal" data-bs-target="#modOfferModal"></i>
+                                    <i class="bi bi-trash position-absolute top-0 end-0 mt-3 me-2 pointer btn-sm btn-danger rounded-circle" (click)="getOffer(o.id)" data-bs-toggle="modal" data-bs-target="#elOfferModal"></i>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="text-muted text-justify">{{o.description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modOfferModal" tabindex="-1" aria-labelledby="modOfferModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Actualizar oferta de voluntariado</h5>
+                    <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form [formGroup]="oForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div *ngIf="!offerCreated">
+                                    <div class="mb-5">
+                                        <label for="name" class="form-label">Título</label>
+                                        <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title">
+                                        <div *ngIf="oForm.controls['title'].invalid && (oForm.controls['title'].dirty || oForm.controls['title'].touched)" class="alert">
+                                            <div *ngIf="oForm.controls['title'].hasError('required')">
+                                                <div class="text-danger text-50 m-0">Añade un título a la oferta</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-5">
+                                        <label for="name" class="form-label">Descripción</label>
+                                        <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description"></textarea>
+                                        <div *ngIf="oForm.controls['description'].invalid && (oForm.controls['description'].dirty || oForm.controls['description'].touched)" class="alert">
+                                            <div *ngIf="oForm.controls['description'].hasError('required')">
+                                                <div class="text-danger text-50 m-0">Añade una descripción de la oferta</div>
+                                            </div>
+                                            <div *ngIf="oForm.controls['description'].hasError('minlength')">
+                                                <div class="text-danger text-50 m-0">Mínimo 10 caracteres</div>
+                                            </div>
+                                            <div *ngIf="oForm.controls['description'].hasError('maxlength')">
+                                                <div class="text-danger text-50 m-0">Máximo 500 caracteres</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="offerCreated" class="text-center">
+                                    <div class="container py-4">
+                                        <h6 class="my-4">Oferta actualizada</h6>
+                                        <i class="bi bi-check-circle-fill h1 text-success py-4"></i>
+                                        <h4 class="mt-4">¡Esperamos encuentres pronto nuevos voluntarios!</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                        <button type="button" class="btn btn-primary text-light" *ngIf="!offerCreated" (click)="updateOffer()">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="elOfferModal" tabindex="-1" aria-labelledby="elOfferModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">¿Eliminar oferta?</h5>
+                    <button type="button" id="closeDeleteOffer" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Realmente quires borrar la oferta <strong>"{{offer.title}}"</strong>?</p>
+                    <p>Todos los datos serán eliminados.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                    <button type="button" class="btn btn-danger" (click)="deleteOffer(offer.id)">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
