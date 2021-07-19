@@ -19,6 +19,7 @@ export class SignInComponent implements OnInit {
   registerForm: FormGroup
   loginForm: FormGroup
   vw: number = 0
+  verificationSent = false
 
 
   constructor(private authService: AuthService, private router: Router, private notifier: NotifierService, private fb: FormBuilder,) {
@@ -48,13 +49,17 @@ export class SignInComponent implements OnInit {
   }
 
 
-
   register() {
     if (this.registerForm.invalid) {
       this.notifier.notify('error', 'Email y/o contraseña invalidos')
       return
     }
-    this.authService.signUp(this.f.email.value, this.f.password.value)
+    this.authService.signUp(this.f.email.value, this.f.password.value).then(success =>{
+      this.verificationSent = true
+    }).catch(error => {
+      this.notifier.notify('error', 'Error en el registro')
+    }
+    )
   }
 
   loginEmailPsw() {
@@ -85,6 +90,8 @@ export class SignInComponent implements OnInit {
       this.notifier.notify('error', 'Error en el acceso')
     })
   }
+
+
   loginFb() {
     this.authService.loginWithFB().then(success => {
       document.getElementById('modalCloseLogin')?.click()

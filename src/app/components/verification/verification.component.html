@@ -1,1 +1,18 @@
-<p>verification works!</p>
+<header class="overflow-hidden vh-100 log-header">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6 col-md-12 col-sm-12 header-left pt-5 px-4 mx-lg-5 m-sm-1">
+                <div class="py-4 px-4 shadow-lg bg-white rounded-3 text-center">
+                    <h4 class="text-dark w-100 fw-normal py-2">Se ha verificado tu correo electrónico</h4>
+                    <div class="mb-2">
+                        <i class="bi bi-check-circle-fill h1 text-success py-4 mb-4"></i>
+                    </div>
+                    <p class="fw-light">Ya puedes iniciar sesión con la cuenta nueva</p>
+                    <div class="text-center">
+                        <button [routerLink]="['/']" routerLinkActive="router-link-active" class="btn px-5 btn-primary text-light my-3 rounded-2 shadow-sm" type="button" name="button">Ir a la página de acceso</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

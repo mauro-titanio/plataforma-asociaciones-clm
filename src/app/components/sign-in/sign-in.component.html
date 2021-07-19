@@ -75,13 +75,13 @@
                 <button type="button " id="modalCloseRegister" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body ">
-                <div class="row pt-3 ">
+                <div class="row pt-3" *ngIf="!verificationSent">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-5 px-4 ">
                         <form [formGroup]="registerForm ">
                             <div class="mb-3 ">
                                 <label for="floatingInput ">Correo electrónico</label>
-                                <input formControlName="email" type="email " class="form-control border-1 border-dark mb-0 " placeholder="nombre@ejemplo.com ">
-                                <div *ngIf="registerForm.controls[ 'email'].invalid && (registerForm.controls[ 'email'].dirty || registerForm.controls[ 'email'].touched) " class="alert ">
+                                <input formControlName="email" type="email" class="form-control border-1 border-dark mb-0 " placeholder="nombre@ejemplo.com ">
+                                <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" class="alert">
                                     <div *ngIf="registerForm.controls[ 'email'].errors ">
                                         <div class="text-danger text-50 m-0 ">Introducir un correo electrónico valido</div>
                                     </div>
@@ -90,8 +90,8 @@
                             <div class="mb-3 ">
                                 <label for="floatingPassword ">Contraseña</label>
                                 <input formControlName="password" type="password" class="form-control border-1 border-dark " placeholder=" ">
-                                <div *ngIf="registerForm.controls[ 'password'].invalid && (registerForm.controls[ 'password'].dirty || registerForm.controls[ 'password'].touched) " class="alert ">
-                                    <div *ngIf="registerForm.controls[ 'password'].errors ">
+                                <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" class="alert">
+                                    <div *ngIf="registerForm.controls['password'].errors">
                                         <div class="text-danger text-50 m-0 ">Introducir una contraseña valida</div>
                                     </div>
                                 </div>
@@ -99,8 +99,8 @@
                             <div class="mb-3 ">
                                 <label for="floatingPassword ">Repetir contraseña</label>
                                 <input formControlName="confirmPassword" type="password" class="form-control border-1 border-dark" placeholder=" ">
-                                <div *ngIf="registerForm.controls[ 'email'].invalid && (registerForm.controls[ 'email'].dirty || registerForm.controls[ 'email'].touched) " class="alert ">
-                                    <div *ngIf="registerForm.controls[ 'email'].errors ">
+                                <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" class="alert">
+                                    <div *ngIf="registerForm.controls['email'].errors">
                                         <div class="text-danger text-50 m-0 ">Repetir la misma contraseña</div>
                                     </div>
                                 </div>
@@ -118,6 +118,14 @@
                     </div>
                     <div class="text-center py-4 mt-2 ">
                         <small>¿Ya tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal"> Acceder</a>
+                    </div>
+                </div>
+                <div class="text-center" *ngIf="verificationSent">
+                    <div class="container pb-4 pt-2">
+                        <h6 class="my-4">Hemos envíado un mail de verificación a tu correo electrónico </h6>
+                        <i class="bi bi-check-circle-fill h1 text-success py-4 mb-4"></i>
+                        <p class="mb-0">Pincha en el enlace para activar tu cuenta</p>
+                        <small class="text-muted">Si no encuentras el mail, controla en la carpeta de spam</small>
                     </div>
                 </div>
             </div>

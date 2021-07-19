@@ -68,8 +68,6 @@ export class AuthService {
 
 
   // Sign in with Facebook
-
-
   // Auth logic to run auth providers
   async loginWithFB(): Promise<any> {
     try {
@@ -100,11 +98,10 @@ export class AuthService {
       const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
       this.sendVerification();
       this.notifier.notify('success', 'Te hemos enviado un correo de verificación');
-      document.getElementById('modalCloseRegister')?.click();
-      this.router.navigate(['/verification-email']);
       console.log(result.user);
     } catch (error) {
       this.notifier.notify('error', 'El usuario ya existe');
+      return
     }
   }
 
