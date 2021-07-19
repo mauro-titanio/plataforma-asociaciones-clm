@@ -54,12 +54,8 @@ export class SignInComponent implements OnInit {
       this.notifier.notify('error', 'Email y/o contraseña invalidos')
       return
     }
-    this.authService.signUp(this.f.email.value, this.f.password.value).then(success =>{
-      this.verificationSent = true
-    }).catch(error => {
-      this.notifier.notify('error', 'Error en el registro')
-    }
-    )
+    this.authService.signUp(this.f.email.value, this.f.password.value)
+
   }
 
   loginEmailPsw() {
@@ -72,7 +68,7 @@ export class SignInComponent implements OnInit {
 
 
   loginGoogle() {
-    this.authService.googleAuth().then(success => {
+    this.authService.googleAuth().then(_success => {
       document.getElementById('modalCloseLogin')?.click()
       document.getElementById('modalCloseRegister')?.click()
       this.notifier.notify('success', 'Acceso realizado')
@@ -80,18 +76,18 @@ export class SignInComponent implements OnInit {
         this.router.navigate(['/home'])
       }, 1000);
       
-    }).catch(error => {
+    }).catch(_error => {
       this.notifier.notify('error', 'Error en el acceso')
     })
   }
 
 
   loginFb() {
-    this.authService.loginWithFB().then(success => {
+    this.authService.loginWithFB().then(_success => {
       document.getElementById('modalCloseLogin')?.click()
       document.getElementById('modalCloseRegister')?.click()
       this.router.navigate(['/home'])
-    }).catch(error => {
+    }).catch(_error => {
       this.notifier.notify('error', 'Error en el acceso')
     })
   }

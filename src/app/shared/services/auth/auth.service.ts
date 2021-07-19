@@ -2,17 +2,20 @@ import { Injectable, NgZone } from '@angular/core';
 import fireapp from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
-import { throwError } from 'rxjs';
+import { from, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
 import { NotifierService } from 'angular-notifier';
+import { map, switchMap } from 'rxjs/operators';
+import { Token } from '@angular/compiler';
+import { FirebaseApp } from '@angular/fire';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-
+  verificationSent = false
   constructor(
     private fireStore: AngularFirestore,
     private fireAuth: AngularFireAuth,
@@ -40,14 +43,20 @@ export class AuthService {
       merge: true
     })
   }
+  
+
+
   userData(): User {
     return JSON.parse(localStorage.getItem('user')!)
   }
   // Sign in with email/password
   async signIn(email: string, password: string): Promise<void> {
+
+
     try {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
       localStorage.setItem('user', JSON.stringify(result.user));
+      console.log(result.user)
       this.setUserData(result.user);
       console.log(result.user?.emailVerified)
       if (result.user?.emailVerified == false) {
@@ -58,14 +67,14 @@ export class AuthService {
         setTimeout(() => {
           this.notifier.notify('success', 'Acceso realizado')
           document.getElementById('modalCloseLogin')?.click()
-        }, 200); 
+        }, 200);
         setTimeout(() => {
           this.router.navigate(['/home'])
         }, 1000);
       }
     } catch (error) {
       throwError(error);
-      this.notifier.notify('error', 'Ha occurrido un error');
+      this.notifier.notify('error', 'El account no existe');
     }
   }
 
@@ -97,23 +106,26 @@ export class AuthService {
     } catch (error) {
       throwError(error);
     }
-
   }
-
-
 
   // Sign up with email/password
-  async signUp(email: string, password: string) {
-    try {
-      const result = await this.fireAuth.createUserWithEmailAndPassword(email, password);
-      this.sendVerification();
-      this.notifier.notify('success', 'Te hemos enviado un correo de verificación');
-      console.log(result.user);
-    } catch (error) {
-      this.notifier.notify('error', 'El usuario ya existe');
-      return
-    }
+  signUp(email: string, password: string) {
+    return this.fireAuth.createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log(result.user)
+        this.sendVerification()
+        document.getElementById('modalCloseRegister')?.click()
+        setTimeout(() => {
+          document.getElementById('hiddenButton')?.click()
+        }, 1000);
+      }).catch((error) => {
+        console.log(error.message)
+        this.notifier.notify('error', 'Ya existe un usuario con esta dirección de correo');
+        return
+      })
   }
+
+
 
   async sendVerification(): Promise<void> {
     return await (await this.fireAuth.currentUser)?.sendEmailVerification()
@@ -122,3 +134,6 @@ export class AuthService {
 
 
 }
+
+
+
