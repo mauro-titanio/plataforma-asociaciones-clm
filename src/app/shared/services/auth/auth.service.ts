@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import fireapp from 'firebase/app';
-import { AngularFireAuth} from "@angular/fire/auth";
+import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -44,35 +44,34 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')!)
   }
   // Sign in with email/password
-  async signIn(email: string, password: string):Promise<void> {
+  async signIn(email: string, password: string): Promise<void> {
     try {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
-      this.ngZone.run(() => {
+      localStorage.setItem('user', JSON.stringify(result.user));
+      this.setUserData(result.user);
+      setTimeout(() => {
         this.notifier.notify('success', 'Acceso realizado')
-        this.setUserData(result.user);
-        setTimeout(() => {
-          document.getElementById('modalCloseLogin')?.click()
-          this.router.navigate(['/home'])
-        }, 200); 
-      });
+        document.getElementById('modalCloseLogin')?.click()
+      }, 200);
     } catch (error) {
+      throwError(error);
       this.notifier.notify('error', 'Ha occurrido un error');
     }
   }
 
-  async signOut() {
-    await this.fireAuth.signOut();
+  signOut() {
+    this.fireAuth.signOut();
     localStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 
 
 
- // Sign in with Facebook
+  // Sign in with Facebook
 
- 
+
   // Auth logic to run auth providers
-  async loginWithFB(): Promise<any>{
+  async loginWithFB(): Promise<any> {
     try {
       const result = await this.fireAuth.signInWithPopup(new fireapp.auth.FacebookAuthProvider());
       console.log(result);
@@ -109,10 +108,10 @@ export class AuthService {
     }
   }
 
-async sendVerification(): Promise<void>{
-  return await (await this.fireAuth.currentUser)?.sendEmailVerification()
-}
+  async sendVerification(): Promise<void> {
+    return await (await this.fireAuth.currentUser)?.sendEmailVerification()
+  }
 
 
- 
+
 }

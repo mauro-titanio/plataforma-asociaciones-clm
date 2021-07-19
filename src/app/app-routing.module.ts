@@ -13,7 +13,7 @@ import { AuthGuard } from './shared/services/auth/guard/guard.guard';
 
 const routes: Routes = [
   { path: '', component: SignInComponent, pathMatch: 'full', redirectTo: '' },
-  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard], pathMatch: 'full' },
   { path: 'verification', component: VerificationComponent, /*canActivate: [AuthGuard] */ },
   { path: 'profile/:userID/:assID', component: AssociationProfileComponent, pathMatch: 'full' },
   { path: 'create/:assID', component: AssociationFormComponent },

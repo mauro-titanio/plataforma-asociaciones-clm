@@ -2,22 +2,23 @@
     <div class="container-fluid mt-1">
         <p class="py-lg-2 mx-lg-5 mx-sm-2 text-light" [ngClass]="{'h6' : vw >= 500, 'fw-bold' : vw < 500}"><a href="">Plataforma de asociaciones <br> de Castilla - La Mancha</a></p>
         <div class="dropdown ">
-            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="user != null && vw > 600" [src]="user.photoURL" alt="User profile image" />
-            <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="vw <= 600 || user == null"></i>
+            <img width="50px" class="rounded-circle border border-2 border-secondary profile-img mx-2" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="user.photoURL != null && vw > 600" [src]="user.photoURL" alt="User profile image"
+            />
+            <i class="bi bi-three-dots-vertical h3 text-light pt-5" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" *ngIf="vw <= 600 || user.photoURL == null"></i>
             <div class="dropdown-menu mt-2 dropdown-menu-end shadow-sm" aria-labelledby="dropdownMenuButton1">
                 <div class="container mx-0">
                     <div class="row justify-content-center">
                         <div class="col-12 text-center py-3">
-                            <div class="row" *ngIf="user != null">
-                                <div class="col-3">
-                                    <img width="100%" class="rounded-circle border border-2 border-secondary profile-img mx-5 mx-0" *ngIf="user != null" [src]="user.photoURL" alt="User profile image" />
+                            <div class="row justify-content-between" *ngIf="user.photoURL != null">
+                                <div class="col-3 d-block">
+                                    <img width="100%" class="rounded-circle border border-2 border-secondary profile-img  m-auto " *ngIf="user.photoURL != null" [src]="user.photoURL" alt="User profile image" />
                                 </div>
-                                <div class="col-9 pt-3">
+                                <div class="col-9 pt-3" [ngClass]="{'text-start' : vw >= 500, 'text-center' : vw < 500}">
                                     <p class="h5 mb-0">{{user.displayName}}</p>
                                     <small class="text-muted">{{user.email}}</small>
                                 </div>
                             </div>
-                            <hr *ngIf="user != null">
+                            <hr *ngIf="user.photoURL != null">
                             <ul class="list-group list-group-flush text-start text-dark">
                                 <li class="list-group-item h6 pb-3"><a href=""><i class="bi bi-house h4 me-3"></i>Inicio</a></li>
                                 <li class="list-group-item h6 pb-3"><a [routerLink]="'/associations'"><i class="bi bi-collection h4 me-3"></i>Asociaciones</a></li>
