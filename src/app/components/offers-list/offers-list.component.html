@@ -50,10 +50,10 @@
                             <small class="card-text text-muted">Publicada por:</small>
                             <div class="row ">
                                 <div class="col-lg-8 col-md-6 col-sm-6 ">
-                                    <p> <a [routerLink]="['/profile', o.author, o.associationId ]" class="fw-bold text-dark ">{{o.associationName}}</a></p>
+                                    <p><a [routerLink]="['/profile', o.author, o.associationId ]" class="fw-bold text-dark ">{{o.associationName}}</a></p>
                                 </div>
                                 <div class="col-2" *ngIf="o.image != ''">
-                                    <img class="rounded-circle img-translate " [routerLink]="['/profile', o.author, o.associationId ]" [src]="o.image " alt=" " width="50px ">
+                                    <a [routerLink]="['/profile', o.author, o.associationId ]"></a> <img class="rounded-circle img-translate" [src]="o.image " alt=" " width="50px ">
                                 </div>
                             </div>
                             <button class="btn mb-2 p-0 text-muted" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapsable' + i" aria-expanded="false" aria-controls="collapseExample">

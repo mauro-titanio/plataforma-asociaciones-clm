@@ -73,10 +73,10 @@ export class AssociationFormComponent implements OnInit {
       type: ['', Validators.required],
       profileImage: [''],
       profileCover: [''],
-      facebook: ['', Validators.pattern(reg)],
-      instagram: ['', Validators.pattern(reg)],
-      twitter: ['', Validators.pattern(reg)],
-      linkedin: ['', Validators.pattern(reg)],
+      facebook: ['',/* Validators.pattern(reg)*/],
+      instagram: ['', /* Validators.pattern(reg)*/],
+      twitter: ['', /* Validators.pattern(reg)*/],
+      linkedin: ['',/* Validators.pattern(reg)*/],
       website: [''],
       telephone: [0],
       address: [''],
@@ -233,12 +233,10 @@ export class AssociationFormComponent implements OnInit {
 
 
   addhttp(url: any) {
-
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
       url = "https://" + url;
     }
     return url;
-
   }
 
   addhttpFb(url: any) {
@@ -259,6 +257,7 @@ export class AssociationFormComponent implements OnInit {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
       url = "https://twitter.com/" + url;
     }
+    console.log(url)
     return url;
   }
 

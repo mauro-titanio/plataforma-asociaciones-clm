@@ -49,10 +49,20 @@ export class AuthService {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
       localStorage.setItem('user', JSON.stringify(result.user));
       this.setUserData(result.user);
-      setTimeout(() => {
-        this.notifier.notify('success', 'Acceso realizado')
-        document.getElementById('modalCloseLogin')?.click()
-      }, 200);
+      console.log(result.user?.emailVerified)
+      if (result.user?.emailVerified == false) {
+        this.notifier.notify('error', 'Completar el proceso de verificación')
+        return
+      }
+      if (result.user?.emailVerified === true) {
+        setTimeout(() => {
+          this.notifier.notify('success', 'Acceso realizado')
+          document.getElementById('modalCloseLogin')?.click()
+        }, 200); 
+        setTimeout(() => {
+          this.router.navigate(['/home'])
+        }, 1000);
+      }
     } catch (error) {
       throwError(error);
       this.notifier.notify('error', 'Ha occurrido un error');

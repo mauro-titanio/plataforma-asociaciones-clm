@@ -67,13 +67,7 @@ export class SignInComponent implements OnInit {
       this.notifier.notify('error', 'Email y/o contraseña invalidos')
       return
     }
-    this.authService.signIn(this.g.email.value, this.g.password.value).then(success => {
-      setTimeout(() => {
-        this.router.navigate(['/home'])
-      }, 1000);
-    }).catch(error => {
-      this.notifier.notify('error', 'Error en el acceso')
-    })
+    this.authService.signIn(this.g.email.value, this.g.password.value)
   }
 
 

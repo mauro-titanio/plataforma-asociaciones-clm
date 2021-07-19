@@ -48,9 +48,6 @@ export class AssociationsListComponent implements OnInit {
     setTimeout(() => {
       this.readAssociations()
     }, 1000);
-    setTimeout(() => {
-      this.pageLoaded = true
-    }, 3000);
   }
 
   ngOnInit(): void {
@@ -100,6 +97,10 @@ export class AssociationsListComponent implements OnInit {
         return 0;
       });
     }, 500);
+    setTimeout(() => {
+      this.pageLoaded = true
+    }, 200);
+   
   }
 
   searchByType() {
