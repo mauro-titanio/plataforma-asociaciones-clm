@@ -48,13 +48,13 @@ export class AuthService {
     try {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
       this.ngZone.run(() => {
-        this.notifier.notify('success', 'Acceso realizado'); 
+        this.notifier.notify('success', 'Acceso realizado')
+        this.setUserData(result.user);
+        setTimeout(() => {
+          document.getElementById('modalCloseLogin')?.click()
+          this.router.navigate(['/home'])
+        }, 200); 
       });
-      this.setUserData(result.user);
-      setTimeout(() => {
-        document.getElementById('modalCloseLogin')?.click()
-        this.router.navigate(['/home'])
-      }, 200); 
     } catch (error) {
       this.notifier.notify('error', 'Ha occurrido un error');
     }
