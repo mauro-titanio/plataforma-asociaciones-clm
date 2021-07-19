@@ -4,14 +4,14 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-md-12 col-sm-12">
                 <div class="row">
-                    <div class="cover bg-secondary" [ngStyle]="{ 'background-image': 'url(' + association.profileCover + ')'}" [ngClass]="{'cover-image': vw > 990}"></div>
+                    <div class="cover" [ngStyle]="{ 'background-image': 'url(' + association.profileCover + ')'}" [ngClass]="{'cover-image': vw > 990, 'bg-secondary': association.profileCover == '', 'bg-white': association.profileCover != '', 'inset-shadow': association.profileCover != ''}"></div>
                 </div>
                 <div class="bg-light mx-lg-5 shadow-lg">
-                    <div class="row justify-content-center bg-white rounded-bottom shadow-lg">
+                    <div class="row justify-content-center bg-white rounded-bottom shadow">
                         <div class="col-lg-10 col-md-12 col-sm-12 pt-3">
                             <div class="row justify-content-center ">
                                 <div class="col-lg-2 col-sm-12 logo-bar">
-                                    <div class="profile-image bg-secondary mx-auto shadow-sm border-light" [ngStyle]="{ 'background-image': 'url(' + association.profileImage + ')'}"></div>
+                                    <div class="profile-image mx-auto shadow border-light inset-shadow" [ngStyle]="{ 'background-image': 'url(' + association.profileImage + ')'}" [ngClass]="{'bg-secondary': association.profileCover == '', 'bg-white': association.profileCover != ''}"></div>
                                 </div>
                                 <div class="col-lg-10 col-md-12 col-sm-12">
                                     <div class="container ms-lg-2 ms-md-0 ms-sm-0" [ngClass]="{'text-center': vw <=990}">
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="px-lg-5 px-md-3 px-sm-1 mx-lg-5 mb-5 rounded-bottom pb-4" [ngClass]="{'bg-light': vw >= 600, 'shadow-sm': vw >= 600}">
+                <div class="px-lg-5 px-md-3 px-sm-1 mx-lg-5 mb-5 rounded-bottom pb-4" [ngClass]="{'bg-secondary': vw >= 600, 'shadow-sm': vw >= 600}">
                     <div class="row pt-4">
                         <div class="col-lg-5 col-md-12 col-sm-12 px-4">
                             <div class="row justify-content-center">
