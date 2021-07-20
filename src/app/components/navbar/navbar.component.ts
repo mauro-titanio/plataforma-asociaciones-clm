@@ -136,6 +136,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.signOut()
+    document.getElementById('closeLogout')?.click()
   }
 
 

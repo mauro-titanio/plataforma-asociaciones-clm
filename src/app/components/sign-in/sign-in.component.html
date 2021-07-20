@@ -12,6 +12,7 @@
             </div>
         </div>
         <a id="hiddenButton" data-bs-toggle="modal" data-bs-target="#sentModal"></a>
+        <a id="hiddenFbButton" data-bs-toggle="modal" data-bs-target="#devModal"></a>
     </div>
 </header>
 
@@ -31,7 +32,7 @@
                         <form [formGroup]="loginForm">
                             <div class="form mb-3">
                                 <label for="floatingInput">Correo electrónico</label>
-                                <input formControlName="email" type="email" class="form-control border-1 border-dark" id="floatingInput" placeholder="nombre@ejemplo.com">
+                                <input formControlName="email" type="email" class="form-control border" id="floatingInput" placeholder="nombre@ejemplo.com" [ngClass]="{'border-danger': loginForm.controls['email'].errors, 'border-dark': !loginForm.controls['email'].errors}">
                                 <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['email'].errors">
                                         <div class="text-danger text-50 m-0">Introducir un correo electrónico valido</div>
@@ -40,7 +41,7 @@
                             </div>
                             <div class="form mb-3">
                                 <label for="floatingPassword">Contraseña</label>
-                                <input formControlName="password" type="password" class="form-control border-1 border-dark" id="floatingPassword" placeholder="Contraseña">
+                                <input formControlName="password" type="password" class="form-control border" id="floatingPassword" placeholder="Contraseña" [ngClass]="{'border-danger': loginForm.controls['password'].errors, 'border-dark': !loginForm.controls['password'].errors}">
                                 <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="alert">
                                     <div *ngIf="loginForm.controls['password'].errors">
                                         <div class="text-danger text-50 m-0">Introducir una contraseña valida</div>
@@ -51,12 +52,12 @@
                                 <button (click)="loginEmailPsw()" class="btn btn-dark">Acceder</button>
                             </div>
                         </form>
-                        <hr *ngIf="vw < 600 " class="my-4">
+                        <hr *ngIf="vw < 900" class="my-4">
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 px-4 border-start border-dark text-center ">
+                    <div class="col-lg-6 col-md-12 col-sm-12 px-4 mt-3 text-center" [ngClass]="{'border-start border-dark': vw > 900}">
                         <p>O acceder con:</p>
-                        <button class="btn btn-google w-100 mb-2 py-3 " (click)="loginGoogle() "><i class="bi bi-google me-2 "></i>Google</button>
-                        <button class="btn btn-facebook w-100 mb-2 py-3 " (click)="loginFb() "><i class="bi bi-facebook me-2 "></i>Facebook</button>
+                        <button class="btn btn-google w-100 mb-2 py-3 " (click)="loginGoogle()"><i class="bi bi-google me-2 "></i>Google</button>
+                        <button class="btn btn-facebook w-100 mb-2 py-3 " (click)="toggleFbDev()"><i class="bi bi-facebook me-2 "></i>Facebook</button>
                     </div>
                     <div class="text-center py-4 mt-2 ">
                         <small>¿No tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#signinModal"> Registro</a>
@@ -68,7 +69,7 @@
 </div>
 
 
-<div class="modal fade " id="signinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true ">
+<div class="modal fade" id="signinModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true ">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content ">
             <div class="modal-header ">
@@ -77,11 +78,11 @@
             </div>
             <div class="modal-body ">
                 <div class="row pt-3">
-                    <div class="col-lg-6 col-md-12 col-sm-12 mb-5 px-4 ">
+                    <div class="col-lg-6 col-md-12 col-sm-12 px-4 ">
                         <form [formGroup]="registerForm ">
                             <div class="mb-3 ">
                                 <label for="floatingInput ">Correo electrónico</label>
-                                <input formControlName="email" type="email" class="form-control border-1 border-dark mb-0 " placeholder="nombre@ejemplo.com ">
+                                <input formControlName="email" type="email" class="form-control border mb-0 " placeholder="nombre@ejemplo.com" [ngClass]="{'border-danger': registerForm.controls['email'].errors, 'border-dark': !registerForm.controls['email'].errors}">
                                 <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" class="alert">
                                     <div *ngIf="registerForm.controls[ 'email'].errors ">
                                         <div class="text-danger text-50 m-0 ">Introducir un correo electrónico valido</div>
@@ -90,7 +91,7 @@
                             </div>
                             <div class="mb-3 ">
                                 <label for="floatingPassword ">Contraseña</label>
-                                <input formControlName="password" type="password" class="form-control border-1 border-dark " placeholder=" ">
+                                <input formControlName="password" type="password" class="form-control border" placeholder=" " [ngClass]="{'border-danger': registerForm.controls['password'].errors, 'border-dark' : !registerForm.controls['password'].errors}">
                                 <div *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)" class="alert">
                                     <div *ngIf="registerForm.controls['password'].errors">
                                         <div class="text-danger text-50 m-0 ">Introducir una contraseña valida</div>
@@ -99,9 +100,9 @@
                             </div>
                             <div class="mb-3 ">
                                 <label for="floatingPassword ">Repetir contraseña</label>
-                                <input formControlName="confirmPassword" type="password" class="form-control border-1 border-dark" placeholder=" ">
-                                <div *ngIf="registerForm.controls['email'].invalid && (registerForm.controls['email'].dirty || registerForm.controls['email'].touched)" class="alert">
-                                    <div *ngIf="registerForm.controls['email'].errors">
+                                <input formControlName="confirmPassword" type="password" class="form-control border" [ngClass]="{'border-danger': registerForm.controls['confirmPassword'].errors, 'border-dark' : !registerForm.controls['confirmPassword'].errors}">
+                                <div *ngIf="registerForm.controls['confirmPassword'].invalid && (registerForm.controls['confirmPassword'].dirty || registerForm.controls['confirmPassword'].touched)" class="alert">
+                                    <div *ngIf="registerForm.controls['confirmPassword'].errors">
                                         <div class="text-danger text-50 m-0 ">Repetir la misma contraseña</div>
                                     </div>
                                 </div>
@@ -110,12 +111,12 @@
                                 <button (click)="register()" type="button" class="btn btn-dark text-light">Registro</button>
                             </div>
                         </form>
-                        <hr *ngIf="vw < 600 " class="my-4">
+                        <hr *ngIf="vw < 900" class="my-4">
                     </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 px-4 border-start border-dark text-center ">
+                    <div class="col-lg-6 col-md-12 col-sm-12 px-4 text-center" [ngClass]="{'border-start border-dark': vw > 900}">
                         <p>O registrarse con:</p>
-                        <button (click)="loginGoogle() " class="btn btn-google w-100 mb-2 py-3 "><i class="bi bi-google me-2 "></i> Google</button>
-                        <button (click)="loginFb() " class="btn btn-facebook w-100 mb-2 py-3 "><i class="bi bi-facebook me-2 "></i> Facebook</button>
+                        <button (click)="loginGoogle()" class="btn btn-google w-100 mb-2 py-3 "><i class="bi bi-google me-2 "></i> Google</button>
+                        <button (click)="toggleFbDev()" class="btn btn-facebook w-100 mb-2 py-3 "><i class="bi bi-facebook me-2 "></i> Facebook</button>
                     </div>
                     <div class="text-center py-4 mt-2 ">
                         <small>¿Ya tienes un account?</small><a data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal"> Acceder</a>
@@ -137,10 +138,6 @@
 </div>
 
 
-
-
-
-
 <div class="modal fade" id="sentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
@@ -159,6 +156,24 @@
                         <small class="text-muted">Si no encuentras el mail, mira en la carpeta de spam</small>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Dev-->
+<div class="modal fade" id="devModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Lo sentimos mucho 😔</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Todavía el acesso con Facebook está en desarrollo.<br><strong>Pronto estará disponible.</strong><br><br>Mientras tanto puedes registrarte con email y contraseña o acceder con tu usuario de Google.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
             </div>
         </div>
     </div>

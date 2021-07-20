@@ -38,7 +38,7 @@
                                 </div>
                                 <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#feedbackModal" (click)="toggleFeedBack()"><i class="bi bi-chat-text h4 me-3"></i>Enviar comentarios</a></li>
                                 <li class="list-group-item h6 pb-3" *ngIf="ass.name != ''"><a data-bs-toggle="modal" data-bs-target="#eliminateModal"><i class="bi bi-trash h4 me-3"></i>Eliminar perfil de asociación</a></li>
-                                <li class="list-group-item h6 pb-3"><a (click)="logout()"><i class="bi bi-box-arrow-right h4 me-3 ms-1"></i>Cerrar sesión</a></li>
+                                <li class="list-group-item h6 pb-3"><a data-bs-toggle="modal" data-bs-target="#logoutModal"><i class="bi bi-box-arrow-right h4 me-3 ms-1"></i>Cerrar sesión</a></li>
                             </ul>
                             <small class="mt-2 fw-light text-muted copyright"><a [routerLink]="['/privacy']">Política de privacidad</a></small>
                             <small class="mt-2 fw-light text-muted copyright"> - Copyright © 2021 | Mauro Titanio</small>
@@ -51,7 +51,7 @@
 </nav>
 
 
-
+<!--Destroy Association Modal-->
 <div class="modal fade" id="eliminateModal" tabindex="-1" aria-labelledby="eliminateModal" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -59,13 +59,38 @@
                 <h5 class="modal-title" id="exampleModalLabel">¿Eliminar {{ass.name}}?</h5>
                 <button type="button" id="closeDelete" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center py-4">
+                <div class="container mb-4">
+                    <i class="bi bi-exclamation-circle-fill text-danger h1 mb-4"></i>
+                </div>
                 <p>¿Realmente quires borrar el perfil de <strong>{{ass.name}}</strong>?</p>
                 <p>Todos los datos serán eliminados.</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
                 <button type="button" class="btn btn-danger" (click)="deleteAss()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="eliminateModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Salir de la aplicación</h5>
+                <button type="button" id="closeLogout" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center py-4">
+                <div class="container mb-4">
+                    <i class="bi bi-box-arrow-right h1 mb-4"></i>
+                </div>
+                <h6>¿Realmente quires salir de la aplicación?</h6>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Volver</button>
+                <button type="button" class="btn btn-danger" (click)="logout()">Salir</button>
             </div>
         </div>
     </div>
@@ -90,7 +115,7 @@
                         <p> Si has tenido un problema o tienes sugerencias envíanos un mensaje aquí abajo.<br> O si la plataforma te ha gustado mucho, también nos lo puedes comentar.</p>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" class="form-label">Mensaje</label>
-                            <textarea class="form-control border" id="exampleFormControlTextarea1" rows="5" formControlName="message"></textarea>
+                            <textarea class="form-control border" id="exampleFormControlTextarea1" rows="5" formControlName="message" [ngClass]="{'border-danger':  commentForm.controls['message'].invalid && (commentForm.controls['message'].dirty || commentForm.controls['message'].touched)}"></textarea>
                             <div *ngIf="commentForm.controls['message'].invalid && (commentForm.controls['message'].dirty || commentForm.controls['message'].touched)" class="alert">
                                 <div *ngIf="commentForm.controls['message'].hasError('required')">
                                     <div class="text-danger text-50 m-0">El mensaje está vacío</div>
@@ -133,13 +158,12 @@
             </div>
             <form [formGroup]="offerForm">
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div *ngIf="!feedbackSent">
                                 <div class="mb-5">
                                     <label for="name" class="form-label">Título</label>
-                                    <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title">
+                                    <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title" [ngClass]="{'border-danger':  offerForm.controls['title'].errors && (offerForm.controls['title'].dirty || offerForm.controls['title'].touched)}">
                                     <div *ngIf="offerForm.controls['title'].invalid && (offerForm.controls['title'].dirty || offerForm.controls['title'].touched)" class="alert">
                                         <div *ngIf="offerForm.controls['title'].hasError('required')">
                                             <div class="text-danger text-50 m-0">Añade un título a la oferta</div>
@@ -148,7 +172,7 @@
                                 </div>
                                 <div class="mb-5">
                                     <label for="name" class="form-label">Descripción</label>
-                                    <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description"></textarea>
+                                    <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description" [ngClass]="{'border-danger':  offerForm.controls['description'].invalid && (offerForm.controls['description'].dirty || offerForm.controls['description'].touched)}"></textarea>
                                     <div *ngIf="offerForm.controls['description'].invalid && (offerForm.controls['description'].dirty || offerForm.controls['description'].touched)" class="alert">
                                         <div *ngIf="offerForm.controls['description'].hasError('required')">
                                             <div class="text-danger text-50 m-0">Añade una descripción de la oferta</div>

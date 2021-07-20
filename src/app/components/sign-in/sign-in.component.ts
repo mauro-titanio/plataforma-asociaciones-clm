@@ -18,8 +18,8 @@ export class SignInComponent implements OnInit {
   loginForm: FormGroup
   vw: number = 0
   verificationSent = false
+  logFormSent = false
 
-  
   constructor(private authService: AuthService, private router: Router, private notifier: NotifierService, private fb: FormBuilder,) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -28,7 +28,7 @@ export class SignInComponent implements OnInit {
     }, { validator: MustMatch('password', 'confirmPassword') }
     )
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     })
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
@@ -63,9 +63,12 @@ export class SignInComponent implements OnInit {
   loginEmailPsw() {
     if (this.loginForm.invalid) {
       this.notifier.notify('error', 'Email y/o contraseña invalidos')
+      this.logFormSent = true
       return
     }
-    this.authService.signIn(this.g.email.value, this.g.password.value)
+    else{
+      this.authService.signIn(this.g.email.value, this.g.password.value)
+    }
   }
 
 
@@ -93,5 +96,11 @@ export class SignInComponent implements OnInit {
     })
   }
 
-
+  toggleFbDev() {
+    document.getElementById('modalCloseLogin')?.click()
+    document.getElementById('modalCloseRegister')?.click()
+    setTimeout(() => {
+      document.getElementById('hiddenFbButton')?.click()
+    }, 100);
+  }
 }

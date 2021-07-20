@@ -53,7 +53,7 @@
                                 <div *ngIf="!offerCreated">
                                     <div class="mb-5">
                                         <label for="name" class="form-label">Título</label>
-                                        <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title">
+                                        <input type="text" class="form-control border" placeholder="Poner un título llamativo" formControlName="title" [ngClass]="{'border-danger': oForm.controls['title'].invalid && (oForm.controls['title'].dirty || oForm.controls['title'].touched)}">
                                         <div *ngIf="oForm.controls['title'].invalid && (oForm.controls['title'].dirty || oForm.controls['title'].touched)" class="alert">
                                             <div *ngIf="oForm.controls['title'].hasError('required')">
                                                 <div class="text-danger text-50 m-0">Añade un título a la oferta</div>
@@ -62,7 +62,7 @@
                                     </div>
                                     <div class="mb-5">
                                         <label for="name" class="form-label">Descripción</label>
-                                        <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description"></textarea>
+                                        <textarea type="text" class="form-control border" placeholder="Añadir una pequeña descripción" rows="5" formControlName="description" [ngClass]="{'border-danger': oForm.controls['description'].invalid && (oForm.controls['description'].dirty || oForm.controls['description'].touched)}"></textarea>
                                         <div *ngIf="oForm.controls['description'].invalid && (oForm.controls['description'].dirty || oForm.controls['description'].touched)" class="alert">
                                             <div *ngIf="oForm.controls['description'].hasError('required')">
                                                 <div class="text-danger text-50 m-0">Añade una descripción de la oferta</div>
@@ -104,7 +104,10 @@
                     <h5 class="modal-title" id="exampleModalLabel">¿Eliminar oferta?</h5>
                     <button type="button" id="closeDeleteOffer" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body py-4 text-center">
+                    <div class="container mb-4">
+                        <i class="bi bi-exclamation-circle-fill text-danger h1 mb-4"></i>
+                    </div>
                     <p>¿Realmente quires borrar la oferta <strong>"{{offer.title}}"</strong>?</p>
                     <p>Todos los datos serán eliminados.</p>
                 </div>

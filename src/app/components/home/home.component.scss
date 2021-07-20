@@ -9,26 +9,27 @@
     background-repeat: no-repeat;
     transition: transform 500ms ease;
     transition: background-color 500ms ease 500ms;
-    // border-top-right-radius: 5rem !important;
 }
 
 .col .card {
-    background-image: url('https://i.imgur.com/C7qAU2S.png');
-    background-position: center;
+    background-image: url('https://i.imgur.com/rxHJ04a.png');
     background-size: cover;
+    background-position: bottom left;
     height: 31rem;
 }
 
 .col-animated .card-animated:nth-child(1) {
-    background-image: url('https://i.imgur.com/ptFj30o.png');
-    background-position: bottom;
+    background-image: url('https://i.imgur.com/2HRTwSw.png');
     height: 15rem;
+    background-position: top right;
+    background-size: 155%;
 }
 
 .col-animated .card-animated:nth-child(2) {
-    background-image: url('https://i.imgur.com/lo2wklJ.png');
+    background-image: url('https://i.imgur.com/H61P8SF.png');
     height: 15rem;
-    background-position: top;
+    background-position: bottom left;
+    background-size: 120%;
 }
 
 .card-animated .card-body {

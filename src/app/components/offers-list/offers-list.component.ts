@@ -51,7 +51,7 @@ export class OffersListComponent implements OnInit {
     this.readUsers()
     setTimeout(() => {
       this.readOffers()
-    }, 1000);
+    }, 1200);
     setTimeout(() => {
       this.pageLoaded = true
     }, 2500);
