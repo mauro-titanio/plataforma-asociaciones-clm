@@ -27,6 +27,8 @@ export class OffersDashboardComponent implements OnInit {
   }
   oForm: FormGroup
   offerCreated = false
+
+  
   constructor(
     private route: ActivatedRoute,
     private crudOffers: OfferCrudService,

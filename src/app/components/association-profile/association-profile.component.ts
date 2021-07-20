@@ -4,7 +4,7 @@ import { Association } from 'src/app/shared/models/association';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth/auth.service';
 import { AssociationCrudService } from 'src/app/shared/services/crud/association/association-crud.service';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-association-profile',
@@ -43,6 +43,8 @@ export class AssociationProfileComponent implements OnInit {
     emailVerified: true
   }
   sameUser: boolean = false
+
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -59,23 +61,27 @@ export class AssociationProfileComponent implements OnInit {
       this.association.id = data.id
     })
     this.user = this.authService.userData()
-  
+
   }
+
 
   isTheSameUser() {
     if (this.user.uid == this.userId) {
       this.sameUser = true
-    } else{
+    } else {
       this.sameUser = false
     }
-    
+
   }
 
   ngOnInit(): void {
     this.isTheSameUser()
   }
 
+
   goBack() {
     this._location.back();
   }
+
+
 }

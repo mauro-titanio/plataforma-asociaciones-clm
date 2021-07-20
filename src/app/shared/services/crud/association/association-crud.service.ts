@@ -23,7 +23,6 @@ getAssociation(userID:string,associationID: string ){
 }
 
 updateAssociation(userID:string, data:any,  associationID: string){
-  console.log(data)
   return this.fireStore.collection('users').doc(userID).collection('association').doc(associationID).set(data)
 }
 

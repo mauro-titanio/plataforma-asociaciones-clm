@@ -11,14 +11,15 @@ export class VerificationComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router,) { }
 
-  ngOnInit(): void {
-  }
-verified(){
-  this.router.navigate(['/'])
-  setTimeout(() => {
-    location.reload();
-  }, 1000);
- 
+  ngOnInit(): void { }
+
   
-}
+  verified() {
+    this.router.navigate(['/'])
+    setTimeout(() => {
+      location.reload();
+    }, 1000);
+  }
+
+
 }

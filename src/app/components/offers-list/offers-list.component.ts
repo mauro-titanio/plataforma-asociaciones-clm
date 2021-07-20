@@ -39,7 +39,8 @@ export class OffersListComponent implements OnInit {
     date: 0,
     zone: ''
   }
-  // new Date().toDateString()
+
+  
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -54,12 +55,11 @@ export class OffersListComponent implements OnInit {
     setTimeout(() => {
       this.pageLoaded = true
     }, 2500);
-    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0) 
+    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void { }
+
 
   readUsers() {
     this.crudUsers.readAllUsers().subscribe(data => {
@@ -71,7 +71,6 @@ export class OffersListComponent implements OnInit {
       })
     })
   }
-
 
 
   readOffers() {
@@ -96,8 +95,6 @@ export class OffersListComponent implements OnInit {
   }
 
 
-
-
   toggleSearchFilters() {
     if (!this.openSearchFilters) {
       this.openSearchFilters = true
@@ -107,7 +104,6 @@ export class OffersListComponent implements OnInit {
   }
 
 
-
   searchByProvince() {
     if (this.selectedProvince == null) {
       this.searchProvince = ''
@@ -115,4 +111,6 @@ export class OffersListComponent implements OnInit {
       this.searchProvince = this.selectedProvince.name
     }
   }
+
+
 }

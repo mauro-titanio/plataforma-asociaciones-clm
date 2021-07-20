@@ -62,7 +62,6 @@ export class NavbarComponent implements OnInit {
   offerForm: FormGroup
 
 
-
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -82,19 +81,21 @@ export class NavbarComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
     })
     this.user = this.authService.userData()
-    console.log("Usuario: ", this.authService.userData())
     this.readAssociations()
-    console.log(this.feedback)
   }
 
   ngOnInit(): void { }
+
+
   get c() {
     return this.commentForm.controls
   }
 
+
   get o() {
     return this.offerForm.controls
   }
+
 
   readAssociations() {
     setTimeout(() => {
@@ -112,12 +113,14 @@ export class NavbarComponent implements OnInit {
     }, 1100);
   }
 
+
   readThisAssociation() {
     this.crudAssociation.getAssociation(this.user.uid, this.userAss[0].id).subscribe((data: any) => {
       this.ass = data.data()
       this.ass.id = data.id
     })
   }
+
 
   deleteAss() {
     this.crudAssociation.deleteAssociation(this.user.uid, this.ass.id).then(success => {
@@ -142,6 +145,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+
   sendFeedBack() {
     const comment: Feedback = {
       id: new Date().getTime(),
@@ -163,6 +167,7 @@ export class NavbarComponent implements OnInit {
       this.notifier.notify('error', 'Ha ocurrido un error');
     })
   }
+
 
   createOffer() {
     const off: Offer = {
@@ -195,16 +200,9 @@ export class NavbarComponent implements OnInit {
   }
 
 
-
-
   refresh(): void {
     window.location.reload();
-}
-
-
-
-
-
+  }
 
 
   /*

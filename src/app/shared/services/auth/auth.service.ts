@@ -16,6 +16,8 @@ import { FirebaseApp } from '@angular/fire';
 
 export class AuthService {
   verificationSent = false
+
+
   constructor(
     private fireStore: AngularFirestore,
     private fireAuth: AngularFireAuth,
@@ -24,6 +26,7 @@ export class AuthService {
     private notifier: NotifierService
   ) { }
 
+
   isLoggedIn(): boolean {
     const user = localStorage.getItem('user');
     if (user) {
@@ -31,6 +34,8 @@ export class AuthService {
     }
     return false
   }
+
+
   setUserData(user: any) {
     const userData: User = {
       uid: user.uid,
@@ -43,22 +48,19 @@ export class AuthService {
       merge: true
     })
   }
-  
 
 
   userData(): User {
     return JSON.parse(localStorage.getItem('user')!)
   }
+
+
   // Sign in with email/password
   async signIn(email: string, password: string): Promise<void> {
-
-
     try {
       const result = await this.fireAuth.signInWithEmailAndPassword(email, password);
       localStorage.setItem('user', JSON.stringify(result.user));
-      console.log(result.user)
       this.setUserData(result.user);
-      console.log(result.user?.emailVerified)
       if (result.user?.emailVerified == false) {
         this.notifier.notify('error', 'Completar el proceso de verificación')
         return
@@ -78,6 +80,7 @@ export class AuthService {
     }
   }
 
+
   signOut() {
     this.fireAuth.signOut();
     localStorage.removeItem('user');
@@ -85,17 +88,16 @@ export class AuthService {
   }
 
 
-
   // Sign in with Facebook
   // Auth logic to run auth providers
   async loginWithFB(): Promise<any> {
     try {
       const result = await this.fireAuth.signInWithPopup(new fireapp.auth.FacebookAuthProvider());
-      console.log(result);
     } catch (err) {
       console.log(err.message);
     }
   }
+
 
   //GOOGLE
   async googleAuth(): Promise<any> {
@@ -108,11 +110,11 @@ export class AuthService {
     }
   }
 
+
   // Sign up with email/password
   signUp(email: string, password: string) {
     return this.fireAuth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result.user)
         this.sendVerification()
         document.getElementById('modalCloseRegister')?.click()
         setTimeout(() => {
@@ -126,11 +128,9 @@ export class AuthService {
   }
 
 
-
   async sendVerification(): Promise<void> {
     return await (await this.fireAuth.currentUser)?.sendEmailVerification()
   }
-
 
 
 }

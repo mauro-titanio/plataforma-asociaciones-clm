@@ -25,7 +25,7 @@ export class AssociationsListComponent implements OnInit {
   searchProvince!: string
   selectedProvince: any
   provinces = [{ id: 1, name: 'Albacete' }, { id: 2, name: 'Ciudad Real' }, { id: 3, name: 'Cuenca' }, { id: 4, name: 'Guadalajara' }, { id: 5, name: 'Toledo' }]
-  aTypes = [{ id: 1, name: 'Asociación de vecinos' }, { id: 2, name: 'AMPA' }, { id: 3, name: 'Asociación cultural' }, { id: 4, name: 'Asociación juvenil' }, { id: 5, name: 'EPSJ' }, { id: 6, name: 'Asociación recreativa' }, { id: 7, name: 'Asociación deportiva' }, { id: 8, name: 'Asociación ideológica' }, { id: 9, name: 'Asociación de la tercera edad' }, { id: 10, name: 'Asociación de acción sanitaria' }, { id: 11, name: 'Asociación de acción social' }, { id: 12, name: 'Asociación referida a la Mujer' }, { id: 13, name: 'Asociación de profesionales' }, { id: 14, name: 'Asociación económica' }, {id: 15, name: 'LGTBI'}]
+  aTypes = [{ id: 1, name: 'Asociación de vecinos' }, { id: 2, name: 'AMPA' }, { id: 3, name: 'Asociación cultural' }, { id: 4, name: 'Asociación juvenil' }, { id: 5, name: 'EPSJ' }, { id: 6, name: 'Asociación recreativa' }, { id: 7, name: 'Asociación deportiva' }, { id: 8, name: 'Asociación ideológica' }, { id: 9, name: 'Asociación de la tercera edad' }, { id: 10, name: 'Asociación de acción sanitaria' }, { id: 11, name: 'Asociación de acción social' }, { id: 12, name: 'Asociación referida a la Mujer' }, { id: 13, name: 'Asociación de profesionales' }, { id: 14, name: 'Asociación económica' }, { id: 15, name: 'LGTBI' }]
   associationTypes = this.aTypes.sort(function (a, b) {
     if (a.name > b.name) {
       return 1;
@@ -36,13 +36,16 @@ export class AssociationsListComponent implements OnInit {
     // a must be equal to b
     return 0;
   });
+
+  
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
     private crudUsers: UsersCrudService,
     private notifier: NotifierService
 
-  ) { this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  ) {
+    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
     this.readUsers()
     this.pageLoaded = false
     setTimeout(() => {
@@ -53,6 +56,7 @@ export class AssociationsListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
   toggleSearchFilters() {
     if (!this.openSearchFilters) {
       this.openSearchFilters = true
@@ -60,6 +64,7 @@ export class AssociationsListComponent implements OnInit {
       this.openSearchFilters = false
     }
   }
+
 
   readUsers() {
     this.crudUsers.readAllUsers().subscribe(data => {
@@ -71,6 +76,7 @@ export class AssociationsListComponent implements OnInit {
       })
     })
   }
+
 
   readAssociations() {
     this.associations = []
@@ -100,8 +106,9 @@ export class AssociationsListComponent implements OnInit {
     setTimeout(() => {
       this.pageLoaded = true
     }, 200);
-   
+
   }
+
 
   searchByType() {
     if (this.selection == null) {
@@ -129,6 +136,7 @@ export class AssociationsListComponent implements OnInit {
     }, 500);
   }
 
+
   searchByProvince() {
     if (this.selectedProvince == null) {
       this.searchProvince = ''
@@ -136,12 +144,6 @@ export class AssociationsListComponent implements OnInit {
       this.searchProvince = this.selectedProvince.name
     }
   }
-
-
-
-
-
-
 
 
 }

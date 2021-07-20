@@ -42,6 +42,8 @@ export class HomeComponent implements OnInit {
   }
   associationExist = false
   pageLoaded: boolean = false
+
+  
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -52,9 +54,7 @@ export class HomeComponent implements OnInit {
     this.readAssociations()
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
 
   createAssociation() {
@@ -78,7 +78,6 @@ export class HomeComponent implements OnInit {
       profileImage: ''
     }
     this.crudAssociation.newAssociation(association, this.user.uid).then(success => {
-      console.log("Post creado", success)
     }).catch(error => {
       console.log("Error", error)
     })
@@ -89,16 +88,15 @@ export class HomeComponent implements OnInit {
 
   }
 
+
   readAssociations() {
     setTimeout(() => {
       this.crudAssociation.readAllAssociation(this.user.uid).subscribe(data => {
         this.userAssociation = []
-        console.log("hola")
         data.forEach((doc: any) => {
           let association: Association = doc.data()
           association.id = doc.id
           this.userAssociation.push(association)
-          console.log("read associations: ", this.userAssociation)
         })
       })
     }, 50);
@@ -117,7 +115,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+
   logout() {
     this.authService.signOut()
   }
+
+
 }

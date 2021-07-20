@@ -14,38 +14,40 @@ import { MustMatch } from 'src/app/shared/services/validation/validation';
 })
 export class SignInComponent implements OnInit {
 
-
-
   registerForm: FormGroup
   loginForm: FormGroup
   vw: number = 0
   verificationSent = false
 
-
+  
   constructor(private authService: AuthService, private router: Router, private notifier: NotifierService, private fb: FormBuilder,) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
-    }, {validator: MustMatch('password', 'confirmPassword')}
+    }, { validator: MustMatch('password', 'confirmPassword') }
     )
-
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
       password: ['', Validators.required],
     })
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
   }
-  get f() {
-    return this.registerForm.controls
-  }
-  get g() {
-    return this.loginForm.controls
-  }
+
+
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
       this.router.navigate(['/home'])
     }
+  }
+
+  get f() {
+    return this.registerForm.controls
+  }
+
+
+  get g() {
+    return this.loginForm.controls
   }
 
 
@@ -55,8 +57,8 @@ export class SignInComponent implements OnInit {
       return
     }
     this.authService.signUp(this.f.email.value, this.f.password.value)
-
   }
+
 
   loginEmailPsw() {
     if (this.loginForm.invalid) {
@@ -75,7 +77,6 @@ export class SignInComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/home'])
       }, 1000);
-      
     }).catch(_error => {
       this.notifier.notify('error', 'Error en el acceso')
     })
@@ -91,9 +92,6 @@ export class SignInComponent implements OnInit {
       this.notifier.notify('error', 'Error en el acceso')
     })
   }
-
-
-
 
 
 }

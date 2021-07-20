@@ -54,6 +54,8 @@ export class AssociationFormComponent implements OnInit {
   percent: any
   vh: number = 0
   vw: number = 0
+
+  
   constructor(
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
@@ -89,9 +91,11 @@ export class AssociationFormComponent implements OnInit {
     this.readAssociations()
   }
 
+
   get f() {
     return this.assForm.controls
   }
+
 
   readAssociations() {
     setTimeout(() => {
@@ -108,6 +112,7 @@ export class AssociationFormComponent implements OnInit {
       this.readThisAssociation()
     }, 1100);
   }
+
 
   readThisAssociation() {
     this.crudAssociation.getAssociation(this.user.uid, this.userAssociation[0].id).subscribe((data: any) => {
@@ -135,6 +140,7 @@ export class AssociationFormComponent implements OnInit {
     })
   }
 
+
   uploadProfileImage(event: any) {
     const file = event.target.files[0];
     const filePath = Date.now() + file.name;
@@ -159,6 +165,7 @@ export class AssociationFormComponent implements OnInit {
       .subscribe()
   }
 
+
   uploadProfileCover(event: any) {
     const file = event.target.files[0];
     const filePath = Date.now() + file.name;
@@ -182,6 +189,8 @@ export class AssociationFormComponent implements OnInit {
     )
       .subscribe()
   }
+
+
   navTab() {
     let first = document.getElementById('pills-home-tab')
     let second = document.getElementById('pills-profile-tab')
@@ -193,6 +202,8 @@ export class AssociationFormComponent implements OnInit {
       window.scrollTo(0, 0)
     }
   }
+
+
   updateProfile() {
     let association: Association = {
       id: this.association.id,
@@ -219,17 +230,13 @@ export class AssociationFormComponent implements OnInit {
     }
     this.crudAssociation.updateAssociation(this.user.uid, association, this.association.id).then(success => {
       this.notifier.notify('success', 'Perfil actualizado');
-      console.log("Post creado", success)
-
       setTimeout(() => {
         this.router.navigate(['/profile', (this.user.uid), (this.association.id)]);
       }, 1000);
     }).catch(error => {
       this.notifier.notify('error', 'Ha habido un error en el servidor');
-      console.log("Error", error)
     })
   }
-
 
 
   addhttp(url: any) {
@@ -239,12 +246,14 @@ export class AssociationFormComponent implements OnInit {
     return url;
   }
 
+
   addhttpFb(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
       url = "https://www.facebook.com/" + url;
     }
     return url;
   }
+
 
   addhttpLkdn(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
@@ -253,13 +262,14 @@ export class AssociationFormComponent implements OnInit {
     return url;
   }
 
+
   addhttpTw(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {
       url = "https://twitter.com/" + url;
     }
-    console.log(url)
     return url;
   }
+
 
   addhttpIg(url: any) {
     if (!/^(?:f|ht)tps?\:\/\//.test(url)) {

@@ -21,7 +21,6 @@ export class OfferCrudService {
   }
   
   updateOffer(userID:string, data:any,  offerID: string){
-    console.log(data)
     return this.fireStore.collection('users').doc(userID).collection('offers').doc(offerID).set(data)
   }
   
