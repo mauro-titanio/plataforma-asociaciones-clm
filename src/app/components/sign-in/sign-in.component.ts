@@ -19,16 +19,19 @@ export class SignInComponent implements OnInit {
   vw: number = 0
   verificationSent = false
   logFormSent = false
+  privacyPolicy = false
 
   constructor(private authService: AuthService, private router: Router, private notifier: NotifierService, private fb: FormBuilder,) {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+      privacyPolicy: [false, Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, { validator: MustMatch('password', 'confirmPassword') }
     )
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+      privacyPolicy: [true, Validators.required],
       password: ['', Validators.required],
     })
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
@@ -52,6 +55,11 @@ export class SignInComponent implements OnInit {
 
 
   register() {
+    if (!this.privacyPolicy) {
+      this.notifier.notify('error', 'No puedes completar el registro sin aceptar la política de privacidad')
+      this.logFormSent = true
+      return
+    }
     if (this.registerForm.invalid) {
       this.notifier.notify('error', 'Email y/o contraseña invalidos')
       return
@@ -66,7 +74,7 @@ export class SignInComponent implements OnInit {
       this.logFormSent = true
       return
     }
-    else{
+    else {
       this.authService.signIn(this.g.email.value, this.g.password.value)
     }
   }
@@ -103,4 +111,20 @@ export class SignInComponent implements OnInit {
       document.getElementById('hiddenFbButton')?.click()
     }, 100);
   }
+
+  togglePrivacyPolicy() {
+    if (!this.privacyPolicy) {
+      this.privacyPolicy = true
+    } else {
+      this.privacyPolicy = false
+    }
+  }
+
+
+  toggleModal() {
+    document.getElementById('modalCloseLogin')?.click()
+    document.getElementById('modalCloseRegister')?.click()
+  }
+
+
 }
