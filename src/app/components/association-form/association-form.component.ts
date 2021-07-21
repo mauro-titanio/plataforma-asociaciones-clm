@@ -82,7 +82,7 @@ export class AssociationFormComponent implements OnInit {
       website: [''],
       telephone: [0],
       address: [''],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', Validators.email],
     })
   }
 
