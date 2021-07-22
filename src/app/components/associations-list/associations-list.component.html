@@ -44,7 +44,7 @@
                 <div class="spinner-border text-primary mb-2" role="status" data-aos="fade-in" data-aos-delay="300"></div>
             </div>
             <div class="row minicard" *ngIf="pageLoaded">
-                <div class="col-lg-4 col-md-6 col-sm-12 p-3" *ngFor="let ass of associations | filter:searchText | filter:searchProvince; let i=index" data-aos="fade-up" [attr.data-aos-delay]="(i * 100)">
+                <div class="col-lg-4 col-md-6 col-sm-12 p-3" *ngFor="let ass of associations | filter:searchText | filter:searchProvince; let i=index" data-aos="fade-up" [attr.data-aos-delay]="(i * 100)" [ngClass]="{'hide': ass.name == ''}">
                     <div class="row bg-white align-items-center shadow-sm py-2 rounded-3 minicard-body" [routerLink]="['/profile', ass.author, ass.id ]">
                         <div class="col mx-0">
                             <img class="mini-img rounded-circle border mx-auto" [src]="ass.profileImage" alt="Imagen de prefil de asociación" *ngIf="ass.profileImage != ''">

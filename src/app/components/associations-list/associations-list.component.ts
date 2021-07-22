@@ -105,7 +105,7 @@ export class AssociationsListComponent implements OnInit {
     }, 500);
     setTimeout(() => {
       this.pageLoaded = true
-    }, 200);
+    }, 1000);
 
   }
 
