@@ -46,14 +46,14 @@ export class AssociationsListComponent implements OnInit {
 
   ) {
     this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  }
+
+  ngOnInit(): void {
     this.readUsers()
     this.pageLoaded = false
     setTimeout(() => {
       this.readAssociations()
     }, 1000);
-  }
-
-  ngOnInit(): void {
   }
 
 

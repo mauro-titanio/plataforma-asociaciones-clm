@@ -48,13 +48,12 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private crudAssociation: AssociationCrudService,
     private router: Router
-  ) {
+  ) { }
+
+  ngOnInit(): void {
     this.user = this.authService.userData()
-
     this.readAssociations()
-  }
-
-  ngOnInit(): void { }
+   }
 
 
   createAssociation() {

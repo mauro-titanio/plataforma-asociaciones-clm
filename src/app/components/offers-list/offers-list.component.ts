@@ -48,6 +48,10 @@ export class OffersListComponent implements OnInit {
     private notifier: NotifierService,
     private crudOffers: OfferCrudService
   ) {
+    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  }
+
+  ngOnInit(): void {
     this.readUsers()
     setTimeout(() => {
       this.readOffers()
@@ -55,10 +59,7 @@ export class OffersListComponent implements OnInit {
     setTimeout(() => {
       this.pageLoaded = true
     }, 2500);
-    this.vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-  }
-
-  ngOnInit(): void { }
+   }
 
 
   readUsers() {

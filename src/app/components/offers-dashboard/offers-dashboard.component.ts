@@ -36,8 +36,6 @@ export class OffersDashboardComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.userId = this.route.snapshot.paramMap.get('userId') ?? ""
-
-    this.readAllOffers()
     this.oForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
@@ -45,7 +43,7 @@ export class OffersDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.readAllOffers()
   }
 
   get v() {

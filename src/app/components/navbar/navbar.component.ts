@@ -80,11 +80,12 @@ export class NavbarComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
     })
-    this.user = this.authService.userData()
-    this.readAssociations()
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.user = this.authService.userData()
+    this.readAssociations()
+   }
 
 
   get c() {
