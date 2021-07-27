@@ -113,19 +113,16 @@ export class OffersDashboardComponent implements OnInit {
     }
     if (this.oForm.invalid) {
       this.notifier.notify('error', 'No se ha podido actualizar');
-      console.log("error!")
       return
     }
     this.crudOffers.updateOffer(this.userId, o, o.id).then(success => {
       this.notifier.notify('success', 'Oferta actualizada');
-      console.log("Post creado", success)
       setTimeout(() => {
         this.offerCreated = true
       }, 100);
       this.readAllOffers()
     }).catch(error => {
       this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
-      console.log("Error", error)
     })
   }
 

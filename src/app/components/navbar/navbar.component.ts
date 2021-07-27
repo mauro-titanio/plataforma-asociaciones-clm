@@ -129,7 +129,6 @@ export class NavbarComponent implements OnInit {
       document.getElementById('closeDelete')?.click()
       this.router.navigate([''])
     }).catch(error => {
-      console.log("Error", error)
       this.notifier.notify('error', 'Ha ocurrido un error en el servidor');
     })
   }
