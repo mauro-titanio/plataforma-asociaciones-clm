@@ -29,6 +29,7 @@
 @media (hover) {
     .minicard-body:hover,
     .minicard-body:focus-within {
+        cursor: pointer;
         opacity: 0.5;
         transition: opacity 500ms ease;
     }
